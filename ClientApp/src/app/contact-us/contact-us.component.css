@@ -1,0 +1,65 @@
+body {
+    background-image: url('/assets/fender.jpg');
+    height: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: white;
+}
+
+h1 h2 p {
+    color: black;
+}
+
+h1 {
+    font-size: 6em;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+h2 {
+    font-size: 3em;
+    text-align: left;
+}
+
+p {
+    font-size: 1.5em;
+    font-weight: 300;
+    text-align: left;
+    line-height: 1;
+    color: #262626;
+}
+
+#map {
+    max-width:600px;
+    max-height:450px;
+    width:inherit;
+    height:150%;
+}
+
+.contactform {
+    text-align:center;
+}
+
+.contact-bottom{
+    margin-bottom:7.5%;
+}
+.g-recaptcha {
+    padding: 10px;
+    align-self:center;
+    padding-left:15%;
+}
+
+.btn-block {
+    color: white;
+    background-color: #262626;
+    border: none;
+    border-radius: 0px;
+}
+
+.btn-block:hover {
+    opacity: 0.7;
+    background-color: #262626;
+    color: white;
+    }

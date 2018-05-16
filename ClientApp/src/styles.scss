@@ -1,0 +1,514 @@
+@import '~bootstrap/scss/bootstrap';
+
+$navbar-height:50px;
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-image: url('/assets/piano.jpg');
+    height: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
+    font: 11px "Times New Roman", Times, serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-top: $navbar-height;
+    min-height: 100vh;
+}
+
+/*NAV BAR*/
+.flex-rw {
+    display: flex;
+    flex-flow: row wrap
+}
+
+#nav-name {
+    font-family: "Times New Roman", Times, serif;
+    color: white;
+    font-style: normal;
+}
+
+#navbar-header {
+    color: black;
+    background-color: black;
+    font-family: "Arial", Gadget, sans-serif;
+}
+
+.nav-item{
+    font-size: 12px;
+}
+/* footer */
+#footer {
+    width: 100%;
+    padding-left: 25%;
+    padding-right: 15%;
+    background-color: black;
+    height: auto;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    position: relative;
+    bottom: 0;
+}
+
+#footer ul li {
+    list-style: none;
+}
+
+.generic-anchor {
+    color: white;
+    text-align: left
+}
+
+.footer-list-top {
+    width: 15%
+}
+
+.footer-list-top > li {
+        text-align: left;
+        padding-bottom: 5px
+}
+
+.footer-list-header {
+    padding: 5px 0 5px 0;
+    color: #fff;
+    font:"Times New Roman", Times, serif;
+    font-size:1.5em;
+}
+
+.footer-list-anchor {
+    font: "Times New Roman", Times, serif;
+    text-align: left;
+    font-size:1.25em;
+
+}
+#lab_social_icon_footer {
+}
+
+#lab_social_icon_footer a {
+  color: #333;
+}
+
+#lab_social_icon_footer .social:hover {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -o-transform: scale(1.1);
+}
+
+#lab_social_icon_footer .social {
+  -webkit-transform: scale(0.8);
+  /* Browser Variations: */
+  
+  -moz-transform: scale(0.8);
+  -o-transform: scale(0.8);
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+}
+.container-social{
+    float:left;
+}
+/* end of footer */
+
+
+main {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: 1em "Times New Roman", Times, serif;
+    color: rgb(155,155,155);
+    line-height: 1
+}
+
+/* BUTTONS */
+.default-button {
+    background-color: #262626;
+    border: none;
+    color: white;
+    padding: 20px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    opacity: 0.8;
+    font-family: sans-serif;
+}
+    .default-button:hover {
+    opacity: 0.7;
+    color: white;
+    }
+/* Forms */
+.form-control{
+    // border-radius:0;
+}
+
+/* links */
+
+.linklight {
+    color: dimgray;
+}
+
+.linklight:hover {
+        color: black;
+}
+
+.linkdark {
+    color: dimgray;
+}
+
+.linkdark:hover {
+        color: white;
+    }
+
+  
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%
+
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none
+    }
+}
+
+
+
+/* About Page */
+.about-body{
+    font: 14px "Times New Roman", Times, Serif;
+    color: white;
+
+}
+
+.container2 {
+    width: 100%;
+    color: #ffffff;
+}
+
+.container3 {
+    width: 100%;
+    color: #ffffff;
+    font-size: 15px;
+
+}
+
+.container4 {
+    width: 100%;
+    color: #ffffff;
+    font-size: 20px;
+
+}
+
+/* Home Page */
+.section {
+    min-height: 100vh;
+    align-items:center;
+}
+
+.home-header {
+    text-align: center;
+    color: white;
+
+}
+
+
+.ta-c{
+    text-align:center;
+}
+
+.title {
+    font-size: 8em;
+    color: white;
+}
+
+.slogan {
+    font-size: 2em;
+    line-height: 1;
+    padding: 5%;
+}
+
+#home-blurb {
+    height: auto;
+    background-color: white;
+    
+}
+
+    #home-blurb h2 {
+        font-size: 8em;
+        text-align: left;
+    }
+
+    #home-blurb p {
+        font-size: 2em;
+        line-height: 2;
+        text-align: left;
+    }
+
+#home-services {
+    height: auto;
+    background-color: rgba(150, 150, 150, 0.3);
+    color: white;
+}
+
+    #home-services h2 {
+        font-size: 10em;
+    }
+
+.services-h4 {
+    font-size: 3em;
+    padding-right: 20%;
+    padding-top: 1.5%;
+    line-height: 2;
+    text-align: left;
+}
+
+.services-p {
+    font-size: 1.5em;
+    font-weight:300;
+    text-align: justify;
+}
+
+
+#home-testimonials {
+    height: auto;
+    background-color: rgba(255, 255, 255, 1);
+    padding-top: 5%;
+    padding-bottom: 10%;
+    padding-left: 20%;
+    padding-right: 20%;
+    color: black;
+}
+
+    #home-testimonials h2 {
+        font-size: 8em;
+        text-align: center;
+    }
+/* Carousel Testimony homepage*/
+
+#carousel-testimony {
+    height: 300px;
+    width: 100%;
+    padding-bottom: 2%;
+}
+
+.carousel-content {
+    font-size: 2em;
+    line-height: 1.4;
+    text-align: center;
+    color: #262626;
+    padding-top: 5em;
+}
+
+.carousel-author {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 2em;
+    line-height: 1;
+    text-align: center;
+    color: #262626;
+}
+
+.carousel-inner {
+    height: 400px;
+    width: 100%;
+    position: relative;
+}
+
+
+/* Log In Page */
+
+
+.form-signin {
+    margin: 6.5% 25%;
+    width: 50%;
+    padding: 5%;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+#login-wrap-text {
+    width: 50%;
+    margin: auto;
+    overflow: hidden;
+}
+
+#login-wrap-first {
+    float: left;
+}
+
+#login-wrap-second {
+    overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 65%;
+}
+
+#no-acc {
+    padding-left: 10px;
+}
+/* Log in Buttons */
+
+/* Shared */
+.social-login {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.loginBtn {
+    box-sizing: border-box;
+    position: relative;
+    margin-bottom: 1em;
+    padding: 0 15px 0 46px;
+    border: none;
+    text-align: left;
+    line-height: 34px;
+    white-space: nowrap;
+    font-size: 16px;
+    color: #FFF;
+    width: 100%;
+}
+
+    .loginBtn:before {
+        content: "";
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 34px;
+        height: 100%;
+    }
+
+    .loginBtn:focus {
+        outline: none;
+    }
+
+    .loginBtn:active {
+        box-shadow: inset 0 0 0 32px rgba(0,0,0,0.1);
+    }
+
+
+/* Facebook */
+.loginBtn--facebook {
+    background-color: #4C69BA;
+    font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;
+    text-shadow: 0 -1px 0 #354C8C;
+}
+
+    .loginBtn--facebook:before {
+        border-right: #364e92 1px solid;
+        background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png') 6px 6px no-repeat;
+    }
+
+    .loginBtn--facebook:hover,
+    .loginBtn--facebook:focus {
+        background-color: #5B7BD5;
+    }
+
+
+/* Google */
+.loginBtn--google {
+    font-family: "Roboto", Roboto, arial, sans-serif;
+    background: #DD4B39;
+}
+
+    .loginBtn--google:before {
+        border-right: #BB3F30 1px solid;
+        background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png') 6px 6px no-repeat;
+    }
+
+    .loginBtn--google:hover,
+    .loginBtn--google:focus {
+        background: #E74B37;
+    }
+
+
+/* REGISTER PAGE */
+
+
+#reg-title {
+    text-align: center;
+}
+
+#terms {
+    text-align: left;
+    color: white;
+}
+
+#msform {
+    text-align: center;
+    position: relative;
+    margin-top: 30px;
+}
+
+    #msform fieldset {
+        background: rgba(100, 100, 100, 0.5);
+        border: 0 none;
+        border-radius: 0px;
+        box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+        padding: 20px 30px;
+        box-sizing: border-box;
+        width: 80%;
+        margin: 0 10%;
+        /*stacking fieldsets above each other*/
+        position: relative;
+    }
+
+        /*Hide all except first fieldset*/
+        #msform fieldset:not(:first-of-type) {
+            display: none;
+        }
+
+
+
+
+/*inputs*/
+#msform input, #msform textarea {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    color: #2C3E50;
+    font-size: 13px;
+}
+
+
+
+/*headings*/
+.fs-title {
+    font-family: "Arial", Gadget, sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.fs-subtitle {
+    font-family: "Times New Roman", Times, serif;
+    font-weight: normal;
+    font-size: 13px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+/* gotta CAPTHA them all */
+.g-recaptcha{
+    padding-left:25%;
+}
+

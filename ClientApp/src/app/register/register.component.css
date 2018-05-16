@@ -1,0 +1,13 @@
+body {
+    background-image: url(/assets/violin.jpg);
+    height: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
+}
+
+.g-recaptcha {
+    padding: 10px;
+}
