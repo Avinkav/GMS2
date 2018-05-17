@@ -22,6 +22,7 @@ import { UserDashboardComponent } from './user-portal/dashboard/user-dashboard.c
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule, MatListModule } from '@angular/material';
 import { BookLessonComponent } from './book-lesson/book-lesson.component';
+import { ChartModule } from 'angular2-chartjs';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { BookLessonComponent } from './book-lesson/book-lesson.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

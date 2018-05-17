@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FinancesComponent } from './finances.component';
+
+export class AppModule {
+}
 
 describe('FinancesComponent', () => {
   let component: FinancesComponent;
