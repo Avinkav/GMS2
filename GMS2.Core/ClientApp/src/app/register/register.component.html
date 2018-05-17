@@ -1,59 +1,59 @@
-<div class="row">
-    <div class="col-md-6 mx-auto">
-        <form method="post" id="msform">
-            <fieldset>
-                <h4 class="title" id="reg-title">Create an account.</h4>
-                <hr />
-                <h2 class="fs-title">Personal Details</h2>
-                <h3 class="fs-subtitle">Let us know who you are</h3>
-                <div class="form-group">
-                    <input class="form-control" placeholder="First Name*" />
-                    <span class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" placeholder="Last Name*" />
-                    <span class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" placeholder="Birthday*" />
-                    <span class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" placeholder="Phone Number*" />
-                    <span class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" placeholder="Address*" />
-                    <span class="text-danger"></span>
-                </div>
+<div [@fadeAnim] class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 mx-auto light-font">
+      <form method="post">
+        <fieldset>
+          <h3>Create an account</h3>
+          <h4>Personal Details</h4>
+          <p class="lead">Let us know who you are</p>
+          <div class="form-group">
+            <input class="form-control" placeholder="First Name*" />
+            <span class="text-danger"></span>
+          </div>
+          <div class="form-group">
+            <input class="form-control" placeholder="Last Name*" />
+            <span class="text-danger"></span>
+          </div>
+          <div class="form-group">
+            <input class="form-control" placeholder="Birthday*" />
+            <span class="text-danger"></span>
+          </div>
+          <div class="form-group">
+            <input class="form-control" placeholder="Phone Number*" />
+            <span class="text-danger"></span>
+          </div>
+          <div class="form-group">
+            <input class="form-control" placeholder="Address*" />
+            <span class="text-danger"></span>
+          </div>
 
-                <h2 class="fs-title">Social Profiles</h2>
-                <h3 class="fs-subtitle">What social platforms are you on?</h3>
-                <input type="text" name="twitter" placeholder="Twitter" />
-                <input type="text" name="facebook" placeholder="Facebook" />
-                <input type="text" name="gplus" placeholder="Google Plus" />
+          <h3>Social Profiles</h3>
+          <p class="lead">What social platforms are you on?</p>
+          <input type="text" name="twitter" placeholder="Twitter" />
+          <input type="text" name="facebook" placeholder="Facebook" />
+          <input type="text" name="gplus" placeholder="Google Plus" />
 
-                <h2 class="fs-title">Create your account</h2>
-                <h3 class="fs-subtitle">Fill in your credentials</h3>
-                <div class="form-group">
-                    <input asp-for="Email" class="form-control" placeholder="Email" />
-                    <span class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <input asp-for="Password" class="form-control" placeholder="Password" />
-                    <span class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
-                    <span class="text-danger"></span>
-                </div>
-                <p id="terms"> By creating an account you agree to our <a href="#" class="linkdark">Terms & Privacy</a>.</p>
-                <div class="g-recaptcha pb-2 pt-2" data-sitekey="6Le_PVkUAAAAADJVxDu7pFuKPJkCY1aF21uLAjJw"></div>
-                <button type="submit" class="default-button" id="registerbutton">Register</button>
-            </fieldset>
-        </form>
+          <h3>Create your account</h3>
+          <p class="lead">Fill in your credentials</p>
+          <div class="form-group">
+            <input asp-for="Email" class="form-control" placeholder="Email" />
+            <span class="text-danger"></span>
+          </div>
+          <div class="form-group">
+            <input asp-for="Password" class="form-control" placeholder="Password" />
+            <span class="text-danger"></span>
+          </div>
+          <div class="form-group">
+            <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
+            <span class="text-danger"></span>
+          </div>
+          <p id="terms"> By creating an account you agree to our
+            <a href="#" class="linkdark">Terms & Privacy</a>.</p>
+          <div class="g-recaptcha px-2" data-sitekey="6Le_PVkUAAAAADJVxDu7pFuKPJkCY1aF21uLAjJw"></div>
+          <button type="submit" class="btn btn-primary">Register</button>
+        </fieldset>
+      </form>
 
     </div>
+  </div>
 </div>

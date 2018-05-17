@@ -7,10 +7,8 @@ import {
 
 export const fadeInAnimation = trigger('fadeAnim', [
   transition(':enter', [
-    style({
-      opacity: 1
-    }),
-    animate(350)
+    style({ opacity: 0 }),
+    animate('.3s', style({ opacity: 1 }))
   ]),
   transition(':leave', [
     animate('0.2s ease', style({

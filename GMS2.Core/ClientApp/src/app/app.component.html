@@ -37,76 +37,51 @@
     </div>
   </div>
 </nav>
-<div class="body-content container-fluid p-0">
+<div class="body-content container-fluid p-0 h-100">
   <router-outlet></router-outlet>
 </div>
-<footer class="flex-rw" id="footer">
-  <ul class="footer-list-top">
-    <li>
-      <h4 class="footer-list-header"> Services</h4>
-    </li>
-    <li>
-      <a class="generic-anchor footer-list-anchor linkdark"> Instrumental Lessons</a>
-    </li>
-    <li>
-      <a class="generic-anchor footer-list-anchor linkdark"> Music Theory</a>
-    </li>
-    <li>
-      <a class="generic-anchor footer-list-anchor linkdark"> Other Services</a>
-    </li>
-  </ul>
-  <ul class="footer-list-top">
-    <li>
-      <h4 class="footer-list-header"> About Us </h4>
-    </li>
-    <li>
-      <a class="generic-anchor footer-list-anchor linkdark">Our Story</a>
-    </li>
-  </ul>
-  <ul class="footer-list-top">
-    <li>
-      <h4 class="footer-list-header">Contact</h4>
-    </li>
-    <li>
+<footer class="container py-4 light-font">
+  <div class="row">
+    <div class="col-sm-6 col-md-4 col-lg-2 d-flex flex-column">
+      <h4 class="footer-list-header">Services</h4>
+      <a class="generic-anchor footer-list-anchor linkdark" href="#">Instrumental Lessons</a>
+      <a class="generic-anchor footer-list-anchor linkdark" href="#">Music Theory</a>
+      <a class="generic-anchor footer-list-anchor linkdark" href="#">Other Services</a>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-2 d-flex flex-column">
+      <h4 class="footer-list-header">About Us</h4>
+      <a class="generic-anchor footer-list-anchor linkdark" href="#">Our Story</a>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-2 d-flex flex-column">
+      <h4 class="footer-list-header">Contact Us</h4>
+      <a class="generic-anchor footer-list-anchor linkdark" href="#">FAQ</a>
       <a class="generic-anchor footer-list-anchor linkdark" routerLink="/contact-us">Contact Us</a>
-    </li>
-    <li>
-      <a class="generic-anchor footer-list-anchor linkdark">FAQ</a>
-    </li>
-  </ul>
-  <ul class="footer-list-top">
-    <li>
-      <h4 class="footer-list-header"> Legal</h4>
-    </li>
-    <li>
-      <a class="footer-list-anchor linkdark"> Terms of Use</a>
-    </li>
-    <li>
-      <a class="footer-list-anchor linkdark"> Privacy and Policy</a>
-    </li>
-  </ul>
-  <ul class="footer-list-top">
-    <li>
-      <h4 class="footer-list-header"> Connect With Us</h4>
-      <li>
-        <section id="lab_social_icon_footer">
-          <div class="container-social">
-            <div class="text-center center-block">
-              <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-                <i id="social-fb" class="fa fa-facebook-square fa-3x social linkdark"></i>
-              </a>
-              <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-                <i id="social-tw" class="fa fa-twitter-square fa-3x social linkdark"></i>
-              </a>
-              <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-                <i id="social-gp" class="fa fa-google-plus-square fa-3x social linkdark"></i>
-              </a>
-              <a href="~/Views/Home/Contact.cshtml">
-                <i id="social-em" class="fa fa-envelope-square fa-3x social linkdark"></i>
-              </a>
-            </div>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-2 d-flex flex-column ">
+      <h4 class="footer-list-header">Legal</h4>
+      <a class="footer-list-anchor linkdark" href="#">Terms of Use</a>
+      <a class="footer-list-anchor linkdark" href="#">Privacy and Policy</a>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-3 d-flex flex-column">
+      <h4 class="footer-list-header">Connect With Us</h4>
+      <section id="lab_social_icon_footer">
+        <div class="container-social">
+          <div class="text-center center-block">
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+              <i id="social-fb" class="fa fa-facebook-square fa-3x social linkdark"></i>
+            </a>
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+              <i id="social-tw" class="fa fa-twitter-square fa-3x social linkdark"></i>
+            </a>
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+              <i id="social-gp" class="fa fa-google-plus-square fa-3x social linkdark"></i>
+            </a>
+            <a href="~/Views/Home/Contact.cshtml">
+              <i id="social-em" class="fa fa-envelope-square fa-3x social linkdark"></i>
+            </a>
           </div>
-        </section>
-      </li>
-  </ul>
+        </div>
+      </section>
+    </div>
+  </div>
 </footer>

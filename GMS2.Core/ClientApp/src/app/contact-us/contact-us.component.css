@@ -1,4 +1,4 @@
-body {
+.container-fluid {
     background-image: url('/assets/fender.jpg');
     height: 100%;
     background-attachment: fixed;
@@ -8,45 +8,10 @@ body {
     background-color: white;
 }
 
-h1 h2 p {
-    color: black;
-}
-
-h1 {
-    font-size: 6em;
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
-
-h2 {
-    font-size: 3em;
-    text-align: left;
-}
-
-p {
-    font-size: 1.5em;
-    font-weight: 300;
-    text-align: left;
-    line-height: 1;
-    color: #262626;
-}
-
 #map {
     width: 100%;
-    height: 100%;
-}
-
-.contactform {
-    text-align:center;
-}
-
-.contact-bottom{
-    margin-bottom:7.5%;
-}
-.g-recaptcha {
-    padding: 10px;
-    align-self:center;
-    padding-left:15%;
+    height: 500px;
+    border: none;
 }
 
 .btn-block {

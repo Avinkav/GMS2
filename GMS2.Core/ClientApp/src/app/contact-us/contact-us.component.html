@@ -1,61 +1,62 @@
-<div [@slideAnim] class="container my-3">
-  <div class="row">
-    <div class="col-md-12">
-      <h1>
-        Generic Music School
-      </h1>
-      <h2>We're listening. Find us at:</h2>
+<div [@fadeAnim] class="container-fluid">
+  <div class="container p-3">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>
+          Generic Music School
+        </h1>
+        <h2>We're listening. Find us at:</h2>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-3 pt-3">
-      <p class="addy">2 George St,</p>
-      <p class="addy">Brisbane City QLD 4000</p>
+    <div class="row">
+      <div class="col-sm-3 pt-3">
+        <p class="addy">2 George St,</p>
+        <p class="addy">Brisbane City QLD 4000</p>
+      </div>
+      <div class="col-sm-5 pt-3">
+        <p>Marketing:
+          <a class="linklight" href="mailto:Marketing@example.com">marketing@mika.com</a>
+        </p>
+        <p>Support:
+          <a class="linklight" href="mailto:Marketing@example.com">support@mikamusic.com</a>
+        </p>
+      </div>
     </div>
-    <div class="col-sm-5 pt-3">
-      <p>Marketing:
-        <a class="linklight" href="mailto:Marketing@example.com">marketing@mika.com</a>
-      </p>
-      <p>Support:
-        <a class="linklight" href="mailto:Marketing@example.com">support@mikamusic.com</a>
-      </p>
-    </div>
-  </div>
 
-  <div class="row contact-bottom">
-    <div [@fadeAnim] class="col-md-7 col-sm-12">
+    <div class="row contact-bottom">
+      <div [@fadeAnim] class="col-md-7 col-sm-12">
         <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14158.959444045791!2d153.028415!3d-27.477357!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xaeb9c00d1ef00171!2sQUT+Gardens+Point+Campus!5e0!3m2!1sen!2sau!4v1525349084355"></iframe>
-    </div>
-
-    <div class="col-md-5 col-sm-12">
-      <h2 class="mt-0">Get in Touch</h2>
-      <div class="panel panel-danger">
-        <div class="panel-body">
-          <form id="reused_form">
-            <div class="form-group">
-              <input type="text" name="name" class="form-control" placeholder="How shall we address you?">
+      </div>
+      <div class="col-md-5 col-sm-12">
+        <h2 class="mt-0">Get in Touch</h2>
+        <div class="panel panel-danger">
+          <div class="panel-body">
+            <form id="reused_form">
+              <div class="form-group">
+                <input type="text" name="name" class="form-control" placeholder="How shall we address you?">
+              </div>
+              <div class="form-group">
+                <input type="email" name="email" class="form-control" placeholder="Your Email so we can get back to you.">
+              </div>
+              <div class="form-group">
+                <textarea rows="3" name="message" class="form-control" placeholder="Let us know what you're thinking."></textarea>
+              </div>
+              <div class="form-group">
+                <div class="g-recaptcha" data-sitekey="6Le_PVkUAAAAADJVxDu7pFuKPJkCY1aF21uLAjJw"></div>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-raised btn-block btn-danger">Send &rarr;</button>
+              </div>
+            </form>
+            <div id="error_message" style="width:100%; height:100%; display:none; ">
+              <h4>
+                Error
+              </h4>
+              Sorry there was an error sending your form.
             </div>
-            <div class="form-group">
-              <input type="email" name="email" class="form-control" placeholder="Your Email so we can get back to you.">
+            <div id="success_message" style="width:100%; height:100%; display:none; ">
+              <h2>Success! Your Message was Sent Successfully.</h2>
             </div>
-            <div class="form-group">
-              <textarea rows="3" name="message" class="form-control" placeholder="Let us know what you're thinking."></textarea>
-            </div>
-            <div class="form-group">
-              <div class="g-recaptcha" data-sitekey="6Le_PVkUAAAAADJVxDu7pFuKPJkCY1aF21uLAjJw"></div>
-            </div>
-            <div class="form-group">
-              <button class="btn btn-raised btn-block btn-danger">Send &rarr;</button>
-            </div>
-          </form>
-          <div id="error_message" style="width:100%; height:100%; display:none; ">
-            <h4>
-              Error
-            </h4>
-            Sorry there was an error sending your form.
-          </div>
-          <div id="success_message" style="width:100%; height:100%; display:none; ">
-            <h2>Success! Your Message was Sent Successfully.</h2>
           </div>
         </div>
       </div>

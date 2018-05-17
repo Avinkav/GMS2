@@ -1,6 +1,5 @@
-body {
+.container-fluid {
     background-image: url(/assets/guitar.jpg);
-    height: 100%;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;

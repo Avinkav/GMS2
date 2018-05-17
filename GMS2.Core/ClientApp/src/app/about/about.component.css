@@ -1,4 +1,5 @@
-body {
+.container-fluid{
+    /* background-color:rgba(249,249,249,0.1); */
     background-image: url('/assets/vinyl.jpg');
     height: 100%;
     background-attachment: fixed;
@@ -6,45 +7,4 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-color: white;
-}
-
-h1 h2 h3 h4 p{
-    color: black;
-}
-
-h1{
-    font-size: 6em;
-    padding-bottom:1em;
-    padding-top:1em;
-}
-
-h2{ 
-    padding-bottom:1.5em;
-
-}
-h3 {
-    font-size: 3em;
-    line-height: 1.5;
-    text-align: left;
-    padding-bottom: 0.5em;
-    font-weight: bold;
-}
-
-h4 {
-    font-style:italic;
-    font-size:2.0em;
-}
-
-p {
-    font-size: 1.5em;
-    font-weight: 300;
-    text-align: justify;
-    line-height: 2;
-    color: #262626;
-}
-
-.aboutbody {
-    padding-left: 2.5%;
-    padding-right: 2.5%;
-    background-color: rgba(255, 255, 255, 0.5);
 }

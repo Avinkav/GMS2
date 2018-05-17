@@ -1,49 +1,41 @@
-<div class="form-signin">
-    <section>
-        <form method="post">
-            <h4 class="title" id="login-title">Welcome Back</h4>
-            <hr />
-            <div class="text-danger"></div>
-            
-            <div class="social-login">
-                <div class="form-group">
-                    <input asp-for="UserName" class="form-control" placeholder="Email" />
-                    <span class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input asp-for="Password" class="form-control" placeholder="Password" />
-                    <span class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="form-group" id="login-wrap-text">
-                <div class="checkbox" id="login-wrap-first">
-                    <label>
-                        <input type="checkbox" /> Rembmer Me
-                    </label>
-                </div>
-                <div id="login-wrap-second">
-                    <a class="linkdark">Forgot your password?</a>
-                </div>
-            </div>
-
-                <button type="submit" class="default-button d-block mx-auto">Log in</button>
-            <div class="social-login">
-            <button class="loginBtn loginBtn--facebook">
-                Login with Facebook
-            </button>
-
-            <button class="loginBtn loginBtn--google">
-                Login with Google
-            </button>
-            </div>
-
-
-            <div class="form-group">
-                <p>
-                    Don't have an account? <a class="linkdark" id="no-acc">Create an account!</a>
-                </p>
-            </div>
-        </form>
-    </section>
+<div [@fadeAnim] class="container-fluid section d-flex flex-column">
+  <div class="m-auto light-font">
+    <h1 class="title serif-heading display-1 mb-5" id="login-title">Welcome Back</h1>
+    <form class="col-sm-9 mx-auto" method="post">
+      <div class="form-group">
+        <input asp-for="UserName" class="form-control" placeholder="Email" />
+        <span class="text-danger"></span>
+      </div>
+      <div class="form-group">
+        <input asp-for="Password" class="form-control" placeholder="Password" />
+        <span class="text-danger"></span>
+      </div>
+      <div class="form-group d-flex">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" /> Remember Me
+          </label>
+        </div>
+        <div class="flex-spacer"></div>
+        <a class="linkdark">Forgot your password?</a>
+      </div>
+      <div class="btn-group my-3">
+        <button type="submit" class="btn btn-secondary">Log in</button>
+      </div>
+      <div class="social-login mt-4">
+        <button class="login-btn login-btn-facebook">
+          Login with Facebook
+        </button>
+        <button class="login-btn login-btn-google">
+          Login with Google
+        </button>
+      </div>
+      <div class="form-group">
+        <p>
+          Don't have an account?
+          <a class="linkdark" id="no-acc">Create an account!</a>
+        </p>
+      </div>
+    </form>
+  </div>
 </div>
