@@ -32,10 +32,8 @@ p {
 }
 
 #map {
-    max-width:600px;
-    max-height:450px;
-    width:inherit;
-    height:150%;
+    width: 100%;
+    height: 100%;
 }
 
 .contactform {

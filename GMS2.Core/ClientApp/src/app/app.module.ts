@@ -19,6 +19,8 @@ import { LessonsComponent } from './user-portal/lessons/lessons.component';
 import { ProfileComponent } from './user-portal/profile/profile.component';
 import { BillingComponent } from './user-portal/billing/billing.component';
 import { UserDashboardComponent } from './user-portal/dashboard/user-dashboard.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { UserDashboardComponent } from './user-portal/dashboard/user-dashboard.c
   imports: [
     BrowserModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
