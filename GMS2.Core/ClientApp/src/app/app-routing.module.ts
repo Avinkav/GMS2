@@ -22,11 +22,13 @@ import { UserDashboardComponent } from './user-portal/dashboard/user-dashboard.c
 import { LessonsComponent } from './user-portal/lessons/lessons.component';
 import { BillingComponent } from './user-portal/billing/billing.component';
 import { ProfileComponent } from './user-portal/profile/profile.component';
+import { BookLessonComponent } from './book-lesson/book-lesson.component';
 
 
 const routes: Routes = [
   { path: 'index',  component: HomeComponent },
   { path: 'about',  component: AboutComponent },
+  { path: 'book-lesson',  component: BookLessonComponent },
   { path: 'contact-us',  component: ContactUsComponent },
   { path: 'register',  component: RegisterComponent },
   { path: 'user-portal',  component: UserPortalComponent },

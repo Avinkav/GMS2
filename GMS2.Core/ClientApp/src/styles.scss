@@ -1,8 +1,10 @@
 @import '~@angular/material/theming';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~bootstrap/scss/bootstrap';
+@import 'calendar';
 
 $navbar-height:50px;
+
 html,
 body {
   min-height: 100%;
