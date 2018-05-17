@@ -1,3 +1,35 @@
-<p>
-  dashboard works!
-</p>
+<div class="container-fluid pt">
+  <div class="row">
+    <div class="col-8">
+      <h1> All Lessons </h1>
+      <div id="calendar">
+      </div>
+    </div>
+    <div class="col-md-4 d-flex flex-column">
+      <div class="col-md-4">
+        <h2> Financial Summary</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tr *ngFor="let i of summary">
+            <td>{{ i.user }}</td>
+            <td>{{ i.type }}</td>
+            <td>{{ i.description }}</td>
+            <td>{{ i.amount | currency }}</td>
+          </tr>
+        </table>
+        <a routerLink="/admin-portal/finances">View Full Details</a> 
+      </div>
+      <div class="col-md-4">
+        <h2> Notifications</h2>
+      </div>
+    </div>
+  </div>
+  </div>
+
