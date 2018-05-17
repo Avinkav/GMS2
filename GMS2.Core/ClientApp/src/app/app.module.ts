@@ -20,7 +20,8 @@ import { ProfileComponent } from './user-portal/profile/profile.component';
 import { BillingComponent } from './user-portal/billing/billing.component';
 import { UserDashboardComponent } from './user-portal/dashboard/user-dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MatSidenavModule, MatListModule } from '@angular/material';
+import { BookLessonComponent } from './book-lesson/book-lesson.component';
 
 @NgModule({
   declarations: [
@@ -40,12 +41,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FinancesComponent,
     LessonsComponent,
     ProfileComponent,
+    BookLessonComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

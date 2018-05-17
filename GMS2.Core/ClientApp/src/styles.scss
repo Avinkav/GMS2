@@ -1,8 +1,8 @@
 @import '~@angular/material/theming';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~bootstrap/scss/bootstrap';
 
 $navbar-height:50px;
-
 html,
 body {
   min-height: 100%;
@@ -21,31 +21,39 @@ body {
   background-color: black;
   @include mat-elevation-transition;
   @include mat-elevation(2);
-
   &:hover {
     @include mat-elevation(8);
   }
 }
 
-.serif-heading{
- font-family: 'Times New Roman', Times, serif;
+.serif-heading {
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .section {
-  min-height: calc(100vh - #{$navbar-height} );
+  min-height: calc(100vh - #{$navbar-height});
   align-items: center;
 }
 
-.flex-spacer{
+.flex-spacer {
   flex-grow: 1;
 }
 
-.light-font{
+.light-font {
   color: white;
 }
 
-.light-section{
+.light-section {
   background-color: white;
+}
+
+.portal-container {
+  position: absolute !important;
+  top: $navbar-height;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #eee;
 }
 
 /* Footer */
