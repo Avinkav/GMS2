@@ -51,7 +51,7 @@ namespace GMS.Data
                 .HasKey(c => new { c.TaughtById, c.TaughtToId, c.DateTime });
 
             //Composite Key for Instrument Type
-            modelBuilder.Entity<InstumentType>().HasKey(i => new {i.Type, i.UserId});
+            modelBuilder.Entity<LessonType>().HasKey(i => new {i.Type, i.UserId});
 
 
         }

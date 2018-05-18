@@ -25,6 +25,7 @@ import { BookLessonComponent } from './book-lesson/book-lesson.component';
 import { ChartModule } from 'angular2-chartjs';
 import { FormsModule } from '@angular/forms';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { NgxPageScrollModule } from 'ngx-page-scroll';
     MatIconModule,
     FormsModule,
     NgxPageScrollModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

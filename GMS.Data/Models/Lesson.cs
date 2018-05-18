@@ -12,12 +12,12 @@ namespace GMS.Data.Models
         public Guid TaughtById { get; set; }
 
         [Required]
-        public AppUser TaughtBy { get; set; }
+        public Teacher TaughtBy { get; set; }
 
         public Guid TaughtToId { get; set; }
 
         [Required]
-        public AppUser TaughtTo { get; set; }
+        public Student TaughtTo { get; set; }
 
         [Required]
         public DateTime DateTime { get; set; }

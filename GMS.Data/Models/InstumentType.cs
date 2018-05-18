@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GMS.Data.Models
 {
-    public class InstumentType
+    public class LessonType
     {
         public string Type { get; set; }
 

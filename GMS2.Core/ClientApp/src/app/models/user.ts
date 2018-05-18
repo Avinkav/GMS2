@@ -3,12 +3,14 @@ export class User {
     lastName: string;
     userName: string;
     email: string;
-    address1: string;
+    addressLine1: string;
     city: string;
     state: string;
     postcode: number;
-    phone: string;
+    phoneNumber: string;
     dob: Date;
+    password: string;
+
 }
 
 

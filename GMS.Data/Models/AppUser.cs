@@ -18,20 +18,14 @@ namespace GMS.Data.Models
 
         public string LastName { get; set; }
 
-        public string Address { get; set; }
+        public string AddressLine1 { get; set; }
 
-        public List<InstumentType> Instruments { get; set; }
+        public string City { get; set; }
 
-        // Navigation property. Lessons taken by this user
-        [InverseProperty("TaughtTo")]
-        public List<Lesson> LessonsTaken { get; set; }
+        public string State { get; set; }
 
-        // Navigation property. Lessons taught by this user
-        [InverseProperty("TaughtBy")]
-        public List<Lesson> LessonsTaught { get; set; }
-
-        // Navigation property. Times the user is available of lessons
-        public List<Availability> Availabilities { get; set; }
+        public int PostCode { get; set; }
+        
 
     }
 }

@@ -1,13 +1,15 @@
 <div [@fadeAnim] class="container-fluid section d-flex flex-column">
   <div class="m-auto light-font">
     <h1 class="title serif-heading display-1 mb-5" id="login-title">Welcome Back</h1>
-    <form class="col-sm-9 mx-auto" method="post">
+    <form class="col-sm-9 mx-auto" method="post" #loginForm="ngForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <input asp-for="UserName" class="form-control" placeholder="Email" />
+        <input id="email" required 
+                name="email" #email="ngModel" [(ngModel)]="login.email" class="form-control" placeholder="Email" />
         <span class="text-danger"></span>
       </div>
       <div class="form-group">
-        <input asp-for="Password" class="form-control" placeholder="Password" />
+        <input type="password" id="password" required 
+                name="password" #password="ngModel" [(ngModel)]="login.password" class="form-control" placeholder="Password" />
         <span class="text-danger"></span>
       </div>
       <div class="form-group d-flex">

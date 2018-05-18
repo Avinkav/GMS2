@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { fadeInAnimation } from '../../fadeInAnimation';
 import { User, STATES } from '../models/user';
+import { UserService } from '../services/user-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,8 +14,16 @@ export class RegisterComponent implements OnInit {
 
   newUser: User = new User();
   states = STATES;
-  constructor() { }
 
+  constructor(private userService: UserService, private router: Router) { }
+
+  onSubmit() {
+    this.userService.register(this.newUser).subscribe(o => {
+      console.log(o);
+      this.router.navigateByUrl('/login');
+    })
+      ;
+  }
   ngOnInit() {
   }
 
