@@ -1,3 +1,5 @@
+@import '../../sass/variables';
+
 .container-fluid {
     background-image: url(/assets/violin.jpg);
     background-attachment: fixed;
@@ -7,6 +9,7 @@
     background-color: black;
 }
 
-.g-recaptcha {
-    padding: 10px;
+.lead{
+    color: $light-secondary-font-color;
+    font-size: unset;
 }

@@ -1,56 +1,97 @@
-<div [@fadeAnim] class="container-fluid">
+<div [@fadeAnim] class="container-fluid py-5">
   <div class="row">
     <div class="col-md-6 mx-auto light-font">
-      <form method="post">
+      <form method="post" #registerForm="ngForm">
         <fieldset>
-          <h3>Create an account</h3>
-          <h4>Personal Details</h4>
+          <h1 class="serif-heading">Create an account</h1>
+          <!-- <h4>Personal Details</h4> -->
           <p class="lead">Let us know who you are</p>
-          <div class="form-group">
-            <input class="form-control" placeholder="First Name*" />
-            <span class="text-danger"></span>
+          <div class="form-row">
+            <div class="form-group col">
+              <input type="text" class="form-control" placeholder="First name*" id="firstName" required [(ngModel)]="newUser.firstName"
+                name="firstName" #firstName="ngModel" />
+              <span [hidden]="firstName.valid || firstName.pristine" class="text-danger">First name is required</span>
+            </div>
+            <div class="form-group col">
+              <input type="text" class="form-control" placeholder="Last name*" id="lastName" required [(ngModel)]="newUser.lastName" name="lastName"
+                #lastName="ngModel" />
+              <span [hidden]="lastName.valid || lastName.pristine" class="text-danger">Last name is required</span>
+            </div>
           </div>
-          <div class="form-group">
-            <input class="form-control" placeholder="Last Name*" />
-            <span class="text-danger"></span>
-          </div>
-          <div class="form-group">
-            <input class="form-control" placeholder="Birthday*" />
-            <span class="text-danger"></span>
-          </div>
-          <div class="form-group">
-            <input class="form-control" placeholder="Phone Number*" />
-            <span class="text-danger"></span>
-          </div>
-          <div class="form-group">
-            <input class="form-control" placeholder="Address*" />
-            <span class="text-danger"></span>
+          <div class="form-row">
+            <div class="form-group col-sm-3">
+              <input type="date" class="form-control" placeholder="Date of birth*" id="dob" required [(ngModel)]="newUser.dob" name="dob"
+                #dob="ngModel" />
+              <span [hidden]="dob.valid || dob.pristine" class="text-danger">Date of birth is required</span>
+            </div>
           </div>
 
-          <h3>Social Profiles</h3>
+          <p class="lead mt-3">Contact details</p>
+          <div class="form-row">
+            <div class="form-group col-sm-4">
+              <input type="text" class="form-control" placeholder="Phone number*" id="phone" required [(ngModel)]="newUser.phone" name="phone"
+                #phone="ngModel" />
+              <span [hidden]="phone.valid || phone.pristine" class="text-danger">Phone number is required</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Address line 1*" id="address" required [(ngModel)]="newUser.adress1"
+              name="address1" #address1="ngModel" />
+            <span [hidden]="address1.valid || address1.pristine" class="text-danger">address line 1 is required</span>
+          </div>
+          <div class="form-row">
+            <div class="col-sm-5">
+              <input type="text" class="form-control" placeholder="City/suburb*" id="city" required [(ngModel)]="newUser.city" name="city"
+                #city="ngModel" />
+              <span [hidden]="city.valid || city.pristine" class="text-danger">City is required</span>
+            </div>
+            <div class="col-sm-3">
+              <select class="form-control" required id="state" placeholder="State" [(ngModel)]="newUser.state" #state="ngModel">
+                <option *ngFor="let s of states" [value]="s">{{s}}</option>
+              </select>
+              <span [hidden]="state.valid || state.pristine" class="text-danger">State is required</span>
+            </div>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" placeholder="Postcode*" id="postcode" required [(ngModel)]="newUser.postcode" name="postcode"
+                #postcode="ngModel" />
+              <span [hidden]="postcode.valid || postcode.pristine" class="text-danger">Postcode is required</span>
+            </div>
+          </div>
+
+          <p class="lead mt-3">Fill in your credentials</p>
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <input type="text" class="form-control" placeholder="Email*" id="email" required [(ngModel)]="newUser.email" name="email"
+                #email="ngModel" />
+              <span [hidden]="email.valid || email.pristine" class="text-danger">Email is required</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <input asp-for="Password" class="form-control" placeholder="Password" />
+              <span class="text-danger"></span>
+            </div>
+            <div class="form-group col-sm-6">
+              <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
+              <span class="text-danger"></span>
+            </div>
+          </div>
+          <p class="lead" id="terms"> By creating an account you agree to our
+            <a href="#" class="linkdark">Terms & Privacy.</a>
+          </p>
+          <div class="form-row">
+            <div class="col-sm my-2">
+              <div class="g-recaptcha" data-sitekey="6Le_PVkUAAAAADJVxDu7pFuKPJkCY1aF21uLAjJw"></div>
+            </div>
+            <div class="col-sm my-2">
+              <button type="submit" class="btn btn-primary" [disabled]="false">Register</button>
+            </div>
+          </div>
+          <!-- <h3>Social Profiles</h3>
           <p class="lead">What social platforms are you on?</p>
           <input type="text" name="twitter" placeholder="Twitter" />
           <input type="text" name="facebook" placeholder="Facebook" />
-          <input type="text" name="gplus" placeholder="Google Plus" />
-
-          <h3>Create your account</h3>
-          <p class="lead">Fill in your credentials</p>
-          <div class="form-group">
-            <input asp-for="Email" class="form-control" placeholder="Email" />
-            <span class="text-danger"></span>
-          </div>
-          <div class="form-group">
-            <input asp-for="Password" class="form-control" placeholder="Password" />
-            <span class="text-danger"></span>
-          </div>
-          <div class="form-group">
-            <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
-            <span class="text-danger"></span>
-          </div>
-          <p id="terms"> By creating an account you agree to our
-            <a href="#" class="linkdark">Terms & Privacy</a>.</p>
-          <div class="g-recaptcha px-2" data-sitekey="6Le_PVkUAAAAADJVxDu7pFuKPJkCY1aF21uLAjJw"></div>
-          <button type="submit" class="btn btn-primary">Register</button>
+          <input type="text" name="gplus" placeholder="Google Plus" /> -->
         </fieldset>
       </form>
 

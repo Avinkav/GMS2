@@ -1,10 +1,4 @@
-.container-fluid {
-    background-image: url('/assets/fender.jpg');
-    height: 100%;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.section{
     background-color: white;
 }
 
@@ -26,7 +20,3 @@
     background-color: #262626;
     color: white;
     }
-
-.g-recaptcha {
-  margin-left:-10%;
-}

@@ -1,0 +1,14 @@
+@import '../../sass/variables';
+
+.section{
+    background-color: $section-light-bg-color;
+}
+
+
+* {
+    color: $light-primary-font-color;
+}
+
+p {
+    color: $light-secondary-font-color;
+}

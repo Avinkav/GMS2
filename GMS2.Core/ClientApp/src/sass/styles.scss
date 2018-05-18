@@ -1,9 +1,9 @@
 @import '~@angular/material/theming';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~bootstrap/scss/bootstrap';
+@import 'variables';
 @import 'calendar';
 
-$navbar-height:50px;
 
 html,
 body {
@@ -128,7 +128,7 @@ body {
 }
 
 #home-services {
-  background-color: rgba(150, 150, 150, 0.3);
+  background-color: $section-light-bg-color;
   color: white;
 }
 
@@ -234,10 +234,4 @@ body {
 .login-btn-google:hover,
 .login-btn-google:focus {
   background: #E74B37;
-}
-
-/* gotta CAPTCHA them all */
-
-.g-recaptcha {
-  padding-left: 25%;
 }

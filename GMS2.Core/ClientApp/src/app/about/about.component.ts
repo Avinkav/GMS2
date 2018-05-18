@@ -5,7 +5,7 @@ import { fadeInAnimation } from '../../fadeInAnimation';
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
-  styleUrls: ['./about.component.css'],
+  styleUrls: ['./about.component.scss'],
   animations: [slideInAnimation, fadeInAnimation]
 })
 export class AboutComponent implements OnInit {

@@ -20,9 +20,10 @@ import { ProfileComponent } from './user-portal/profile/profile.component';
 import { BillingComponent } from './user-portal/billing/billing.component';
 import { UserDashboardComponent } from './user-portal/dashboard/user-dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSidenavModule, MatListModule } from '@angular/material';
+import { MatSidenavModule, MatListModule, MatStepperModule, MatIconModule } from '@angular/material';
 import { BookLessonComponent } from './book-lesson/book-lesson.component';
 import { ChartModule } from 'angular2-chartjs';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,10 @@ import { ChartModule } from 'angular2-chartjs';
     BrowserAnimationsModule,
     MatSidenavModule,
     MatListModule,
-    ChartModule
+    ChartModule,
+    MatStepperModule,
+    MatIconModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

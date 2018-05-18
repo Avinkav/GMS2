@@ -1,4 +1,9 @@
-<div [@fadeAnim] class="animation-container h-100">
+<div class="bg-container">
+  <ng-container *ngFor="let i of images">
+    <img class="bg-img" [@fadeAnim] *ngIf="i.show" [src]="i.src" />
+  </ng-container>
+</div>
+<div [@fadeAnim] #coverPage class="animation-container h-100">
   <div id="home-header" class="col mx-auto section light-font d-flex flex-column">
     <div class="m-auto d-inline-block">
       <h1 class="title ta-c serif-heading display-1">Generic Music School</h1>
@@ -6,7 +11,7 @@
 
       <!-- <a class="btn btn-primary  mx-auto m-5 " href="/Lesson/Book">BOOK NOW</a> -->
 
-      <button type="button" class="btn btn-secondary mx-auto my-5 p-2" href="/Session/Register">JOIN NOW</button>
+      <button type="button" class="btn btn-primary mx-auto my-5 p-2" href="/Session/Register">JOIN NOW</button>
     </div>
   </div>
   <div id="home-blurb" class="section light-section d-flex  flex-column">
@@ -62,6 +67,8 @@
       </div>
     </div>
   </div>
+  <app-contact-us></app-contact-us>
+  <app-about></app-about>
   <div id="home-testimonials" class="section d-flex flex-column">
     <div class="m-auto">
       <h1 class="display-2 serif-heading">Hear From Our Community</h1>
@@ -94,7 +101,8 @@
               <div class="carousel-item">
                 <div class="carousel-content">
                   <p class="lead">"I've been learning at Generic Music School for about 3 years and I've learn so much through such a supportive
-                    community."</p>
+                    community."
+                  </p>
                   <h3 class="carousel-author">Peter Parker</h3>
                 </div>
               </div>
@@ -112,12 +120,13 @@
                 </div>
               </div>
               <div class="carousel-item">
-                  <div class="carousel-content">
-                    <p class="lead">"I've been learning at Generic Music School for about 3 years and I've learn so much through such a
-                      supportive community."</p>
-                    <h3 class="carousel-author">Peter Parker</h3>
-                  </div>
+                <div class="carousel-content">
+                  <p class="lead">"I've been learning at Generic Music School for about 3 years and I've learn so much through such a supportive
+                    community."
+                  </p>
+                  <h3 class="carousel-author">Peter Parker</h3>
                 </div>
+              </div>
             </div>
           </div>
         </div>

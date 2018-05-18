@@ -1,8 +1,63 @@
 <div class="container-fluid py-2 py-lg-5">
-  <div class="col-md-8">
-    <div id="calendar">
+  <mat-horizontal-stepper #stepper linear="true">
+    <mat-step #step1 [completed]="selectedTeacher">
+      <ng-template matStepLabel>Select a Teacher</ng-template>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let t of teachers" (click)="clickTeacher(t)">
+          {{t.name}}
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-step>
+    <mat-step #step2 completed="selectedDate">
+      <ng-template matStepLabel>Pick a date and time</ng-template>
+      <div class="content-wrapper">
+        <!-- <div class="detail-pane" *ngIf="selectedTeacher">
+        <h3>{{selectedTeacher.name}}</h3>
+        <p class="mat-body-2 justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et lectus vel lorem ultricies sodales. Interdum
+          et malesuada fames ac ante ipsum primis in faucibus. In ipsum sapien, auctor in sodales eu, aliquet in justo.
+          Nunc ut est in orci dignissim dapibus et ac quam. Nullam leo sapien, efficitur vel iaculis id, dapibus eget
+          leo. Vivamus non scelerisque magna. Duis eleifend semper nunc non tincidunt. Nunc et laoreet tortor, at malesuada
+          lorem. Nunc tempor libero eget ante rutrum, nec volutpat lorem condimentum. Ut vitae eros sapien.
+        </p>
+        What lessons do you want?
+        <mat-selection-list role="option">
+          <mat-list-option *ngFor="let i of selectedTeacher.instruments">
+            {{i}}
+          </mat-list-option>
+        </mat-selection-list>
+        <p>{{selectedDate | date}}</p>
+      </div> -->
+        <!-- <div class="flex-spacer"></div> -->
+        <div id="calendar">
+        </div>
+        <button mat-button (click)="clickNext()">
+          < Back</button>
+            <div class="flex-spacer"></div>
+            <button mat-button (click)="clickNext()">Next ></button>
+      </div>
+    </mat-step>
+    <mat-step #step3 completed="false">
+      <ng-template matStepLabel>Hire an Instrument</ng-template>
+      <mat-selection-list role="option">
+        <mat-list-option *ngFor="let i of instruments">
+          <img matListAvatar src="{{i.imageUrl}}" alt="...">
+          <h3 matLine>{{i.name}} {{i.hireCost | currency}} per lesson </h3>
+          <p matLine></p>
+        </mat-list-option>
+      </mat-selection-list>
+      <div class="content-wrapper">
+        <div class="flex-spacer"></div>
+        <div>Total Cost: $50.00</div>
+      </div>
+      <div class="content-wrapper">
+        <div class="flex-spacer"></div>
+        <button mat-button>Cancel</button>
+        <button mat-button>Confirm</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Confirm Booking</ng-template>
 
-    </div>
-  </div>
-
+    </mat-step>
+  </mat-horizontal-stepper>
 </div>

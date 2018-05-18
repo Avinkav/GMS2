@@ -1,8 +1,26 @@
 .animation-container {
-    background-image: url('/assets/piano.jpg');
+    /* background-image: url('/assets/piano.jpg');
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    z-index: -2; */
+}
 
+.bg-container{
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.bg-img{
+    position: fixed;
+    left:0;
+    top:0;
+    width: 100%;
+    z-index: 0;
 }
