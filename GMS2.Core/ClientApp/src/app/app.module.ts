@@ -20,10 +20,11 @@ import { ProfileComponent } from './user-portal/profile/profile.component';
 import { BillingComponent } from './user-portal/billing/billing.component';
 import { UserDashboardComponent } from './user-portal/dashboard/user-dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSidenavModule, MatListModule, MatStepperModule, MatIconModule } from '@angular/material';
+import { MatSidenavModule, MatListModule, MatStepperModule, MatIconModule, MatButtonModule } from '@angular/material';
 import { BookLessonComponent } from './book-lesson/book-lesson.component';
 import { ChartModule } from 'angular2-chartjs';
 import { FormsModule } from '@angular/forms';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,9 @@ import { FormsModule } from '@angular/forms';
     ChartModule,
     MatStepperModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    NgxPageScrollModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

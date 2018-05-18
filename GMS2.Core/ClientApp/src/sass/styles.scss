@@ -1,10 +1,14 @@
 @import '~@angular/material/theming';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import '~bootstrap/scss/bootstrap';
 @import 'variables';
 @import 'calendar';
 
+$theme-colors: (
+  "primary": $accent,
+  "danger": #ff4136
+);
 
+@import '~bootstrap/scss/bootstrap';
 html,
 body {
   min-height: 100%;

@@ -13,10 +13,10 @@ export class BookLessonComponent implements OnInit {
 
   teachers: Teacher[];
   @ViewChild('stepper') stepper;
-  step1: boolean;
-  step2: boolean;
-  step3: boolean;
-  step4: boolean;
+  step1 = false;
+  step2 = false;
+  step3 = false;
+  step4 = false;
   events;
 
   selectedTeacher: Teacher;
@@ -27,7 +27,7 @@ export class BookLessonComponent implements OnInit {
 
   ngOnInit() {
     this.mockDataService.getTeachers().subscribe(t => this.teachers = t);
-    $('#calendar').fullCalendar({
+    $('#fullCalendar').fullCalendar({
       eventLimit: false,
       header: {
         left: 'prev,next today',
@@ -42,6 +42,7 @@ export class BookLessonComponent implements OnInit {
   clickTeacher(t: Teacher) {
     this.selectedTeacher = t;
     this.step1 = true;
+    this.stepper.next();
   }
 
 }

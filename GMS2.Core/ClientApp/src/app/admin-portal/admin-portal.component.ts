@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminPortalComponent implements OnInit {
 
+  navItems = [
+    { anchor: 'Dashboard', link: 'dashboard'},
+    { anchor: 'Users', link: 'users'},
+    { anchor: 'Classes', link: 'classes'},
+    { anchor: 'Finances', link: 'finances'},
+    { anchor: 'Profile', link: 'profile'},
+];
   constructor() { }
 
   ngOnInit() {

@@ -1,63 +1,71 @@
 <div class="container-fluid py-2 py-lg-5">
-  <mat-horizontal-stepper #stepper linear="true">
-    <mat-step #step1 [completed]="selectedTeacher">
-      <ng-template matStepLabel>Select a Teacher</ng-template>
-      <mat-nav-list>
-        <mat-list-item *ngFor="let t of teachers" (click)="clickTeacher(t)">
-          {{t.name}}
-        </mat-list-item>
-      </mat-nav-list>
-    </mat-step>
-    <mat-step #step2 completed="selectedDate">
-      <ng-template matStepLabel>Pick a date and time</ng-template>
-      <div class="content-wrapper">
-        <!-- <div class="detail-pane" *ngIf="selectedTeacher">
-        <h3>{{selectedTeacher.name}}</h3>
-        <p class="mat-body-2 justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et lectus vel lorem ultricies sodales. Interdum
-          et malesuada fames ac ante ipsum primis in faucibus. In ipsum sapien, auctor in sodales eu, aliquet in justo.
-          Nunc ut est in orci dignissim dapibus et ac quam. Nullam leo sapien, efficitur vel iaculis id, dapibus eget
-          leo. Vivamus non scelerisque magna. Duis eleifend semper nunc non tincidunt. Nunc et laoreet tortor, at malesuada
-          lorem. Nunc tempor libero eget ante rutrum, nec volutpat lorem condimentum. Ut vitae eros sapien.
-        </p>
-        What lessons do you want?
+  <div class="container">
+
+    <mat-horizontal-stepper #stepper > 
+        <!-- linear="true" -->
+      <mat-step [completed]="step1">
+        <ng-template matStepLabel>Select a Teacher</ng-template>
+        <ng-container *ngFor="let t of teachers">
+          <div (click)="clickTeacher(t)" class="media p-3">
+            <img class="align-self-start mr-3 avatar-img" src="assets/avatar.png" alt="Generic placeholder image">
+            <div class="media-body">
+              <div>
+                  <!-- (click)="t.selected = !t.selected" -->
+                <h5 class="mt-0">{{t.name}}</h5>
+                <p>{{t.description}}</p>
+                <div class="inline-list" *ngIf="!t.selected">
+                  <span *ngFor="let i of t.instruments">
+                    {{i}}
+                  </span>
+                </div>
+              </div>
+              <div class="radio-list" *ngIf="t.selected">
+                <div class="form-check" *ngFor="let i of t.instruments">
+                  <input class="form-check-input" type="radio" name="exampleRadios" value="i">
+                  <label class="form-check-label" for="exampleRadios1">
+                    {{i}}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </mat-step>
+      <mat-step [completed]="step2">
+        <ng-template matStepLabel>Pick a date and time</ng-template>
+          <div id="fullCalendar">
+          </div>
+          <div class="d-flex">
+            <button class="btn btn-primary" mat-button (click)="clickNext()">
+              Back</button>
+              <div class="flex-spacer"></div>
+              <button button class="btn btn-primary" mat-button (click)="clickNext()">Next</button>
+            </div>
+      </mat-step>
+      <mat-step [completed]="step3">
+        <ng-template matStepLabel>Hire an Instrument</ng-template>
         <mat-selection-list role="option">
-          <mat-list-option *ngFor="let i of selectedTeacher.instruments">
-            {{i}}
+          <mat-list-option *ngFor="let i of instruments">
+            <img matListAvatar src="{{i.imageUrl}}" alt="...">
+            <h3 matLine>{{i.name}} {{i.hireCost | currency}} per lesson </h3>
+            <p matLine></p>
           </mat-list-option>
         </mat-selection-list>
-        <p>{{selectedDate | date}}</p>
-      </div> -->
-        <!-- <div class="flex-spacer"></div> -->
-        <div id="calendar">
+        <div class="content-wrapper">
+          <div class="flex-spacer"></div>
+          <div>Total Cost: $50.00</div>
         </div>
-        <button mat-button (click)="clickNext()">
-          < Back</button>
-            <div class="flex-spacer"></div>
-            <button mat-button (click)="clickNext()">Next ></button>
-      </div>
-    </mat-step>
-    <mat-step #step3 completed="false">
-      <ng-template matStepLabel>Hire an Instrument</ng-template>
-      <mat-selection-list role="option">
-        <mat-list-option *ngFor="let i of instruments">
-          <img matListAvatar src="{{i.imageUrl}}" alt="...">
-          <h3 matLine>{{i.name}} {{i.hireCost | currency}} per lesson </h3>
-          <p matLine></p>
-        </mat-list-option>
-      </mat-selection-list>
-      <div class="content-wrapper">
-        <div class="flex-spacer"></div>
-        <div>Total Cost: $50.00</div>
-      </div>
-      <div class="content-wrapper">
-        <div class="flex-spacer"></div>
-        <button mat-button>Cancel</button>
-        <button mat-button>Confirm</button>
-      </div>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Confirm Booking</ng-template>
+        <div class="content-wrapper">
+          <div class="flex-spacer"></div>
+          <button mat-button>Cancel</button>
+          <button mat-button>Confirm</button>
+        </div>
+      </mat-step>
+      <mat-step [completed]="step2">
+        <ng-template matStepLabel>Confirm Booking</ng-template>
 
-    </mat-step>
-  </mat-horizontal-stepper>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+
 </div>
