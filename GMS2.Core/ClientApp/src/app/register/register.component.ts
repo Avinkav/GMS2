@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { fadeInAnimation } from '../../fadeInAnimation';
 import { User, STATES } from '../models/user';
-import { UserService } from '../services/user-service.service';
+import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,8 +19,12 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.userService.register(this.newUser).subscribe(o => {
-      console.log(o);
-      this.router.navigateByUrl('/login');
+      if (o.status === 200) {
+      this.router.navigateByUrl('/user-portal/profile');
+      } else {
+      // handle err
+      }
+
     })
       ;
   }

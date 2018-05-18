@@ -26,6 +26,7 @@ namespace GMS.Data.Models
 
         public int PostCode { get; set; }
         
+        public DateTime Dob {get; set;}
 
     }
 }

@@ -50,7 +50,7 @@ namespace GMS2.Core.Controllers
         /// <param name="returnUrl">Page to redirect to after user logs in</param>
         /// <returns></returns>
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterViewModel model, string returnUrl = null)
+        public async Task<object> Register([FromBody] RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (!ModelState.IsValid) return new BadRequestObjectResult("Invalid data recieved");
@@ -95,6 +95,14 @@ namespace GMS2.Core.Controllers
             }
 
             return new BadRequestObjectResult("Login Failed");
+        }
+
+        [HttpGet("details")]
+        [Authorize]
+        public async Task<object> Details(string id = null){
+            var user = await _userManager.GetUserAsync(User);
+            var userVm = new UserViewModel(user);
+            return Json(userVm);
         }
 
         private async Task<object> GenerateJwtToken(string email, AppUser user)

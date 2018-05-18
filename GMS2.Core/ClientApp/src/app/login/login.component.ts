@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { fadeInAnimation } from '../../fadeInAnimation';
-import { UserService } from '../services/user-service.service';
+import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,9 +20,11 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.userService.login(this.login).subscribe(o => {
-      console.log(o);
-
-
+      if (o.status === 200 ) {
+        this.userService.token = o.body;
+        set
+        this.router.navigateByUrl('/user-portal/dashboard');
+      }
     });
   }
 

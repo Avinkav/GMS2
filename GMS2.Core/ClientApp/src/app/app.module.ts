@@ -26,6 +26,7 @@ import { ChartModule } from 'angular2-chartjs';
 import { FormsModule } from '@angular/forms';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { HttpClientModule } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ CookieService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
