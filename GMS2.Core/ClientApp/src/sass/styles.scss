@@ -24,6 +24,7 @@ body {
 }
 
 .navbar {
+  height: $navbar-height;
   background-color: black;
   @include mat-elevation-transition;
   @include mat-elevation(2);

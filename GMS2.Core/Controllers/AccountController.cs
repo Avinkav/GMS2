@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using GMS.ASPNet.Core.Models;
+using GMS.Data;
 using GMS.Data.Models;
 using GMS2.Core.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -22,6 +23,7 @@ namespace GMS2.Core.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly DataContext _dataContext;
         private readonly IConfiguration _configuration;
 
         [TempData] public string ErrorMessage { get; set; }
@@ -35,12 +37,14 @@ namespace GMS2.Core.Controllers
         public AccountController(
              UserManager<AppUser> userManager,
              SignInManager<AppUser> signInManager,
+             DataContext dataContext,
              IConfiguration configuration
              )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
+            _dataContext = dataContext;
         }
 
         /// <summary>
@@ -67,8 +71,8 @@ namespace GMS2.Core.Controllers
                 City = model.City,
                 State = model.State,
                 PostCode = model.PostCode
-                       
-                
+
+
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -78,7 +82,8 @@ namespace GMS2.Core.Controllers
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
                 return new OkObjectResult(user);
-            }else
+            }
+            else
                 return new BadRequestObjectResult("Error Encountered");
 
         }
@@ -99,9 +104,43 @@ namespace GMS2.Core.Controllers
 
         [HttpGet("details")]
         [Authorize]
-        public async Task<object> Details(string id = null){
+        public async Task<object> Details(string id = null)
+        {
             var user = await _userManager.GetUserAsync(User);
             var userVm = new UserViewModel(user);
+            return Json(userVm);
+        }
+
+        [HttpPut("details")]
+        [Authorize]
+        public async Task<object> Details([FromBody] UserViewModel model)
+        {
+
+            if (model == null) NotFound();
+
+            if (model == null)
+                return NotFound();
+
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user == null)
+                return NotFound();
+
+            if (user.Id != model.Id)
+                return Unauthorized();
+
+            var userVm = new UserViewModel(user);
+
+            if (!ModelState.IsValid)
+                return new BadRequestObjectResult(model);
+
+            // Perform database update
+            UpdateValues(user, model);
+            await _userManager.UpdateAsync(user);
+            await _userManager.UpdateNormalizedEmailAsync(user);
+            await _userManager.UpdateNormalizedUserNameAsync(user);
+            ViewData["Status"] = "Changes Saved";
+
             return Json(userVm);
         }
 
@@ -128,5 +167,27 @@ namespace GMS2.Core.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+        // Update user object using values from the viewmodel
+        public void UpdateValues(AppUser user, UserViewModel model)
+        {
+            user.UserName = model.UserName;
+            user.NormalizedUserName = model.Email.ToUpperInvariant();
+            user.NormalizedEmail = model.Email.ToUpperInvariant();
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.Email = model.Email;
+            user.AddressLine1 = model.AddressLine1;
+            user.City = model.City;
+            user.PostCode = model.PostCode;
+            user.PhoneNumber = model.PhoneNumber;
+        }
+
+        // Helper method to read a full user
+        // private async Task<AppUser> GetFullUser(string id)
+        // {
+        //     var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.Id == new Guid(id));
+        //     return user;
+        // }
     }
 }

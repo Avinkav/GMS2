@@ -1,52 +1,52 @@
-<div class="container">
-    <div>
-      <h1> All Users</h1>
-      <p>Find by name:</p> <input type="text" />
-      <input type="submit" value="Search" />
-      <a>
-        Create New User
-      </a>
+<div class="col-12 pt-5">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">
+        <mat-icon>search</mat-icon>
+      </span>
     </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th class="uth">
-            First Name
-          </th>
-          <th class="uth">
-            Last Name
-          </th>
-          <th class="uth">
-            Username
-          </th>
-          <th class="uth">
-            Email
-          </th>
-          <th class="uth">
-            PhoneNumber
-          </th>
-          <th class="uth">
-            Teacher
-          </th>
-          <th class="uth">
-            Admin
-          </th>
-        </tr>
-      </thead>
-      <tbody class="utd">
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>
-            <a>Details</a> |
-            <a>Delete</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <input type="text" class="form-control" placeholder="Type to search..." [(ngModel)]="searchString" />
+    <div class="input-group-append">
+
+        <button class="btn btn-outline-primary" routerLink="new">New user</button>
+
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of users | filter : 'firstName' : searchString;">
+        <td>{{i.firstName}} {{i.lastName}}</td>
+        <td>{{i.email}}</td>
+        <td>{{i.phoneNumber}}</td>
+        <td>{{i.city}}</td>
+        <td>
+          <a routerLink="details">Details</a> |
+          <a href="#" (click)="confirmDelete(deleteMessage)">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+<ng-template #deleteMessage let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Confirm Delete</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Cancel')">Cancel</button>
+    <button type="button" class="btn btn-outline-danger" (click)="c('Confirm')">Confirm</button>
+  </div>
+</ng-template>

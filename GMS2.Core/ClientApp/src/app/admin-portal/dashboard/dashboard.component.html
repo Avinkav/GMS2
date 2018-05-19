@@ -1,14 +1,19 @@
-<div class="container-fluid pt">
+<div class="container-fluid py-3">
   <div class="row">
-    <div class="col-8">
-      <h1> All Lessons </h1>
-      <div id="calendar">
+    <div class="col-md-8">
+      <div class="col p-3 shadow-sm bg-white">
+        <div id="calendar">
+        </div>
       </div>
     </div>
-    <div class="col-md-4 d-flex flex-column">
-      <div>
-        <h2> Financial Summary</h2>
-        <table>
+    <div class="row col-md-4 d-flex flex-column">
+      <div class="col p-3 shadow-sm bg-white">
+        <div class="d-flex align-baseline">
+          <h4> Financial Summary</h4>
+          <div class="flex-spacer"></div>
+          <a routerLink="/admin-portal/finances">More details</a>
+        </div>
+        <table class="table table-striped">
           <thead>
             <tr>
               <th>User</th>
@@ -24,12 +29,11 @@
             <td>{{ i.amount | currency }}</td>
           </tr>
         </table>
-        <a routerLink="/admin-portal/finances">View Full Details</a> 
+
       </div>
-      <div>
-        <h2> Notifications</h2>
+      <div class="col p-3 shadow-sm bg-white my-2">
+        <h4> Notifications</h4>
       </div>
     </div>
   </div>
-  </div>
-
+</div>

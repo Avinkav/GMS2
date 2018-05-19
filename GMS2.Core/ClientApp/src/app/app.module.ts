@@ -27,6 +27,9 @@ import { FormsModule } from '@angular/forms';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { FilterPipe } from './pipes/filter.pipe';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { HomeCarouselComponent } from './home/home-carousel/home-carousel.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,8 @@ import { CookieService } from 'ngx-cookie-service';
     LessonsComponent,
     ProfileComponent,
     BookLessonComponent,
+    FilterPipe,
+    HomeCarouselComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +66,8 @@ import { CookieService } from 'ngx-cookie-service';
     FormsModule,
     NgxPageScrollModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule.forRoot()
   ],
   providers: [ CookieService ],
   bootstrap: [AppComponent]

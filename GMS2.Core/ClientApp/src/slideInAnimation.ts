@@ -10,7 +10,7 @@ export const slideInAnimation = trigger('slideAnim', [
     style({
       transform: 'translateX(100%)'
     }),
-    animate(350)
+    animate(350, style({ transform: 'translateX(0%)'}))
   ]),
   transition(':leave', [
     animate('1s ease', style({

@@ -11,8 +11,7 @@ export class AdminPortalComponent implements OnInit {
     { anchor: 'Dashboard', link: 'dashboard'},
     { anchor: 'Users', link: 'users'},
     { anchor: 'Classes', link: 'classes'},
-    { anchor: 'Finances', link: 'finances'},
-    { anchor: 'Profile', link: 'profile'},
+    { anchor: 'Finances', link: 'finances'}
 ];
   constructor() { }
 
