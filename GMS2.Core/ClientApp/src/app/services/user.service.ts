@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user';
 import { CookieService } from 'ngx-cookie-service';
+import { ProgressService } from './progress.service';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +17,7 @@ export class UserService {
     public id = '';
     public token = '';
 
-  constructor(private http: HttpClient, private cookieService: CookieService) { }
+  constructor(private http: HttpClient, private cookieService: CookieService, private progressService: ProgressService) { }
 
   public register(user: User) {
     return this.http.post('api/account/register', user, { headers: this.headers, responseType: 'text', observe: 'response' });
@@ -22,7 +25,15 @@ export class UserService {
   }
 
   public login(login: any) {
-    return this.http.post('api/account/login', login, { headers: this.headers, responseType: 'text', observe: 'response' } );
+    this.progressService.setProgress(true);
+    return this.http.post('api/account/login', login, { headers: this.headers, responseType: 'text', observe: 'response' } ).pipe(
+      tap(res => {
+        if (res.status === 200) {
+          this.token = res.body;
+          this.cookieService.set('token', res.body);
+          this.progressService.setProgress(false);
+        }
+      }));
   }
 
   public logout() {
@@ -30,7 +41,10 @@ export class UserService {
   }
 
   public getDetails() {
-    return this.http.get<User>('api/account/details', this.getAuthHeader() );
+    this.progressService.setProgress(true);
+    return this.http.get<User>('api/account/details', this.getAuthHeader()).pipe(
+      tap(u => this.progressService.setProgress(false))
+    );
   }
 
   public getUsers() {

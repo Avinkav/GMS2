@@ -24,6 +24,14 @@ body {
   min-height: 100%;
 }
 
+.progress{
+  position: fixed;
+  top:$navbar-height;
+  left: 0;
+  right: 0;
+  z-index: 100000;
+}
+
 .navbar {
   height: $navbar-height;
   background-color: black;

@@ -23,13 +23,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.progressService.setProgress(true);
     this.userService.login(this.login).subscribe(o => {
       if (o.status === 200 ) {
-        this.userService.token = o.body;
-        this.cookieService.set('token', o.body);
         this.router.navigateByUrl('/user-portal/dashboard');
-        this.progressService.setProgress(false);
       }
     });
   }

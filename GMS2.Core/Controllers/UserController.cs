@@ -35,7 +35,7 @@ namespace GMS2.Core.Controllers
         /// <param name="context">Entity Framework inherited GMS.Data.DataContext instance</param>
         /// <param name="roleManager">ASP Net Identity RoleManager instance</param>
         /// <param name="logger">Framework provided logger for logging</param>
-        public UserController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, DataContext context, RoleManager<IdentityRole<Guid>> roleManager, ILogger<AccountController> logger)
+        public UserController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, DataContext context, RoleManager<IdentityRole<Guid>> roleManager, ILogger logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -45,7 +45,7 @@ namespace GMS2.Core.Controllers
         }
 
         [HttpGet("list")]
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> ListUsers()
         {
             var userVms = new List<UserViewModel>();
 
@@ -57,6 +57,30 @@ namespace GMS2.Core.Controllers
             }
 
             return Json(userVms);
+        }
+
+        [HttpPost("")]
+        public IActionResult CreateUser()
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpGet("")]
+        public IActionResult ReadUser()
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpGet("")]
+        public IActionResult UpdateUser()
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpGet("")]
+        public IActionResult DeleteUser()
+        {
+            throw new NotImplementedException();
         }
 
 

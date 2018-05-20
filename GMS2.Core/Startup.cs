@@ -1,6 +1,6 @@
 using GMS.Data;
 using GMS.Data.Models;
-using GMS2Core.Models;
+using GMS2.Core.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,7 +14,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
-namespace GMS2
+namespace GMS2.Core
 {
     /// <summary>
     /// ASP Net Core application startup routine.
@@ -132,6 +132,10 @@ namespace GMS2
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                  name: "API default",
+                    template: "{controller}/{id?}");
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
