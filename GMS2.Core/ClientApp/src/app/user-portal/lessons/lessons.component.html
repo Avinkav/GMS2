@@ -1,3 +1,33 @@
-<p>
-  lessons works!
-</p>
+<div class="content pt-3">
+  <ngb-tabset>
+    <ngb-tab title="Calendar">
+      <ng-template ngbTabContent>
+        <div class="card p-3">
+          <div class="row  text-center">
+            <div class="mx-auto col-md-4">
+              <h3>{{ viewDate | calendarDate:('month' + 'ViewTitle'):'en' }}</h3>
+            </div>
+          </div>
+          <mwl-calendar-month-view [viewDate]="viewDate" [events]="events">
+          </mwl-calendar-month-view>
+        </div>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="History">
+          <ng-template ngbTabContent>
+            <div class="card p-3">
+              table
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Preferences">
+              <ng-template ngbTabContent>
+                <div class="card p-3">
+                  table
+                  </div>
+                </ng-template>
+              </ngb-tab>
+    </ngb-tabset>
+
+
+</div>

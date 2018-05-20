@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LessonsComponent implements OnInit {
 
+  viewDate = new Date();
   constructor() { }
 
   ngOnInit() {

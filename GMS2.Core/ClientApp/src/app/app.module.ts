@@ -31,6 +31,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HomeCarouselComponent } from './home/home-carousel/home-carousel.component';
 import { CalendarModule } from 'angular-calendar';
+import { ProgressComponent } from './progress/progress.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { CalendarModule } from 'angular-calendar';
     BookLessonComponent,
     FilterPipe,
     HomeCarouselComponent,
+    ProgressComponent,
   ],
   imports: [
     BrowserModule,

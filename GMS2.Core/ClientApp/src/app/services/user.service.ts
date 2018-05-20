@@ -25,6 +25,10 @@ export class UserService {
     return this.http.post('api/account/login', login, { headers: this.headers, responseType: 'text', observe: 'response' } );
   }
 
+  public logout() {
+    return this.cookieService.deleteAll();
+  }
+
   public getDetails() {
     return this.http.get<User>('api/account/details', this.getAuthHeader() );
   }

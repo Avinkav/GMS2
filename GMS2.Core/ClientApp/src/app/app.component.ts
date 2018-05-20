@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
+import { UserService } from './services/user.service';
 
 
 @Component({
@@ -10,6 +11,9 @@ import * as $ from 'jquery';
 export class AppComponent implements OnInit {
   title = 'app';
   scrollTop = 0;
+
+  constructor(private userService: UserService) {}
+
   ngOnInit()  {
 
     $(document).scroll(() => {
@@ -21,5 +25,9 @@ export class AppComponent implements OnInit {
       }
       this.scrollTop  = st;
     });
+  }
+
+  logout() {
+    this.userService.logout();
   }
 }
