@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { slideInAnimation } from '../../slideInAnimation';
 import { fadeInAnimation } from '../../fadeInAnimation';
 import { bgImageAnimation } from '../../bgImgANimation';
+import { Observable, interval } from 'rxjs';
+
 
 @Component({
   selector: 'app-home',
@@ -27,14 +29,11 @@ export class HomeComponent implements OnInit {
   }
 
   changeWallpaper() {
-  setTimeout(() => {
+  interval(5000).subscribe(() => {
 
     this.images[this.counter].show = false;
     this.counter = (this.counter < this.images.length - 1) ? this.counter + 1 : 0;
     this.images[this.counter].show = true;
-    this.changeWallpaper();
-
+  });
   }
-  , 5000);
-}
 }

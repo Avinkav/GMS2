@@ -1,0 +1,7 @@
+#editButton{
+    z-index: 10;
+}
+
+#cancelButton{
+    z-index: 9;
+}

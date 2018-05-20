@@ -1,5 +1,6 @@
 @import '~@angular/material/theming';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~angular-calendar/css/angular-calendar.css";
 @import 'variables';
 @import 'calendar';
 
@@ -26,20 +27,34 @@ body {
 .navbar {
   height: $navbar-height;
   background-color: black;
-  @include mat-elevation-transition;
-  @include mat-elevation(2);
-  &:hover {
-    @include mat-elevation(8);
-  }
+  transition: background-color 200ms linear;
+  @include mat-elevation(4);
+}
+
+.navbar.scrolled {
+  background-color:#202124;
+}
+
+.mat-drawer{
+  background-color: unset;
 }
 
 .serif-heading {
   font-family: 'Times New Roman', Times, serif;
 }
 
+.overflow-hidden{
+  overflow: hidden;
+}
+
 .section {
-  min-height: calc(100vh - #{$navbar-height});
+  min-height: 100vh; /* calc(100vh - #{$navbar-height}) */;
   align-items: center;
+}
+
+.table th, .table td{
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .flex-spacer {

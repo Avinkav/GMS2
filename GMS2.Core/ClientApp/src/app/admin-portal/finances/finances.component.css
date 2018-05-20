@@ -1,3 +1,10 @@
+/* Set a min width so that table doesnt collapse on itself on small screens */
+.table-card{
+    min-width: 500px;
+}
+
+
+
 chart{
     height: 250px;
 }

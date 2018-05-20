@@ -1,3 +1,55 @@
-<p>
-  dashboard works!
-</p>
+<div class="container-fluid p-3">
+  <div class="row">
+    <div class="col-md-7">
+      <div class="bg-white shadow-sm p-3">
+        <div class="row  text-center">
+          <div class="mx-auto col-md-4">
+            <h3>{{ viewDate | calendarDate:('month' + 'ViewTitle'):'en' }}</h3>
+          </div>
+        </div>
+        <mwl-calendar-month-view [viewDate]="viewDate" [events]="events">
+        </mwl-calendar-month-view>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div>
+        <div class="bg-white shadow-sm p-3">
+          <h4>
+            Past Lessons </h4>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Payee</th>
+                <th>Status</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let i of bills">
+                <td>{{i.date}}</td>
+                <td>{{i.payee}}</td>
+                <td>{{i.Status}}</td>
+                <td>{{i.amount | currency}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="py-3">
+        <div class="row">
+            <div class="col-6">
+                <div class="bg-white shadow-sm p-3">
+      
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="bg-white shadow-sm p-3">
+      
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { User, STATES } from '../../models/user';
 import { UserService } from '../../services/user.service';
+import { slideInAnimation } from '../../../slideInAnimation';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
+  animations: [slideInAnimation]
 })
 export class ProfileComponent implements OnInit {
 

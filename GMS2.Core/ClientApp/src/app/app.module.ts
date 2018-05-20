@@ -30,6 +30,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { FilterPipe } from './pipes/filter.pipe';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HomeCarouselComponent } from './home/home-carousel/home-carousel.component';
+import { CalendarModule } from 'angular-calendar';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { HomeCarouselComponent } from './home/home-carousel/home-carousel.compon
     NgxPageScrollModule,
     MatButtonModule,
     HttpClientModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    CalendarModule.forRoot()
   ],
   providers: [ CookieService ],
   bootstrap: [AppComponent]
