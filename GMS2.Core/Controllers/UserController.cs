@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-
+using GMS2.Core.Helpers;
 namespace GMS2.Core.Controllers
 {
 
@@ -25,7 +25,6 @@ namespace GMS2.Core.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<IdentityRole<Guid>> _roleManager;
-        private readonly ILogger _logger;
         private readonly DataContext _dataContext;
 
         /// <summary>
@@ -36,25 +35,22 @@ namespace GMS2.Core.Controllers
         /// <param name="context">Entity Framework inherited GMS.Data.DataContext instance</param>
         /// <param name="roleManager">ASP Net Identity RoleManager instance</param>
         /// <param name="logger">Framework provided logger for logging</param>
-        public UserController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, DataContext context, RoleManager<IdentityRole<Guid>> roleManager, ILogger logger)
+        public UserController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, DataContext context, RoleManager<IdentityRole<Guid>> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
-            _logger = logger;
             _dataContext = context;
         }
 
         [HttpGet("list")]
-        public async Task<IActionResult> ListUsers()
+        public async Task<IActionResult> ListUser()
         {
             var userVms = new List<UserViewModel>();
 
             foreach (var user in _dataContext.Users)
-            {
-                var userVm = new UserViewModel(user);
-
-                userVms.Add(userVm);
+            {           
+                userVms.Add(user.MaptoViewModel());
             }
 
             return Json(userVms);
@@ -79,13 +75,13 @@ namespace GMS2.Core.Controllers
             return Json(user);
         }
 
-        [HttpPut("")]
-        public async Task<IActionResult> UpdateUser([FromBody] UserViewModel model)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UserViewModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var user = await _userManager.FindByIdAsync(model.Id.ToString());
+            var user = await _userManager.FindByIdAsync(id.ToString());
 
             if (user == null)
                 return NotFound();

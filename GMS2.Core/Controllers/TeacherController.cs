@@ -76,6 +76,10 @@ namespace GMS2.Core.Controllers
         public async Task<IActionResult> ReadTeacher(string userId)
         {
             var user = await _dataContext.Teachers.Include(u => u.AppUser).FirstAsync(u => u.AppUser.Id == new Guid(userId));
+
+            if (user == null)
+                return NoContent();
+
             return Json(user);
         }
 
@@ -93,7 +97,10 @@ namespace GMS2.Core.Controllers
 
             var teacher = await _dataContext.Teachers.FindAsync(model.Id);
 
-            await TryUpdateModelAsync(teacher);
+            if (!await TryUpdateModelAsync(teacher))
+                return new StatusCodeResult(500);
+           
+            await _dataContext.SaveChangesAsync();
             return Ok();
         }
 
@@ -116,7 +123,8 @@ namespace GMS2.Core.Controllers
         {
             return new Teacher()
             {
-                UserId = new Guid(model.UserId)
+                UserId = new Guid(model.UserId),
+                InstrumentsTaught = String.Join(",", model.InstrumentsTaught)
             };
         }
 

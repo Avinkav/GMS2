@@ -9,6 +9,9 @@ namespace GMS.Data.Models
     /// </summary>
     public class Lesson
     {
+        
+        public Guid Id { get; set; }
+
         public Guid TaughtById { get; set; }
 
         [Required]
@@ -20,7 +23,7 @@ namespace GMS.Data.Models
         public Student TaughtTo { get; set; }
 
         [Required]
-        public DateTime DateTime { get; set; }
+        public DateTime StartDateTime { get; set; }
 
         public Guid InstrumentID { get; set; }
 
@@ -32,8 +35,8 @@ namespace GMS.Data.Models
 
         public int Cost { get; set; }
 
-        public enum LessonStatus { Complete, Cancelled, Missed, Postponed };
-
         public LessonStatus Status { get; set; }
     }
+
+    public enum LessonStatus { Booked, Complete, Cancelled, Missed, Postponed };
 }

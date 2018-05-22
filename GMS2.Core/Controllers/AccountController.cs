@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using GMS.ASPNet.Core.Models;
 using GMS.Data;
 using GMS.Data.Models;
+using GMS2.Core.Helpers;
 using GMS2.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -106,9 +107,10 @@ namespace GMS2.Core.Controllers
         public async Task<object> Details(string id = null)
         {
             var user = await _userManager.GetUserAsync(User);
-            var userVm = new UserViewModel(user);
-            return Json(userVm);
+
+            return Json(user.MaptoViewModel());
         }
+
 
         [HttpPut("details")]
         [Authorize]
@@ -128,8 +130,6 @@ namespace GMS2.Core.Controllers
             if (user.Id != model.Id)
                 return Unauthorized();
 
-            var userVm = new UserViewModel(user);
-
             if (!ModelState.IsValid)
                 return new BadRequestObjectResult(model);
 
@@ -138,9 +138,8 @@ namespace GMS2.Core.Controllers
             await _userManager.UpdateAsync(user);
             await _userManager.UpdateNormalizedEmailAsync(user);
             await _userManager.UpdateNormalizedUserNameAsync(user);
-            ViewData["Status"] = "Changes Saved";
 
-            return Json(userVm);
+            return Ok();
         }
 
         private async Task<object> GenerateJwtToken(string email, AppUser user)

@@ -1,90 +1,99 @@
 <div class="col-lg-8 p-3 m-3 shadow-sm bg-white card">
   <div class="overflow-hidden">
-  <form method="post" #profileForm="ngForm" (ngSubmit)="onSubmit()">
-    <fieldset>
-      <div class="d-flex mb-4 align-items-center">
-        <h2 class="serif-heading">Profile</h2>
-        <div class="flex-spacer"></div>
-        <div class="btn-group"  role="group">
-          <button id="cancelButton" type="button" [@flyInOut]  *ngIf="edit" class="btn btn-dark  px-3" (click)="edit = false">Cancel</button>
-          <button type="submit" id="editButton"  class="btn btn-primary px-3" [disabled]="edit" (click)="edit = true" [tabIndex]="edit ? 1 : -1">
+    <form method="post" #profileForm="ngForm" (ngSubmit)="onSubmit()">
+      <fieldset>
+        <div class="d-flex mb-4 align-items-center">
+          <h2 class="serif-heading">Profile</h2>
+          <div class="flex-spacer"></div>
+          <div class="btn-group" role="group">
+            <button id="cancelButton" type="button" [@flyInOut] *ngIf="edit" class="btn btn-dark  px-3" (click)="edit = false">Cancel</button>
+            <button type="submit" id="editButton" class="btn btn-primary px-3" [disabled]="edit" (click)="edit = true" [tabIndex]="edit ? 1 : -1">
               <span *ngIf="edit">Save</span>
               <span *ngIf="!edit">Edit</span>
 
             </button>
+          </div>
         </div>
-      </div>
 
-      <!-- <h4>Personal Details</h4> -->
-      <div class="form-row">
-        <div class="form-group col">
-          <input type="text" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="First name*"
-            id="firstName" required name="firstName" #firstName="ngModel" [(ngModel)]="user.firstName" />
-          <span [hidden]="firstName.valid || firstName.pristine" class="text-danger">First name is required</span>
+        <!-- <h4>Personal Details</h4> -->
+        <div class="form-row">
+          <div class="form-group col">
+            <input type="text" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="First name*"
+              id="firstName" required name="firstName" #firstName="ngModel" [(ngModel)]="user.firstName" />
+            <span [hidden]="firstName.valid || firstName.pristine" class="text-danger">First name is required</span>
+          </div>
+          <div class="form-group col">
+            <input type="text" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="Last name*"
+              id="lastName" required [(ngModel)]="user.lastName" name="lastName" #lastName="ngModel" />
+            <span [hidden]="lastName.valid || lastName.pristine" class="text-danger">Last name is required</span>
+          </div>
         </div>
-        <div class="form-group col">
-          <input type="text" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="Last name*"
-            id="lastName" required [(ngModel)]="user.lastName" name="lastName" #lastName="ngModel" />
-          <span [hidden]="lastName.valid || lastName.pristine" class="text-danger">Last name is required</span>
+        <div class="form-row">
+          <div class="form-group col-sm-3">
+            <div class="input-group">
+              <input class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="dd-mm-yyyy" id="dob" required
+                [(ngModel)]="user.dob" name="dob" ngbDatepicker #dob="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-dark" [disabled]="!edit" (click)="dob.toggle()" type="button">
+                  <mat-icon>event</mat-icon>
+                </button>
+              </div>
+              <span [hidden]="dob.valid || dob.pristine" class="text-danger">Date of birth is required</span>
+            </div>
+            <!-- <input type="date" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="Date of birth*"
+            id="dob" required [(ngModel)]="user.dob" name="dob" #dob="ngModel" /> -->
+          </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-sm-3">
-          <input type="date" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="Date of birth*"
-            id="dob" required [(ngModel)]="user.dob" name="dob" #dob="ngModel" />
-          <span [hidden]="dob.valid || dob.pristine" class="text-danger">Date of birth is required</span>
+        <div class="form-row">
+          <div class="form-group col-sm-4">
+            <input type="text" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="Phone number*"
+              id="phone" required [(ngModel)]="user.phoneNumber" name="phone" #phone="ngModel" />
+            <span [hidden]="phone.valid || phone.pristine" class="text-danger">Phone number is required</span>
+          </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-sm-4">
-          <input type="text" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="Phone number*"
-            id="phone" required [(ngModel)]="user.phoneNumber" name="phone" #phone="ngModel" />
-          <span [hidden]="phone.valid || phone.pristine" class="text-danger">Phone number is required</span>
+        <div class="form-group">
+          <input type="text" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="Address line 1*"
+            id="address" required [(ngModel)]="user.addressLine1" name="address1" #address1="ngModel" />
+          <span [hidden]="address1.valid || address1.pristine" class="text-danger">address line 1 is required</span>
         </div>
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="Address line 1*"
-          id="address" required [(ngModel)]="user.addressLine1" name="address1" #address1="ngModel" />
-        <span [hidden]="address1.valid || address1.pristine" class="text-danger">address line 1 is required</span>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-sm-5">
-          <input type="text" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="City/suburb*"
-            id="city" required [(ngModel)]="user.city" name="city" #city="ngModel" />
-          <span [hidden]="city.valid || city.pristine" class="text-danger">City is required</span>
+        <div class="form-row">
+          <div class="form-group col-sm-5">
+            <input type="text" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="City/suburb*"
+              id="city" required [(ngModel)]="user.city" name="city" #city="ngModel" />
+            <span [hidden]="city.valid || city.pristine" class="text-danger">City is required</span>
+          </div>
+          <div class="col-sm-3">
+            <select class="form-group form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" required id="state" placeholder="State"
+              [(ngModel)]="user.state" #state="ngModel" name="state">
+              <option *ngFor="let s of states" [value]="s">{{s}}</option>
+            </select>
+            <span [hidden]="state.valid || state.pristine" class="text-danger">State is required</span>
+          </div>
+          <div class="form-group col-sm-4">
+            <input type="text" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="Postcode*"
+              id="postCode" required [(ngModel)]="user.postCode" name="postCode" #postCode="ngModel" />
+            <span [hidden]="postCode.valid || postCode.pristine" class="text-danger">Postcode is required</span>
+          </div>
         </div>
-        <div class="col-sm-3">
-          <select class="form-group form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" required id="state" placeholder="State"
-            [(ngModel)]="user.state" #state="ngModel" name="state">
-            <option *ngFor="let s of states" [value]="s">{{s}}</option>
-          </select>
-          <span [hidden]="state.valid || state.pristine" class="text-danger">State is required</span>
+        <div class="form-row">
+          <div class="form-group col-sm-6">
+            <input type="text" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="Email*" id="email"
+              required [(ngModel)]="user.email" name="email" #email="ngModel" />
+            <span [hidden]="email.valid || email.pristine" class="text-danger">Email is required</span>
+          </div>
         </div>
-        <div class="form-group col-sm-4">
-          <input type="text" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="Postcode*"
-            id="postcode" required [(ngModel)]="user.postcode" name="postcode" #postcode="ngModel" />
-          <span [hidden]="postcode.valid || postcode.pristine" class="text-danger">Postcode is required</span>
+        <div class="form-row" hidden>
+          <div class="form-group col-sm-6">
+            <input type="password" class="form-control" placeholder="Password" id="password" required [(ngModel)]="user.password" name="password"
+              #password="ngModel" />
+            <span class="text-danger"></span>
+          </div>
+          <div class="form-group col-sm-6">
+            <input type="password" class="form-control" placeholder="Confirm Password" id="cPassword" required/>
+            <span class="text-danger"></span>
+          </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-sm-6">
-          <input type="text" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="Email*" id="email"
-            required [(ngModel)]="user.email" name="email" #email="ngModel" />
-          <span [hidden]="email.valid || email.pristine" class="text-danger">Email is required</span>
-        </div>
-      </div>
-      <div class="form-row" hidden>
-        <div class="form-group col-sm-6">
-          <input type="password" class="form-control" placeholder="Password" id="password" required [(ngModel)]="user.password" name="password"
-            #password="ngModel" />
-          <span class="text-danger"></span>
-        </div>
-        <div class="form-group col-sm-6">
-          <input type="password" class="form-control" placeholder="Confirm Password" id="cPassword" required/>
-          <span class="text-danger"></span>
-        </div>
-      </div>
-    </fieldset>
-  </form>
+      </fieldset>
+    </form>
   </div>
 </div>

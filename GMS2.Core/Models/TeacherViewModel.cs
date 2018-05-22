@@ -10,7 +10,7 @@ namespace GMS2.Core.Controllers
 
         public string UserId { get; set; }
 
-        public List<LessonType> InstrumentsTaught { get; set; }
+        public List<string> InstrumentsTaught { get; set; }
 
     }
 

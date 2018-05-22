@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS2.Core", "GMS2.Core\GMS2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Data", "GMS.Data\GMS.Data.csproj", "{70FB7A1A-9717-4338-8CB6-92B9CDDEFF4E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMS2.UnitTests", "GMS2.UnitTessts\GMS2.UnitTests.csproj", "{973EAC46-EAE6-475E-A793-4517F4FA02CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{70FB7A1A-9717-4338-8CB6-92B9CDDEFF4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70FB7A1A-9717-4338-8CB6-92B9CDDEFF4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70FB7A1A-9717-4338-8CB6-92B9CDDEFF4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{973EAC46-EAE6-475E-A793-4517F4FA02CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{973EAC46-EAE6-475E-A793-4517F4FA02CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{973EAC46-EAE6-475E-A793-4517F4FA02CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{973EAC46-EAE6-475E-A793-4517F4FA02CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,7 +7,7 @@ export class User {
     addressLine1: string;
     city: string;
     state: string;
-    postcode: number;
+    postCode: number;
     phoneNumber: string;
     dob: Date;
     password: string;

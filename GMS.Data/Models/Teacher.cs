@@ -14,7 +14,7 @@ namespace GMS.Data.Models
 
         public AppUser AppUser { get; set; }
 
-        public List<LessonType> InstrumentsTaught { get; set; }
+        public string InstrumentsTaught { get; set; }
 
         // Navigation property. Lessons taught by this user
         public List<Lesson> LessonsTaught { get; set; }
