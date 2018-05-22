@@ -27,6 +27,10 @@ namespace GMS.Data
 
         public DbSet<Instrument> Instruments { get; set; }
 
+        public DbSet<Teacher> Teachers { get; set; }
+
+        public DbSet<Student> Students { get; set; }
+
 
         /// <summary>
         /// Executed when Entity Framework is being initialised by the application
@@ -41,6 +45,8 @@ namespace GMS.Data
             modelBuilder.Entity<Lesson>().ToTable("Lesson");
             modelBuilder.Entity<Instrument>().ToTable("Instrument");
             modelBuilder.Entity<Availability>().ToTable("Availability");
+            modelBuilder.Entity<Teacher>().ToTable("Teacher");
+            modelBuilder.Entity<Student>().ToTable("Student");
 
             // Composite key for Availability
             modelBuilder.Entity<Availability>()

@@ -28,5 +28,15 @@ namespace GMS.Data.Models
         
         public DateTime Dob {get; set;}
 
+        public string LanguagesSpoken { get; set; }
+
+        public Guid TeacherId { get; set; }
+
+        public Teacher Teacher { get; set; }
+
+        public Guid StudentId { get; set; }
+
+        public Student Student { get; set; }
+
     }
 }

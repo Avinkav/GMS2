@@ -72,7 +72,6 @@ namespace GMS2.Core.Controllers
                 State = model.State,
                 PostCode = model.PostCode
 
-
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);

@@ -9,7 +9,8 @@ namespace GMS.Data.Models
     {
         public Guid Id { get; set; }
 
-        public Guid AppUserId { get; set; }
+        [ForeignKey("AppUser")]
+        public Guid UserId { get; set; }
 
         public AppUser AppUser { get; set; }
 

@@ -8,6 +8,7 @@ using GMS2.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace GMS2.Core.Controllers
@@ -59,28 +60,54 @@ namespace GMS2.Core.Controllers
             return Json(userVms);
         }
 
+        // Found in AccountController TODO: Code or remove?
         [HttpPost("")]
-        public IActionResult CreateUser()
+        public IActionResult CreateUser([FromBody] UserViewModel model)
         {
+
             throw new NotImplementedException();
         }
 
-        [HttpGet("")]
-        public IActionResult ReadUser()
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> ReadUser(string id)
         {
-            throw new NotImplementedException();
+            var user = await _dataContext.Users
+                                         //.Include(u => u.Teacher).ThenInclude(t => t.InstrumentsTaught)
+                                         //.Include(u => u.Student).ThenInclude(s => s.Instruments)
+                                         .FirstAsync(u => u.Id == new Guid(id));
+            return Json(user);
         }
 
-        [HttpGet("")]
-        public IActionResult UpdateUser()
+        [HttpPut("")]
+        public async Task<IActionResult> UpdateUser([FromBody] UserViewModel model)
         {
-            throw new NotImplementedException();
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var user = await _userManager.FindByIdAsync(model.Id.ToString());
+
+            if (user == null)
+                return NotFound();
+
+            UpdateValues(user, model);
+            await _userManager.UpdateAsync(user);
+
+            return Ok();
         }
 
-        [HttpGet("")]
-        public IActionResult DeleteUser()
+        [Authorize(Roles = "Administrator, Super Administrator")]
+        [HttpDelete("")]
+        public async Task<IActionResult> DeleteUserAsync(string id)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByIdAsync(id.ToString());
+
+            if (user == null)
+                return NotFound();
+
+            await _userManager.DeleteAsync(user);
+
+            return Ok();
         }
 
 
@@ -125,6 +152,21 @@ namespace GMS2.Core.Controllers
             }
 
             return Ok();
+        }
+
+        //
+        public void UpdateValues(AppUser user, UserViewModel model)
+        {
+            user.UserName = model.UserName;
+            user.NormalizedUserName = model.UserName.ToUpperInvariant();
+            user.NormalizedEmail = model.Email.ToUpperInvariant();
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.Email = model.Email;
+            user.AddressLine1 = model.AddressLine1;
+            user.City = model.City;
+            user.State = model.State;
+            user.PhoneNumber = model.PhoneNumber;
         }
     }
 }
