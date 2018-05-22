@@ -23,6 +23,10 @@ import { LessonsComponent } from './user-portal/lessons/lessons.component';
 import { BillingComponent } from './user-portal/billing/billing.component';
 import { ProfileComponent } from './user-portal/profile/profile.component';
 import { BookLessonComponent } from './book-lesson/book-lesson.component';
+import { TeacherPortalComponent } from './teacher-portal/teacher-portal.component';
+import { TeacherDashboardComponent } from './teacher-portal/teacher-dashboard/teacher-dashboard.component';
+import { ClassesComponent } from './teacher-portal/classes/classes.component';
+import { IncomeComponent } from './teacher-portal/income/income.component';
 
 
 const routes: Routes = [
@@ -45,6 +49,12 @@ const routes: Routes = [
     {path: 'lessons', component: LessonsComponent},
     {path: 'billing', component: BillingComponent},
     {path: 'profile', component: ProfileComponent},
+  ] },
+  { path: 'teacher-portal',  component: TeacherPortalComponent, children: [
+    {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+    {path: 'dashboard', component: TeacherDashboardComponent},
+    {path: 'classes', component: ClassesComponent},
+    {path: 'income', component: IncomeComponent},
   ] },
   { path: 'login',  component: LoginComponent },
   {  path: '',  redirectTo: '/index',  pathMatch: 'full'}

@@ -32,6 +32,10 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HomeCarouselComponent } from './home/home-carousel/home-carousel.component';
 import { CalendarModule } from 'angular-calendar';
 import { ProgressComponent } from './progress/progress.component';
+import { TeacherPortalComponent } from './teacher-portal/teacher-portal.component';
+import { TeacherDashboardComponent } from './teacher-portal/teacher-dashboard/teacher-dashboard.component';
+import { ClassesComponent } from './teacher-portal/classes/classes.component';
+import { IncomeComponent } from './teacher-portal/income/income.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +59,10 @@ import { ProgressComponent } from './progress/progress.component';
     FilterPipe,
     HomeCarouselComponent,
     ProgressComponent,
+    TeacherPortalComponent,
+    TeacherDashboardComponent,
+    ClassesComponent,
+    IncomeComponent,
   ],
   imports: [
     BrowserModule,

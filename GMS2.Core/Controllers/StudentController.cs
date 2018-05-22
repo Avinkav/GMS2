@@ -5,12 +5,14 @@ using System.Net;
 using System.Threading.Tasks;
 using GMS.Data;
 using GMS.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace GMS2.Core.Controllers
 {
-    [Route("api/students")]
+    [Route("api/student")]
+    [Authorize]
     public class StudentController : Controller
     {
 
@@ -21,7 +23,7 @@ namespace GMS2.Core.Controllers
             _dataContext = dataContext;
         }
 
-        [HttpGet("list/{count?}")]
+        [HttpGet("list/{count}")]
         public async Task<IActionResult> ListStudents(int count = 10)
         {
             if (count > 100)
@@ -74,14 +76,18 @@ namespace GMS2.Core.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
+            if (model.Instruments == null)
+                model.Instruments = new string[] { };
+
             var student = new Student()
             {
                 UserId = model.UserId,
-                Instruments = string.Join(",", model.Instruments)
+                Instruments = string.Join(",", model.Instruments )
             };
 
             _dataContext.Students.Add(student);
-            await _dataContext.SaveChangesAsync();
+
+             _dataContext.SaveChanges();
 
             return Ok();
         }
@@ -89,7 +95,10 @@ namespace GMS2.Core.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> ReadStudent(Guid id)
         {
-            var student = await _dataContext.Students.Include(s => s.LessonsTaken).FirstAsync(s => s.UserId == id);
+            var student = await _dataContext.Students.Include(s => s.LessonsTaken).FirstOrDefaultAsync(s => s.UserId == id);
+            if (student == null)
+                return NoContent();
+
             var model = new StudentViewModel()
             {
                 Id = student.Id,

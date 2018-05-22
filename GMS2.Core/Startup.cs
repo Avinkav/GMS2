@@ -99,8 +99,8 @@ namespace GMS2.Core
                 // Cookie settings
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-                options.LoginPath = "/Session/Login";
-                options.AccessDeniedPath = "/Session/AccessDenied";
+                options.LoginPath = "/account/login";
+                options.AccessDeniedPath = "/session/accessDenied";
                 options.SlidingExpiration = true;
             });
 
