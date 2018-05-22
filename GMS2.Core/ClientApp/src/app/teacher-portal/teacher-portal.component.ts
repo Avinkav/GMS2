@@ -10,7 +10,7 @@ export class TeacherPortalComponent implements OnInit {
   navItems = [
     { anchor: 'Dashboard', link: 'dashboard'},
     { anchor: 'Classes', link: 'classes'},
-    { anchor: 'Income', link: 'Income'},
+    { anchor: 'Income', link: 'income'},
 ];
 
   constructor() { }

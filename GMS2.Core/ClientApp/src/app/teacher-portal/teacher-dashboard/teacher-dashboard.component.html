@@ -1,3 +1,37 @@
-<p>
-  teacher-dashboard works!
-</p>
+<div class="container-fluid py-3">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="col p-3 shadow-sm bg-white">
+        <div id="calendar">
+        </div>
+      </div>
+    </div>
+    <div class="row col-md-4 d-flex flex-column">
+      <div class="col p-3 shadow-sm bg-white">
+        <div class="d-flex align-baseline">
+          <h4> Payment Summary</h4>
+          <div class="flex-spacer"></div>
+          <a routerLink="/teacher-portal/income">More details</a>
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Fortnight End</th>
+              <th>Hours</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tr *ngFor="let i of summary">
+            <td>{{ i.date }}</td>
+            <td>{{ i.hours }}</td>
+            <td>{{ i.amount | currency }}</td>
+          </tr>
+        </table>
+
+      </div>
+      <div class="col p-3 shadow-sm bg-white my-2">
+        <h4> Notifications</h4>
+      </div>
+    </div>
+  </div>
+</div>
