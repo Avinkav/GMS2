@@ -35,7 +35,6 @@ const routes: Routes = [
   { path: 'book-lesson',  component: BookLessonComponent },
   { path: 'contact-us',  component: ContactUsComponent },
   { path: 'register',  component: RegisterComponent },
-  { path: 'user-portal',  component: UserPortalComponent },
   { path: 'admin-portal',  component: AdminPortalComponent, children: [
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     {path: 'dashboard', component: DashboardComponent},
