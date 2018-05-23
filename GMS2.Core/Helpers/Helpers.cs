@@ -2,6 +2,10 @@ using System;
 using GMS2.Core.Models;
 using GMS.Data;
 using GMS.Data.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace GMS2.Core.Helpers
 {
@@ -24,7 +28,6 @@ namespace GMS2.Core.Helpers
                 PhoneNumber = user.PhoneNumber,
             };
         }
-
 
     }
 }

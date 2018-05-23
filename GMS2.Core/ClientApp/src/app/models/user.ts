@@ -9,7 +9,7 @@ export class User {
     state: string;
     postCode: number;
     phoneNumber: string;
-    dob: Date;
+    dob: string;
     password: string;
 
 }

@@ -12,7 +12,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Text;
+using GMS2.Core.Helpers;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Threading.Tasks;
 
 namespace GMS2.Core
 {
@@ -22,9 +27,6 @@ namespace GMS2.Core
     /// </summary>
     public class Startup
     {
-        private const string SecretKey = "iNivDmHLpUA223sqsfhqGbMRdRj1PVkH";
-        private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -51,27 +53,27 @@ namespace GMS2.Core
             services.AddIdentity<AppUser, IdentityRole<Guid>>().AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
 
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
-            services
-                .AddAuthentication(options =>
-                {
-                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            // JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
+            // services
+            //     .AddAuthentication(options =>
+            //     {
+            //         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //         options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            //         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 
-                })
-                .AddJwtBearer(cfg =>
-                {
-                    cfg.RequireHttpsMetadata = false;
-                    cfg.SaveToken = true;
-                    cfg.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidIssuer = Configuration["JwtIssuer"],
-                        ValidAudience = Configuration["JwtIssuer"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtKey"])),
-                        ClockSkew = TimeSpan.Zero // remove delay of token when expire
-                    };
-                });
+            //     })
+            //     .AddJwtBearer(cfg =>
+            //     {
+            //         cfg.RequireHttpsMetadata = false;
+            //         cfg.SaveToken = true;
+            //         cfg.TokenValidationParameters = new TokenValidationParameters
+            //         {
+            //             ValidIssuer = Configuration["JwtIssuer"],
+            //             ValidAudience = Configuration["JwtIssuer"],
+            //             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtKey"])),
+            //             ClockSkew = TimeSpan.Zero // remove delay of token when expire
+            //         };
+            //     });
 
             // Configure ASP Net Identity to behave as required
             services.Configure<IdentityOptions>(options =>
@@ -98,9 +100,11 @@ namespace GMS2.Core
             {
                 // Cookie settings
                 options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                options.ExpireTimeSpan = TimeSpan.FromDays(30);
                 options.LoginPath = "/account/login";
                 options.AccessDeniedPath = "/session/accessDenied";
+                options.Events.OnRedirectToAccessDenied = ReplaceRedirector(HttpStatusCode.Forbidden, options.Events.OnRedirectToAccessDenied);
+                options.Events.OnRedirectToLogin = ReplaceRedirector(HttpStatusCode.Unauthorized, options.Events.OnRedirectToLogin);
                 options.SlidingExpiration = true;
             });
 
@@ -126,6 +130,7 @@ namespace GMS2.Core
             }
 
             app.UseStaticFiles();
+
             app.UseSpaStaticFiles();
 
             app.UseAuthentication();
@@ -154,5 +159,16 @@ namespace GMS2.Core
                 }
             });
         }
+
+        static Func<RedirectContext<CookieAuthenticationOptions>, Task> ReplaceRedirector(HttpStatusCode statusCode, Func<RedirectContext<CookieAuthenticationOptions>, Task> existingRedirector) =>
+            context =>
+            {
+                if (context.Request.Path.StartsWithSegments("/api"))
+                {
+                    context.Response.StatusCode = (int)statusCode;
+                    return Task.CompletedTask;
+                }
+                return existingRedirector(context);
+            };
     }
 }

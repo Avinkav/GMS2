@@ -87,8 +87,15 @@ namespace GMS2.Core.Controllers
 
             _dataContext.Students.Add(student);
 
-             _dataContext.SaveChanges();
-
+            try{
+             await _dataContext.SaveChangesAsync();
+            } catch (DbUpdateException ex){
+                return BadRequest("Request failed, make sure the UserId is valid and a student doesn't already exist");
+            } catch (Exception e){
+                Request.HttpContext.Response.StatusCode = 500;
+                return Json(e);
+            }
+            
             return Ok();
         }
 

@@ -12,6 +12,7 @@ import { ProgressService } from '../../services/progress.service';
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
 
+  dt: any;
   states = STATES;
   user = new User();
   edit = false;
@@ -19,11 +20,25 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   constructor(private userService: UserService, private progressService: ProgressService) { }
 
   ngOnInit() {
-
-    this.userService.getDetails().subscribe( o => {
-      console.log(o);
+    this.dt = new Date();
+    this.userService.getDetails().subscribe(o => {
       this.user = o;
-     });
+    });
+  }
+
+  onSubmit() {
+    if (this.edit === true) {
+      this.userService.update(this.user).subscribe(o => {
+        if (o.status === 200) {
+          // saved succesfully
+          return;
+        } else {
+          // handle err
+          return;
+        }
+      });
+    }
+      this.edit = true;
   }
 
   ngAfterViewInit() {

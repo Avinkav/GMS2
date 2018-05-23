@@ -7,7 +7,7 @@
           <div class="flex-spacer"></div>
           <div class="btn-group" role="group">
             <button id="cancelButton" type="button" [@flyInOut] *ngIf="edit" class="btn btn-dark  px-3" (click)="edit = false">Cancel</button>
-            <button type="submit" id="editButton" class="btn btn-primary px-3" [disabled]="edit" (click)="edit = true" [tabIndex]="edit ? 1 : -1">
+            <button type="submit" id="editButton" class="btn btn-primary px-3" [disabled]="edit && !profileForm.form.valid" [tabIndex]="edit ? 1 : -1">
               <span *ngIf="edit">Save</span>
               <span *ngIf="!edit">Edit</span>
 
@@ -30,20 +30,19 @@
         </div>
         <div class="form-row">
           <div class="form-group col-sm-3">
-            <div class="input-group">
+            <input type="text" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="Date of birth*"
+              id="dob" required [(ngModel)]="user.dob" name="dob" #dob="ngModel" />
+            <span [hidden]="dob.valid || dob.pristine" class="text-danger">Date of birth is required</span>
+          </div>
+        </div>
+        <!--<div class="input-group">  
               <input class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="dd-mm-yyyy" id="dob" required
                 [(ngModel)]="user.dob" name="dob" ngbDatepicker #dob="ngbDatepicker">
               <div class="input-group-append">
                 <button class="btn btn-dark" [disabled]="!edit" (click)="dob.toggle()" type="button">
                   <mat-icon>event</mat-icon>
                 </button>
-              </div>
-              <span [hidden]="dob.valid || dob.pristine" class="text-danger">Date of birth is required</span>
-            </div>
-            <!-- <input type="date" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="Date of birth*"
-            id="dob" required [(ngModel)]="user.dob" name="dob" #dob="ngModel" /> -->
-          </div>
-        </div>
+              </div>  -->
         <div class="form-row">
           <div class="form-group col-sm-4">
             <input type="text" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="Phone number*"
@@ -82,7 +81,7 @@
             <span [hidden]="email.valid || email.pristine" class="text-danger">Email is required</span>
           </div>
         </div>
-        <div class="form-row" hidden>
+        <!-- <div class="form-row" hidden>
           <div class="form-group col-sm-6">
             <input type="password" class="form-control" placeholder="Password" id="password" required [(ngModel)]="user.password" name="password"
               #password="ngModel" />
@@ -92,8 +91,13 @@
             <input type="password" class="form-control" placeholder="Confirm Password" id="cPassword" required/>
             <span class="text-danger"></span>
           </div>
-        </div>
+        </div> -->
       </fieldset>
     </form>
   </div>
 </div>
+<!-- <div>
+
+  diagnostics :
+  {{user.dob}}
+</div> -->

@@ -95,11 +95,19 @@ namespace GMS2.Core.Controllers
 
             if (result.Succeeded)
             {
-                var appUser = _userManager.Users.SingleOrDefault(r => r.Email == model.Email);
-                return await GenerateJwtToken(model.Email, appUser);
+                var appUser = _userManager.Users.SingleOrDefault(r => r.NormalizedEmail == model.Email.ToUpperInvariant());
+                return Ok(appUser.FirstName);
             }
 
             return new BadRequestObjectResult("Login Failed");
+        }
+
+        [HttpGet("logout")]
+        public async Task<object> Logout()
+        {
+            await _signInManager.SignOutAsync();
+
+            return Ok();
         }
 
         [HttpGet("details")]
@@ -174,6 +182,7 @@ namespace GMS2.Core.Controllers
             user.NormalizedEmail = model.Email.ToUpperInvariant();
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
+            user.Dob = DateTime.Parse(model.dob);
             user.Email = model.Email;
             user.AddressLine1 = model.AddressLine1;
             user.City = model.City;
