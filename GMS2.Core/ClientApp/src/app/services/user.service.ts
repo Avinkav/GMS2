@@ -52,7 +52,7 @@ export class UserService {
     return this.http.get('api/account/logout').pipe( tap (res => {
       this.cookieService.deleteAll();
       this.userName.next(this.getCurrentLogin());
-      this.progressService.setProgress(false)
+      this.progressService.setProgress(false);
     }));
 
   }
@@ -76,6 +76,10 @@ export class UserService {
 
   public getUsers() {
     return this.http.get<User[]>('api/user/list', this.getAuthHeader());
+  }
+
+  public getUser(id) {
+    return this.http.get<User>('api/user/' + id);
   }
 
   public getAuthHeader() {

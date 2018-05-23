@@ -2,13 +2,15 @@ import { Instrument } from './instrument';
 
 export class Teacher {
     // id: string;
+    id: string;
+    userId: string;
     name: string;
     instruments: string[];
     description: string;
     selected: boolean;
 }
 
-export const teachers: Teacher[] = [{
+export const teachers = [{
     name: 'Luciano Pavarotti',
     description: `Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio,
     vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.

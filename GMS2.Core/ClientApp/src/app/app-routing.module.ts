@@ -39,6 +39,7 @@ const routes: Routes = [
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     {path: 'dashboard', component: DashboardComponent},
     {path: 'users', component: UsersComponent},
+    {path: 'users/:id', component: ProfileComponent},
     {path: 'finances', component: FinancesComponent},
     {path: 'reports', component: ReportsComponent},
   ] },

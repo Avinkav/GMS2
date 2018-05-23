@@ -1,0 +1,25 @@
+<form method="post" #studentForm="ngForm" (ngSubmit)="onSubmit()">
+  <fieldset>
+    <div class="d-flex mb-4 align-items-center">
+      <h4>Teacher Properties</h4>
+      <div class="flex-spacer"></div>
+      <div class="btn-group" role="group">
+        <button id="cancelButton" type="button" [@flyInOut] *ngIf="edit" class="btn btn-dark  px-3" (click)="edit = false">Cancel</button>
+        <button type="submit" id="editButton" class="btn btn-primary px-3" [disabled]="edit && !studentForm.form.valid" [tabIndex]="edit ? 1 : -1">
+          <span *ngIf="edit">Save</span>
+          <span *ngIf="!edit">Edit</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col">
+        <input type="text" *ngIf="edit">
+        <ul>
+          <li *ngFor="let i of model.instruments">{{i}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </fieldset>
+</form>

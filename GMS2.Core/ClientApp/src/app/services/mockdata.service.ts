@@ -19,7 +19,7 @@ export class MockdataService {
     return of(shuffle(instruments));
   }
 
-  getTeachers(): Observable<Teacher[]> {
+  getTeachers(): Observable<any[]> {
     return of(teachers);
   }
 

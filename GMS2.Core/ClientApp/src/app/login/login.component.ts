@@ -13,7 +13,7 @@ import { ProgressService } from '../services/progress.service';
 })
 export class LoginComponent implements OnInit {
 
-  login = { email: '', password: '' };
+  login = { email: '', password: '', rememberMe: true };
 
   constructor(private userService: UserService, private router: Router,
     private cookieService: CookieService,

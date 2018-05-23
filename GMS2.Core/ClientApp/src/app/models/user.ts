@@ -11,7 +11,8 @@ export class User {
     phoneNumber: string;
     dob: string;
     password: string;
-
+    StudentId: string;
+    TeacherId: string;
 }
 
 

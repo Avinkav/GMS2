@@ -36,6 +36,9 @@ import { TeacherPortalComponent } from './teacher-portal/teacher-portal.componen
 import { TeacherDashboardComponent } from './teacher-portal/teacher-dashboard/teacher-dashboard.component';
 import { ClassesComponent } from './teacher-portal/classes/classes.component';
 import { IncomeComponent } from './teacher-portal/income/income.component';
+import { UserDetailsComponent } from './shared/user-details/user-details.component';
+import { TeacherComponent } from './shared/teacher/teacher.component';
+import { StudentComponent } from './shared/student/student.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +66,9 @@ import { IncomeComponent } from './teacher-portal/income/income.component';
     TeacherDashboardComponent,
     ClassesComponent,
     IncomeComponent,
+    UserDetailsComponent,
+    TeacherComponent,
+    StudentComponent,
   ],
   imports: [
     BrowserModule,

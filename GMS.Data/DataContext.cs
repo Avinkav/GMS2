@@ -56,7 +56,9 @@ namespace GMS.Data
             modelBuilder.Entity<Lesson>()
                 .HasKey(c => new { c.TaughtById, c.TaughtToId, c.StartDateTime });
 
+            //modelBuilder.Entity<AppUser>().HasOne(a => a.Student).WithOne(b => b.AppUser).HasForeignKey<Student>(b => b.UserId).IsRequired();
 
+            //modelBuilder.Entity<AppUser>().HasOne(d => d.Teacher).WithOne(e => e.AppUser).HasForeignKey<Teacher>(e => e.UserId).IsRequired();
 
         }
      
