@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { slideInAnimation } from '../../slideInAnimation';
 import { fadeInAnimation } from '../../fadeInAnimation';
-import { bgImageAnimation } from '../../bgImgANimation';
+import { bgImageAnimation } from '../../bgImgAnimation';
 import { Observable, interval } from 'rxjs';
 
 
