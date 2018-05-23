@@ -1,0 +1,16 @@
+{
+  "name": "gms2.apitests",
+  "version": "1.0.0",
+  "description": "Node.js client to test API",
+  "main": "app.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Avin Kavish",
+  "license": "MIT",
+  "dependencies": {
+    "jsonfile": "^4.0.0",
+    "request": "^2.87.0"
+  }
+}

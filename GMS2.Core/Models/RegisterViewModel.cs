@@ -9,8 +9,8 @@ namespace GMS.ASPNet.Core.Models
 
         public string LastName { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime DOB { get; set; }
+
+        public string DOB { get; set; }
 
         [EmailAddress]
         public string Email { get; set; }

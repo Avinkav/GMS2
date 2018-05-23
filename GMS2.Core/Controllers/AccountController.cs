@@ -55,10 +55,9 @@ namespace GMS2.Core.Controllers
         /// <param name="returnUrl">Page to redirect to after user logs in</param>
         /// <returns></returns>
         [HttpPost("register")]
-        public async Task<object> Register([FromBody] RegisterViewModel model, string returnUrl = null)
+        public async Task<object> Register([FromBody] RegisterViewModel model)
         {
-            ViewData["ReturnUrl"] = returnUrl;
-            if (!ModelState.IsValid) return new BadRequestObjectResult("Invalid data recieved");
+            if (!ModelState.IsValid) return new BadRequestObjectResult(ModelState);
 
             // Creating the new user
             var user = new AppUser
@@ -71,20 +70,30 @@ namespace GMS2.Core.Controllers
                 AddressLine1 = model.AddressLine1,
                 City = model.City,
                 State = model.State,
-                PostCode = model.PostCode
+                PostCode = model.PostCode,
+                Dob = DateTime.Parse(model.DOB)
 
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
+            // Sign new user in if registration was succesful
+            if (!result.Succeeded) return new BadRequestObjectResult(result.Errors);
 
-            // Sign new user in if regisration was succesful
-            if (result.Succeeded)
+            _dataContext.Students.Add(new Student()
             {
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                return new OkObjectResult(user);
+                UserId = user.Id
+            });
+
+            try
+            {
+                var result2 = await _dataContext.SaveChangesAsync();
             }
-            else
-                return new BadRequestObjectResult("Error Encountered");
+            catch (Exception e)
+            {
+                return new BadRequestObjectResult(e.Message);
+            }
+            await _signInManager.SignInAsync(user, isPersistent: false);
+            return new OkObjectResult(user.FirstName);
 
         }
 
