@@ -40,6 +40,8 @@ namespace GMS2.Core.Models
 
         public StudentViewModel Student {get;set;}
 
+        public TeacherViewModel Teacher {get;set;}
+
         public IList<string> Roles {get; set;}
 
     }

@@ -12,7 +12,7 @@
     </div>
     <div class="col-lg-3 " *ngIf="admin || user?.teacher">
       <div class="shadow-sm bg-white p-3 card overflow-hidden">
-        <app-teacher [model]="user?.teacher"></app-teacher>
+        <app-teacher [permission]="user?.roles?.includes('Teacher')" [userId]="user?.id" [model]="user?.teacher"></app-teacher>
       </div>
     </div>
   </div>

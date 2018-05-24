@@ -4,24 +4,7 @@
   background-color: white;
 }
 
-.media{
-  cursor: pointer;
-}
-
-.media:hover{
-  background-color: rgb(230, 230, 230);
-}
-
-.avatar-img{
-  width: 64px;
-  height: 64px;
-}
 
 .mat-step-header .mat-step-icon {
   background-color: $accent;
-}
-
-#full-calendar{
-  width: 100%;
-  min-height:600px;
 }

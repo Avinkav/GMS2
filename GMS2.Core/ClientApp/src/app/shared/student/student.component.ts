@@ -2,24 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Student } from '../../models/student';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { UserService } from '../../services/user.service';
+import { shrinkInOut } from '../../animations/shrinkInOut';
 
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
   styleUrls: ['./student.component.css'],
-  animations: [
-    trigger('shrinkInOut', [
-      state('in', style({ height: '*' })),
-      transition('* => void', [
-        style({ height: '*' }),
-        animate(250, style({ height: 0 }))
-      ]),
-      transition('void => *', [
-        style({ height: '0' }),
-        animate(250, style({ height: '*' }))
-      ])
-    ])
-  ]
+  animations: [shrinkInOut]
 })
 export class StudentComponent implements OnInit {
 
@@ -59,7 +48,7 @@ export class StudentComponent implements OnInit {
       res => {
         if (res.ok) {
           this.permission = true;
-          // this.
+          this.userService.getStudent(this.userId).subscribe(obj => this.model = obj);
         }
       },
       err => console.log(err)

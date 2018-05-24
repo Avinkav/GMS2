@@ -16,7 +16,7 @@ import { UsersComponent } from './admin-portal/users/users.component';
 import { ReportsComponent } from './admin-portal/reports/reports.component';
 import { FinancesComponent } from './admin-portal/finances/finances.component';
 import { LessonsComponent } from './user-portal/lessons/lessons.component';
-import { ProfileComponent } from './user-portal/profile/profile.component';
+import { ProfileComponent } from './shared/profile/profile.component';
 import { BillingComponent } from './user-portal/billing/billing.component';
 import { UserDashboardComponent } from './user-portal/dashboard/user-dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,7 +28,7 @@ import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { FilterPipe } from './pipes/filter.pipe';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeCarouselComponent } from './home/home-carousel/home-carousel.component';
 import { CalendarModule } from 'angular-calendar';
 import { ProgressComponent } from './progress/progress.component';
@@ -39,6 +39,10 @@ import { IncomeComponent } from './teacher-portal/income/income.component';
 import { UserDetailsComponent } from './shared/user-details/user-details.component';
 import { TeacherComponent } from './shared/teacher/teacher.component';
 import { StudentComponent } from './shared/student/student.component';
+import { SelectTeacherComponent } from './book-lesson/select-teacher/select-teacher.component';
+import { SelectDateComponent } from './book-lesson/select-date/select-date.component';
+import { SelectInstrumentComponent } from './book-lesson/select-instrument/select-instrument.component';
+import { ConfirmComponent } from './book-lesson/confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +73,10 @@ import { StudentComponent } from './shared/student/student.component';
     UserDetailsComponent,
     TeacherComponent,
     StudentComponent,
+    SelectTeacherComponent,
+    SelectDateComponent,
+    SelectInstrumentComponent,
+    ConfirmComponent,
   ],
   imports: [
     BrowserModule,

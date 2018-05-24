@@ -5,6 +5,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { ProgressService } from './progress.service';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
+import { Student } from 'src/app/models/student';
+import { Teacher } from '../models/teacher';
 
 @Injectable({
   providedIn: 'root'
@@ -122,7 +124,29 @@ export class UserService {
     return this.http.get('api/role/' + id, { headers: this.headers, responseType: 'json', observe: 'response' } ).pipe(
       tap(this.progressService.stop()),
       catchError((error) => {
-        this.progressService.setProgress(false);
+        this.progressService.stop();
+        return throwError(error);
+      })
+    );
+  }
+
+  public getStudent(id: string) {
+    this.progressService.start();
+    return this.http.get<Student>('api/student/' + id, { headers: this.headers, responseType: 'json' } ).pipe(
+      tap(null, null , this.progressService.stop()),
+      catchError((error) => {
+        this.progressService.stop();
+        return throwError(error);
+      })
+    );
+  }
+
+  public getTeacher(id: string) {
+    this.progressService.start();
+    return this.http.get<Teacher>('api/teacher/' + id, { headers: this.headers, responseType: 'json' } ).pipe(
+      tap(null, null , this.progressService.stop()),
+      catchError((error) => {
+        this.progressService.stop();
         return throwError(error);
       })
     );

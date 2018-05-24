@@ -1,0 +1,25 @@
+<ng-container *ngFor="let t of model">
+  <div (click)="clickTeacher(t)" class="media p-3">
+    <img class="align-self-start mr-3 avatar-img" src="assets/avatar.png" alt="Generic placeholder image">
+    <div class="media-body">
+      <div>
+        <!-- (click)="t.selected = !t.selected" -->
+        <h5 class="mt-0">{{t.name}}</h5>
+        <p>{{t.description}}</p>
+        <div class="inline-list" *ngIf="!t.selected">
+          <span *ngFor="let i of t.instruments">
+            {{i}}
+          </span>
+        </div>
+      </div>
+      <div class="radio-list" *ngIf="t.selected">
+        <div class="form-check" *ngFor="let i of t.instruments">
+          <input class="form-check-input" type="radio" name="exampleRadios" value="i">
+          <label class="form-check-label" for="exampleRadios1">
+            {{i}}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

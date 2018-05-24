@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
 
-  user: User;
+  user: User = new User();
   @Input() userId;
   studentId: string = null;
   teacherId: string = null;

@@ -72,7 +72,7 @@ namespace GMS2.Core.Controllers
                 return BadRequest();
 
             var user = await _dataContext.Users
-                                         //.Include(u => u.Teacher).ThenInclude(t => t.InstrumentsTaught)
+                                         .Include(u => u.Teacher)
                                          .Include(u => u.Student)
                                          .FirstAsync(u => u.Id == new Guid(id));
 

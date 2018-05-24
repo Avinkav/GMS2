@@ -2,15 +2,20 @@
 using System;
 using System.Collections.Generic;
 
-namespace GMS2.Core.Controllers
+namespace GMS2.Core.Models
 {
     public class TeacherViewModel
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
-        public string UserId { get; set; }
+        public Guid UserId { get; set; }
 
-        public List<string> InstrumentsTaught { get; set; }
+        public string Name {get; set;}
+
+        public string Description {get; set;}
+
+        public int HourlyRate {get; set;}
+        public string[] InstrumentsTaught { get; set; }
 
     }
 

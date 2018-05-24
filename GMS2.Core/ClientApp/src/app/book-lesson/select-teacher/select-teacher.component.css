@@ -1,0 +1,13 @@
+.media{
+    cursor: pointer;
+  }
+  
+  .media:hover{
+    background-color: rgb(230, 230, 230);
+  }
+  
+  .avatar-img{
+    width: 64px;
+    height: 64px;
+  }
+  

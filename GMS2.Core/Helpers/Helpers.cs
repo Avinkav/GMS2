@@ -40,12 +40,40 @@ namespace GMS2.Core.Helpers
                 };
             }
 
+            if (user.Teacher != null)
+            {
+                result.Teacher = new TeacherViewModel()
+                {
+                    Id = user.Student.Id,
+                    UserId = user.Id,
+                    InstrumentsTaught = user.Student.Instruments?.Split(','),
+
+                };
+            }
+
             if (roles != null)
-                result.Roles =  roles;
+                result.Roles = roles;
             else
                 result.Roles = new List<string>();
 
             return result;
+        }
+
+        public static TeacherViewModel ToViewModel(this Teacher teacher){
+           var model = new TeacherViewModel()
+            {
+                Id = teacher.Id,
+                UserId = teacher.UserId,
+                InstrumentsTaught = teacher.InstrumentsTaught?.Split(','),
+                HourlyRate = 50
+            };
+
+            if (teacher.AppUser != null){
+                model.Name = $"{teacher.AppUser.FirstName} {teacher.AppUser.LastName}";
+                
+            }
+
+            return model;
         }
 
     }

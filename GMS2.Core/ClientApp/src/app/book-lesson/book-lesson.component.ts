@@ -3,6 +3,9 @@ import * as $ from 'jquery';
 import 'fullcalendar';
 import { MockdataService } from '../services/mockdata.service';
 import { Teacher } from '../models/teacher';
+import { CalendarEvent } from 'calendar-utils';
+import { Lesson } from '../models/lesson';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-book-lesson',
@@ -11,37 +14,36 @@ import { Teacher } from '../models/teacher';
 })
 export class BookLessonComponent implements OnInit {
 
+
   teachers: Teacher[];
   @ViewChild('stepper') stepper;
   step1 = false;
   step2 = false;
   step3 = false;
   step4 = false;
-  events;
 
-  selectedTeacher: Teacher;
-  selectedDate: Date;
+  model: Lesson = new Lesson();
 
-  constructor(private mockDataService: MockdataService) { }
 
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.mockDataService.getTeachers().subscribe(t => this.teachers = t);
-    $('#fullCalendar').fullCalendar({
-      eventLimit: false,
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay'
-      },
-      // events: this.events,
-      // eventClick: this.eventClick
-    });
+    this.dataService.getTeachers().subscribe(obj => {
+      this.teachers = obj;
+    },
+      error => console.log(error)
+    );
   }
 
-  clickTeacher(t: Teacher) {
-    this.selectedTeacher = t;
+  teacherSelected(t) {
+    this.model.teacher = t;
     this.step1 = true;
+    this.stepper.next();
+  }
+
+  dateSelected(d) {
+    this.model.date = d;
+    this.step2 = true;
     this.stepper.next();
   }
 

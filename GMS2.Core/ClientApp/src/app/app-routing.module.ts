@@ -21,7 +21,7 @@ import { FinancesComponent } from './admin-portal/finances/finances.component';
 import { UserDashboardComponent } from './user-portal/dashboard/user-dashboard.component';
 import { LessonsComponent } from './user-portal/lessons/lessons.component';
 import { BillingComponent } from './user-portal/billing/billing.component';
-import { ProfileComponent } from './user-portal/profile/profile.component';
+import { ProfileComponent } from './shared/profile/profile.component';
 import { BookLessonComponent } from './book-lesson/book-lesson.component';
 import { TeacherPortalComponent } from './teacher-portal/teacher-portal.component';
 import { TeacherDashboardComponent } from './teacher-portal/teacher-dashboard/teacher-dashboard.component';
