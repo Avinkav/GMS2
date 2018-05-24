@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user';
 import { CookieService } from 'ngx-cookie-service';
 import { ProgressService } from './progress.service';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +23,19 @@ export class UserService {
   }
 
   public register(user: User) {
-    return this.http.post('api/account/register', user, { headers: this.headers, responseType: 'text', observe: 'response' });
-
+    return this.http.post('api/account/register', user, { headers: this.headers, responseType: 'text', observe: 'response' }).pipe(
+      tap(res => {
+        if (res.status === 200) {
+          this.cookieService.set('name', res.body);
+          this.progressService.setProgress(false);
+          this.userName.next(this.getCurrentLogin());
+        }
+      }),
+      catchError((error) => {
+        this.progressService.setProgress(false);
+        return throwError(error);
+      })
+    );
   }
 
   public login(login: any) {
@@ -36,7 +47,12 @@ export class UserService {
           this.progressService.setProgress(false);
           this.userName.next(this.getCurrentLogin());
         }
-      }));
+      }),
+      catchError((error) => {
+        this.progressService.setProgress(false);
+        return throwError(error);
+      })
+    );
   }
 
   public getCurrentLogin() {
@@ -49,18 +65,28 @@ export class UserService {
 
   public logout() {
     this.progressService.setProgress(true);
-    return this.http.get('api/account/logout').pipe( tap (res => {
-      this.cookieService.deleteAll();
-      this.userName.next(this.getCurrentLogin());
-      this.progressService.setProgress(false);
-    }));
+    return this.http.get('api/account/logout').pipe(
+      tap(res => {
+        this.cookieService.deleteAll();
+        this.userName.next(this.getCurrentLogin());
+        this.progressService.setProgress(false);
+      }),
+      catchError((error) => {
+        this.progressService.setProgress(false);
+        return throwError(error);
+      })
+    );
 
   }
 
   public getDetails() {
     this.progressService.setProgress(true);
     return this.http.get<User>('api/account/details', this.getAuthHeader()).pipe(
-      tap(u => this.progressService.setProgress(false))
+      tap(u => this.progressService.setProgress(false)),
+      catchError((error) => {
+        this.progressService.setProgress(false);
+        return throwError(error);
+      })
     );
   }
 
@@ -71,7 +97,8 @@ export class UserService {
         if (res.status === 200) {
           this.progressService.setProgress(false);
         }
-      }));
+      })
+    );
   }
 
   public getUsers() {
@@ -80,6 +107,25 @@ export class UserService {
 
   public getUser(id) {
     return this.http.get<User>('api/user/' + id);
+  }
+
+  public setPermission(id: string, role: string) {
+    return this.http.get('api/role/' + id + '/grant/' + role, { headers: this.headers, responseType: 'json', observe: 'response' });
+  }
+
+  public revokePermission(id: string, role: string){
+    return this.http.get('api/role/' + id + '/revoke/' + role, { headers: this.headers, responseType: 'json', observe: 'response' });
+  }
+
+  public getPermissions(id: string) {
+    this.progressService.start();
+    return this.http.get('api/role/' + id, { headers: this.headers, responseType: 'json', observe: 'response' } ).pipe(
+      tap(this.progressService.stop()),
+      catchError((error) => {
+        this.progressService.setProgress(false);
+        return throwError(error);
+      })
+    );
   }
 
   public getAuthHeader() {

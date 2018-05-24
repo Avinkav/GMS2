@@ -1,25 +1,30 @@
-<form method="post" #studentForm="ngForm" (ngSubmit)="onSubmit()">
-  <fieldset>
-    <div class="d-flex mb-4 align-items-center">
-      <h4>Teacher Properties</h4>
-      <div class="flex-spacer"></div>
-      <div class="btn-group" role="group">
-        <button id="cancelButton" type="button" [@flyInOut] *ngIf="edit" class="btn btn-dark  px-3" (click)="edit = false">Cancel</button>
-        <button type="submit" id="editButton" class="btn btn-primary px-3" [disabled]="edit && !studentForm.form.valid" [tabIndex]="edit ? 1 : -1">
-          <span *ngIf="edit">Save</span>
-          <span *ngIf="!edit">Edit</span>
-        </button>
-      </div>
+<div class="d-flex align-items-center">
+  <h4 class="">Teacher</h4>
+  <div class="flex-spacer"></div>
+  <div class="btn-group" role="group">
+    <button id="toggle" type="button" class="btn btn-sm px-3" [class.btn-primary]="!permission" [class.btn-warning]="permission"
+      (click)="togglePermission()">
+      <span *ngIf="permission">Revoke</span>
+      <span *ngIf="!permission">Grant</span>
+    </button>
+  </div>
+</div>
+<div class="content mt-4" [@shrinkInOut] *ngIf="permission && model">
+  <div class="form-row">
+    <div class="form-group col">
+      <label  class="mb-3">Teaching Instruments</label>
+      <ul class="list-group list-group-flush mb-3">
+        <li class="list-group-item d-flex justify-content-between align-items-center overflow-hidden" *ngFor="let i of model.instruments">{{i}}
+          <button type="button" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </li>
+      </ul>
     </div>
-
-    <div class="form-row">
-      <div class="form-group col">
-        <input type="text" *ngIf="edit">
-        <ul>
-          <li *ngFor="let i of model.instruments">{{i}}
-          </li>
-        </ul>
-      </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col">
+      <input #box class="form-control form-control-sm" type="text" placeholder="Add instrument..." (keyup.enter)="addItem(box)">
     </div>
-  </fieldset>
-</form>
+  </div>
+</div>

@@ -24,6 +24,7 @@ body {
   min-height: 100%;
 }
 
+
 .progress{
   position: fixed;
   top:$navbar-height;
@@ -44,6 +45,10 @@ body {
 }
 
 .mat-drawer{
+  background-color: unset;
+}
+
+.breadcrumb{
   background-color: unset;
 }
 
@@ -84,6 +89,7 @@ body {
   left: 0;
   right: 0;
 }
+
 
 /* Footer */
 

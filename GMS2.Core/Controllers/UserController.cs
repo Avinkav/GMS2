@@ -68,11 +68,19 @@ namespace GMS2.Core.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> ReadUser(string id)
         {
+            if (id == null)
+                return BadRequest();
+
             var user = await _dataContext.Users
                                          //.Include(u => u.Teacher).ThenInclude(t => t.InstrumentsTaught)
-                                         //.Include(u => u.Student).ThenInclude(s => s.Instruments)
+                                         .Include(u => u.Student)
                                          .FirstAsync(u => u.Id == new Guid(id));
-            return Json(user);
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            var vm = user.MaptoViewModel(roles);
+
+            return Json(vm);
         }
 
         [HttpPut("{id}")]
@@ -108,6 +116,7 @@ namespace GMS2.Core.Controllers
 
 
         // Backend action to create Roles
+        [HttpGet("createroles")]
         public async Task<IActionResult> CreateRoles()
         {
             if (!await _roleManager.RoleExistsAsync("Super Administrator"))
@@ -149,6 +158,7 @@ namespace GMS2.Core.Controllers
 
             return Ok();
         }
+
 
         //
         public void UpdateValues(AppUser user, UserViewModel model)

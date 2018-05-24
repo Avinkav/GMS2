@@ -1,3 +1,6 @@
+import { Teacher } from "./teacher";
+import { Student } from "./student";
+
 export class User {
     id: string;
     firstName: string;
@@ -11,8 +14,9 @@ export class User {
     phoneNumber: string;
     dob: string;
     password: string;
-    StudentId: string;
-    TeacherId: string;
+    teacher: Teacher;
+    student: Student;
+    roles: string[];
 }
 
 

@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using GMS.Data;
 using GMS.Data.Models;
+using GMS2.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

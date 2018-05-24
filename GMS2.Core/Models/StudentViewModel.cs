@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace GMS2.Core.Controllers
+namespace GMS2.Core.Models
 {
     public class StudentViewModel
     {

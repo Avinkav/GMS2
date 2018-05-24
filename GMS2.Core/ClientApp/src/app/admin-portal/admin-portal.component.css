@@ -12,3 +12,7 @@
 .mat-nav-list{
     width: 190px;
 }
+
+.mat-list-item{
+    font-family: unset;
+}

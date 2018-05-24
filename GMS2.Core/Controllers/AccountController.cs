@@ -71,28 +71,33 @@ namespace GMS2.Core.Controllers
                 City = model.City,
                 State = model.State,
                 PostCode = model.PostCode,
-                Dob = DateTime.Parse(model.DOB)
-
+                Dob = DateTime.Parse(model.DOB),
+                Student = new Student()
             };
 
-            var result = await _userManager.CreateAsync(user, model.Password);
-            // Sign new user in if registration was succesful
-            if (!result.Succeeded) return new BadRequestObjectResult(result.Errors);
 
-            _dataContext.Students.Add(new Student()
-            {
-                UserId = user.Id
-            });
+            var result = await _userManager.CreateAsync(user, model.Password);
+            
+            if (!result.Succeeded) 
+                return new BadRequestObjectResult(result.Errors);
+
+            result = await _userManager.AddToRoleAsync(user, "Student");
+
+            if (!result.Succeeded) 
+                return new BadRequestObjectResult(result.Errors);
 
             try
             {
-                var result2 = await _dataContext.SaveChangesAsync();
+                await _dataContext.SaveChangesAsync();
             }
             catch (Exception e)
             {
                 return new BadRequestObjectResult(e.Message);
             }
+
+            // Sign new user in if registration was succesful
             await _signInManager.SignInAsync(user, isPersistent: false);
+
             return new OkObjectResult(user.FirstName);
 
         }
@@ -100,7 +105,7 @@ namespace GMS2.Core.Controllers
         [HttpPost("login")]
         public async Task<object> Login([FromBody] LoginViewModel model)
         {
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
 
             if (result.Succeeded)
             {

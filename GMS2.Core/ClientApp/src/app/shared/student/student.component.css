@@ -1,0 +1,18 @@
+.material-icons{
+    font-size: 18px;
+}
+
+.content {
+    overflow:hidden;
+    transition:max-height 0.3s ease-out;
+    height:auto;
+    max-height:1600px;
+  }
+  
+  .section.collapsed {
+    max-height:0;
+  }
+
+  .list-group-item{
+    padding: 0.6rem 1rem;
+  }
