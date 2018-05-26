@@ -5,12 +5,12 @@
       <div class="form-group">
         <input id="email" required 
                 name="email" #email="ngModel" [(ngModel)]="login.email" class="form-control" placeholder="Email" />
-        <span class="text-danger"></span>
+        
       </div>
       <div class="form-group">
         <input type="password" id="password" required 
                 name="password" #password="ngModel" [(ngModel)]="login.password" class="form-control" placeholder="Password" />
-        <span class="text-danger"></span>
+        <span class="text-danger pt-3">{{ error }}</span>
       </div>
       <div class="form-group d-flex">
         <div class="checkbox">

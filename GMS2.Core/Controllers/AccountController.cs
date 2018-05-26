@@ -113,7 +113,7 @@ namespace GMS2.Core.Controllers
                 return Ok(appUser.FirstName);
             }
 
-            return new BadRequestObjectResult("Login Failed");
+            return new BadRequestObjectResult("Login failed");
         }
 
         [HttpGet("logout")]

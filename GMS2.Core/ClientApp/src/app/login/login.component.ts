@@ -12,7 +12,8 @@ import { ProgressService } from '../services/progress.service';
   animations: [fadeInAnimation]
 })
 export class LoginComponent implements OnInit {
-
+  
+  error = '';
   login = { email: '', password: '', rememberMe: true };
 
   constructor(private userService: UserService, private router: Router,
@@ -23,11 +24,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.userService.login(this.login).subscribe(o => {
-      if (o.status === 200 ) {
+    this.userService.login(this.login).subscribe(res => {
+      if (res.ok) {
         this.router.navigateByUrl('/user-portal/dashboard');
+        return;
       }
-    });
+    },
+    err => this.error = 'Incorrect username and/or password'
+  );
   }
 
 }
