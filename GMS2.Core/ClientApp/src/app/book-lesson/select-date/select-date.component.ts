@@ -14,7 +14,7 @@ export class SelectDateComponent implements OnInit {
   events: CalendarEvent[] = [];
   @Output() selectDate = new EventEmitter<Date>();
   @Output() selectDuration = new EventEmitter<number>();
-  
+
   @Input() model: Teacher;
 
 
@@ -23,5 +23,8 @@ export class SelectDateComponent implements OnInit {
   ngOnInit() {
   }
 
+  durationSelected(value) {
+    this.selectDuration.emit(value);
+  }
 
 }

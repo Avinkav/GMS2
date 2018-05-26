@@ -28,7 +28,7 @@ namespace GMS2.Core.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> ListAvailability(Guid id)
         {
-            var lessons = await _dataContext.Lessons.Where(l => l.TaughtToId == id).ToListAsync();
+            var lessons = await _dataContext.Lessons.Where(l => l.StudentId == id).ToListAsync();
 
             if (lessons == null)
                 return NoContent();

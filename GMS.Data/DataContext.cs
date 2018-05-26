@@ -54,7 +54,7 @@ namespace GMS.Data
 
             // Composite key for Lesson
             modelBuilder.Entity<Lesson>()
-                .HasKey(c => new { c.TaughtById, c.TaughtToId, c.StartDateTime });
+                .HasKey(c => new { c.StudentId, c.TeacherId, c.StartDateTime });
 
             //modelBuilder.Entity<AppUser>().HasOne(a => a.Student).WithOne(b => b.AppUser).HasForeignKey<Student>(b => b.UserId).IsRequired();
 

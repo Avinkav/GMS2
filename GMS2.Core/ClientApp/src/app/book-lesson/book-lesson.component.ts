@@ -6,6 +6,8 @@ import { Teacher } from '../models/teacher';
 import { CalendarEvent } from 'calendar-utils';
 import { Lesson } from '../models/lesson';
 import { DataService } from '../services/data.service';
+import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-book-lesson',
@@ -25,14 +27,20 @@ export class BookLessonComponent implements OnInit {
   model: Lesson = new Lesson();
 
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
+    if (!this.userService.getCurrentLogin()) {
+      this.router.navigateByUrl('/login');
+    }
+
     this.dataService.getTeachers().subscribe(obj => {
       this.teachers = obj;
     },
       error => console.log(error)
     );
+
+    this.model.duration = 30;
   }
 
   teacherSelected(t) {
@@ -45,6 +53,20 @@ export class BookLessonComponent implements OnInit {
     this.model.date = d;
     this.step2 = true;
     this.stepper.next();
+  }
+
+  cancelClick(e) {
+
+  }
+
+  confirmClick(e) {
+    this.dataService.newLesson(this.model).subscribe(
+      res => { if (res.ok) {
+        this.router.navigateByUrl('/user-portal/lessons');
+      }
+    },
+    err => alert(err)
+    );
   }
 
 }
