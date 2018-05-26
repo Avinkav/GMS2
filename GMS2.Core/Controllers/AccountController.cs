@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -98,7 +99,7 @@ namespace GMS2.Core.Controllers
             // Sign new user in if registration was succesful
             await _signInManager.SignInAsync(user, isPersistent: false);
 
-            return new OkObjectResult(user.FirstName);
+            return new OkObjectResult(user);
 
         }
 
@@ -109,8 +110,10 @@ namespace GMS2.Core.Controllers
 
             if (result.Succeeded)
             {
-                var appUser = _userManager.Users.SingleOrDefault(r => r.NormalizedEmail == model.Email.ToUpperInvariant());
-                return Ok(appUser.FirstName);
+                var appUser = await _userManager.Users.Include(u => u.Student)
+                                                        .Include(u => u.Teacher)
+                                                        .Where(r => r.NormalizedEmail == model.Email.ToUpperInvariant()).SingleOrDefaultAsync();
+                return Ok(appUser.MaptoViewModel());
             }
 
             return new BadRequestObjectResult("Login failed");

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GMS.Data;
 using GMS.Data.Models;
+using GMS2.Core.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -46,10 +47,9 @@ namespace GMS2.Core.Controllers
                 StartDateTime = model.DateTime,
                 Status = LessonStatus.Booked,
                 Cost = model.Cost,
-                InstrumentID = model.InstrumentId,
                 LessonType = model.LessonType,
-                TaughtById = model.TaughtById,
-                TaughtToId = model.TaughtToId
+                StudentId = model.Student.Id,
+                TeacherId = model.Teacher.Id
             };
 
             _dataContext.Lessons.Add(lesson);
@@ -67,7 +67,7 @@ namespace GMS2.Core.Controllers
         [HttpGet("{id}")]
         public IActionResult ReadLessons(Guid id)
         {
-            var lessons = _dataContext.Lessons.Where(l => l.TaughtToId == id);
+            var lessons = _dataContext.Lessons.Where(l => l.StudentId == id);
 
             return Json(lessons);
         }
@@ -93,7 +93,6 @@ namespace GMS2.Core.Controllers
             // Update values, all other properties are immutable after creation
             lesson.StartDateTime = model.DateTime;
             lesson.Cost = model.Cost;
-            lesson.InstrumentID = model.InstrumentId;
             lesson.Status = model.Status;
 
             await _dataContext.SaveChangesAsync();

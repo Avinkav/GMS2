@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ProgressService } from './progress.service';
 import { tap } from 'rxjs/operators';
 import { Teacher } from '../models/teacher';
+import { Lesson } from '../models/lesson';
 
 @Injectable({
   providedIn: 'root'
@@ -18,4 +19,12 @@ export class DataService {
       tap(null, null, this.progressService.stop()),
     );
   }
+
+  public newLesson(model: Lesson) {
+    this.progressService.start();
+    return this.http.post('api/lesson', model, {observe: 'response'}).pipe(
+      tap(null, null, this.progressService.stop()),
+    );
+  }
+
 }

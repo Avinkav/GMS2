@@ -21,16 +21,16 @@ export class UserService {
   public userName: BehaviorSubject<string> = new BehaviorSubject(null);
 
   constructor(private http: HttpClient, private cookieService: CookieService, private progressService: ProgressService) {
-    this.userName.next(this.getCurrentLogin());
+    this.userName.next(this.getCurrentLogin().firstName);
   }
 
   public register(user: User) {
     return this.http.post('api/account/register', user, { headers: this.headers, responseType: 'text', observe: 'response' }).pipe(
       tap(res => {
         if (res.status === 200) {
-          this.cookieService.set('name', res.body);
+          localStorage.setItem('user', JSON.stringify(res.body));
           this.progressService.setProgress(false);
-          this.userName.next(this.getCurrentLogin());
+          this.userName.next(this.getCurrentLogin().firstName);
         }
       }),
       catchError((error) => {
@@ -42,12 +42,12 @@ export class UserService {
 
   public login(login: any) {
     this.progressService.setProgress(true);
-    return this.http.post('api/account/login', login, { headers: this.headers, responseType: 'text', observe: 'response' }).pipe(
+    return this.http.post<User>('api/account/login', login, { headers: this.headers, observe: 'response' }).pipe(
       tap(res => {
-        if (res.status === 200) {
-          this.cookieService.set('name', res.body);
+        if (res.ok) {
+          localStorage.setItem('user', JSON.stringify(res.body));
+          this.userName.next(res.body.firstName);
           this.progressService.setProgress(false);
-          this.userName.next(this.getCurrentLogin());
         }
       }),
       catchError((error) => {
@@ -57,9 +57,9 @@ export class UserService {
     );
   }
 
-  public getCurrentLogin() {
-    if (this.cookieService.check('name')) {
-      return this.cookieService.get('name');
+  public getCurrentLogin(): User {
+    if (localStorage.getItem('user')) {
+      return JSON.parse(localStorage.getItem('user'));
     }
 
     return null;
@@ -69,8 +69,8 @@ export class UserService {
     this.progressService.setProgress(true);
     return this.http.get('api/account/logout').pipe(
       tap(res => {
-        this.cookieService.deleteAll();
-        this.userName.next(this.getCurrentLogin());
+        localStorage.clear();
+        this.userName.next(null);
         this.progressService.setProgress(false);
       }),
       catchError((error) => {
