@@ -25,10 +25,6 @@ namespace GMS.Data.Models
         [Required]
         public DateTime StartDateTime { get; set; }
 
-        public Guid InstrumentID { get; set; }
-
-        public Instrument Instrument { get; set; }
-
         private int Duration { get; set; }
 
         public string LessonType { get; set; }

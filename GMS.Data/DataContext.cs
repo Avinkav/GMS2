@@ -52,6 +52,9 @@ namespace GMS.Data
             modelBuilder.Entity<Availability>()
                 .HasKey(c => new { c.UserId, c.StartTime });
 
+            modelBuilder.Entity<Lesson>()
+                .HasKey(c => c.Id );
+
             // Composite key for Lesson
             modelBuilder.Entity<Lesson>()
                 .HasKey(c => new { c.StudentId, c.TeacherId, c.StartDateTime });

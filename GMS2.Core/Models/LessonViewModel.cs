@@ -7,7 +7,7 @@ namespace GMS2.Core.Models
     public class LessonViewModel
     {
         public Guid Id { get; set; }
-        public DateTime DateTime { get; set; }
+        public string Date { get; set; }
         public int Cost { get; set; }
         //public Guid InstrumentId { get;  set; }
         public string LessonType { get;  set; }

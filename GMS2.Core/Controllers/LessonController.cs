@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GMS2.Core.Controllers
 {
-    [Route("api/lessons")]
+    [Route("api/lesson")]
     public class LessonController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
@@ -44,7 +44,7 @@ namespace GMS2.Core.Controllers
             //
             var lesson = new Lesson()
             {
-                StartDateTime = model.DateTime,
+                StartDateTime = DateTime.Parse(model.Date),
                 Status = LessonStatus.Booked,
                 Cost = model.Cost,
                 LessonType = model.LessonType,
@@ -53,7 +53,12 @@ namespace GMS2.Core.Controllers
             };
 
             _dataContext.Lessons.Add(lesson);
-            await _dataContext.SaveChangesAsync();
+
+            try{
+                await _dataContext.SaveChangesAsync();
+            }catch(Exception e){
+                return new BadRequestObjectResult(e);
+            }
 
             return Ok();
         }
@@ -91,7 +96,7 @@ namespace GMS2.Core.Controllers
                 return NotFound();
 
             // Update values, all other properties are immutable after creation
-            lesson.StartDateTime = model.DateTime;
+            lesson.StartDateTime = DateTime.Parse(model.Date);
             lesson.Cost = model.Cost;
             lesson.Status = model.Status;
 

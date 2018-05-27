@@ -30,7 +30,8 @@ export class BookLessonComponent implements OnInit {
   constructor(private dataService: DataService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    if (!this.userService.getCurrentLogin()) {
+    const user = this.userService.getCurrentLogin();
+    if (!user) {
       this.router.navigateByUrl('/login');
     }
 
@@ -39,7 +40,7 @@ export class BookLessonComponent implements OnInit {
     },
       error => console.log(error)
     );
-
+    this.model.student = user.student;
     this.model.duration = 30;
   }
 
@@ -65,7 +66,7 @@ export class BookLessonComponent implements OnInit {
         this.router.navigateByUrl('/user-portal/lessons');
       }
     },
-    err => alert(err)
+    err => console.log(err)
     );
   }
 
