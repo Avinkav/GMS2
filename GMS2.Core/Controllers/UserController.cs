@@ -100,9 +100,9 @@ namespace GMS2.Core.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Administrator, Super Administrator")]
-        [HttpDelete("")]
-        public async Task<IActionResult> DeleteUserAsync(string id)
+        //[Authorize(Roles = "Administrator, Super Administrator")]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(string id)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
 

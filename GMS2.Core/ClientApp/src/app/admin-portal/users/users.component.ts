@@ -21,11 +21,19 @@ export class UsersComponent implements OnInit {
     );
   }
 
-  confirmDelete(content) {
+  confirmDelete(content, user) {
     this.modalService.open(content).result.then(result => {
-      console.log(result);
+      if (result === 'confirm') {
+        this.userService.deleteUser(user.id).subscribe(
+          res => { this.users.splice(this.users.indexOf(user), 1); },
+          err => alert('failed'));
+      }
     });
     return false;
+  }
+
+  trackByFn(index, i) {
+    return i.id;
   }
 
 }

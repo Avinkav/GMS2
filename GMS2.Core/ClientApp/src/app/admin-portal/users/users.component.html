@@ -20,14 +20,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let i of users | filter : 'firstName' : searchString;">
+      <tr *ngFor="let i of users | filter : 'firstName' : searchString; trackBy: trackByFn;">
         <td>{{i.firstName}} {{i.lastName}}</td>
         <td>{{i.email}}</td>
         <td>{{i.phoneNumber}}</td>
         <td>{{i.city}}</td>
         <td>
           <a routerLink="{{i.id}}">Details</a> |
-          <a href="#" (click)="confirmDelete(deleteMessage)">Delete</a>
+          <a href="#" (click)="confirmDelete(deleteMessage, i)">Delete</a>
         </td>
       </tr>
     </tbody>
@@ -44,7 +44,7 @@
     <p>Are you sure?</p>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="c('Cancel')">Cancel</button>
-    <button type="button" class="btn btn-outline-danger" (click)="c('Confirm')">Confirm</button>
+    <button type="button" class="btn btn-outline-dark" (click)="c('cancel')">Cancel</button>
+    <button type="button" class="btn btn-outline-danger" (click)="c('confirm')">Confirm</button>
   </div>
 </ng-template>

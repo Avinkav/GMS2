@@ -19,14 +19,14 @@ export class UserService {
   public id = '';
   public token = '';
   public userName: BehaviorSubject<string> = new BehaviorSubject(null);
-
+  
   constructor(private http: HttpClient, private cookieService: CookieService, private progressService: ProgressService) {
     const user = this.getCurrentLogin();
     if (user) {
       this.userName.next(user.firstName);
     }
   }
-
+  
   public register(user: User) {
     return this.http.post('api/account/register', user, { headers: this.headers, responseType: 'text', observe: 'response' }).pipe(
       tap(res => {
@@ -42,7 +42,7 @@ export class UserService {
       })
     );
   }
-
+  
   public login(login: any) {
     this.progressService.setProgress(true);
     return this.http.post<User>('api/account/login', login, { headers: this.headers, observe: 'response' }).pipe(
@@ -59,15 +59,15 @@ export class UserService {
       })
     );
   }
-
+  
   public getCurrentLogin(): User {
     if (localStorage.getItem('user')) {
       return JSON.parse(localStorage.getItem('user'));
     }
-
+    
     return null;
   }
-
+  
   public logout() {
     this.progressService.setProgress(true);
     return this.http.get('api/account/logout').pipe(
@@ -81,7 +81,18 @@ export class UserService {
         return throwError(error);
       })
     );
-
+    
+  }
+  
+  deleteUser(id: string) {
+    return this.http.delete('api/user/' + id).pipe(
+      tap(null, null, this.progressService.stop()),
+      catchError((error) => {
+        this.progressService.setProgress(false);
+        console.log(error);
+        return throwError(error);
+      })
+    );
   }
 
   public getDetails() {
