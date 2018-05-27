@@ -21,7 +21,10 @@ export class UserService {
   public userName: BehaviorSubject<string> = new BehaviorSubject(null);
 
   constructor(private http: HttpClient, private cookieService: CookieService, private progressService: ProgressService) {
-    this.userName.next(this.getCurrentLogin().firstName);
+    const user = this.getCurrentLogin();
+    if (user) {
+      this.userName.next(user.firstName);
+    }
   }
 
   public register(user: User) {
