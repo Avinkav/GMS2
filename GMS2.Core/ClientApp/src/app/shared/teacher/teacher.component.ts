@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Teacher } from '../../models/teacher';
 import { UserService } from 'src/app/services/user.service';
 import { shrinkInOut } from '../../animations/shrinkInOut';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-teacher',
@@ -15,18 +16,33 @@ export class TeacherComponent implements OnInit {
   @Input() permission;
   @Input() userId;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private dataService: DataService) { }
 
   ngOnInit() {
 
   }
 
   removeItem(i: string) {
-    this.model.instruments.splice(this.model.instruments.indexOf(i), 1);
+    this.model.instrumentsTaught.splice(this.model.instrumentsTaught.indexOf(i), 1);
+  }
+
+  getIndex(index) {
+    return index;
   }
 
   addItem(box: any) {
-    this.model.instruments.push(box.value);
+    console.log(this.model.instrumentsTaught);
+    if (!this.model.instrumentsTaught)
+      this.model.instrumentsTaught = [];
+    console.log(this.model.instrumentsTaught);
+    this.model.instrumentsTaught.push(box.value);
+    this.dataService.update(this.model).subscribe(res => {
+      // if (res.ok)
+
+    },
+    err => {
+
+  });
     box.value = '';
   }
 
@@ -35,9 +51,9 @@ export class TeacherComponent implements OnInit {
       // revoke
       this.userService.revokePermission(this.userId, 'Teacher').subscribe(
         res => {
-          if (res.ok) {
+          if (res.ok)
             this.permission = false;
-          }
+
         },
         err => console.log(err)
       );
@@ -53,6 +69,8 @@ export class TeacherComponent implements OnInit {
       err => console.log(err)
     );
   }
+
+
 }
 
 

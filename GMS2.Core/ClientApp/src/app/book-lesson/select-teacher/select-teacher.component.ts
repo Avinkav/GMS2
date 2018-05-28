@@ -9,9 +9,10 @@ import { Teacher } from '../../models/teacher';
 export class SelectTeacherComponent implements OnInit {
 
   @Input()  model: Teacher[];
+  searchString = '';
 
   @Output() selectTeacher = new EventEmitter<Teacher>();
-  
+
   constructor() { }
 
   ngOnInit() {

@@ -23,9 +23,9 @@ namespace GMS.Data.Models
         public Student Student { get; set; }
 
         [Required]
-        public DateTime StartDateTime { get; set; }
+        public DateTime DateTime { get; set; }
 
-        private int Duration { get; set; }
+        public int Duration { get; set; }
 
         public string LessonType { get; set; }
 

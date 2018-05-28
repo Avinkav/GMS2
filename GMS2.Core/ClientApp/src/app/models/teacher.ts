@@ -5,7 +5,7 @@ export class Teacher {
     id: string;
     userId: string;
     name: string;
-    instruments: string[];
+    instrumentsTaught: string[];
     description: string;
     selected: boolean;
 }

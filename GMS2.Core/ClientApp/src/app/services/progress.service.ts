@@ -5,9 +5,9 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ProgressService {
-  
+
   public inProgress: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  
+
   start(): any {
     this.inProgress.next(true);
   }

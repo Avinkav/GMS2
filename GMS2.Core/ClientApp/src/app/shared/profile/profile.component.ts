@@ -39,6 +39,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       });
     } else {
       this.userService.getUser(this.userId).subscribe( data => {
+        console.log(data);
         this.user = data;
         this.title = 'User details';
         this.admin = true;

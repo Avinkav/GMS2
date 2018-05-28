@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { CalendarEvent } from 'calendar-utils';
+import { DataService } from '../../services/data.service';
+import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
+import { User } from '../../models/user';
+import { Lesson } from '../../models/lesson';
+import { duration } from 'moment';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -33,9 +40,34 @@ export class UserDashboardComponent implements OnInit {
     description: 'You took banjo classes'
   },
 ];
-  constructor() { }
+
+  events: CalendarEvent[];
+  lessons: Lesson[];
+  readonly user: User;
+
+  constructor(private dataService: DataService, private router: Router, private userService: UserService) {
+    this.user = this.userService.getCurrentLogin();
+
+    if (!this.user) {
+      router.navigateByUrl('/login');
+    }
+   }
 
   ngOnInit() {
+    this.dataService.getLessons(this.user.student.id).subscribe(
+      res => {
+      this.lessons = res;
+      this.events = this.lessons.map( l => {console.log(l); return ({
+        start: new Date(l.date),
+        end:  this.getEndDate(new Date(l.date), l.duration),
+        title: 'Class with ' + l.teacher.name
+      });
+    });
+      }
+    );
   }
 
+   getEndDate(date: Date, dur: number) {
+    return new Date(date.getTime() + dur * 60000);
+   }
 }

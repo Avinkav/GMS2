@@ -1,5 +1,5 @@
-import { Teacher } from "./teacher";
-import { Student } from "./student";
+import { Teacher } from './teacher';
+import { Student } from './student';
 
 export class Lesson {
     teacher: Teacher;

@@ -8,6 +8,8 @@ namespace GMS2.Core.Models
     {
         public Guid Id { get; set; }
         public string Date { get; set; }
+
+        public int Duration {get; set; }
         public int Cost { get; set; }
         //public Guid InstrumentId { get;  set; }
         public string LessonType { get;  set; }

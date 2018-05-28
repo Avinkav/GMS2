@@ -29,24 +29,15 @@ namespace GMS2.Core.Helpers
                 PhoneNumber = user.PhoneNumber,
             };
 
-            if (user.Student != null)
-            {
-                result.Student = new StudentViewModel()
-                {
-                    Id = user.Student.Id,
-                    UserId = user.Id,
-                    Instruments = user.Student.Instruments?.Split(','),
-
-                };
-            }
+            result.Student = user.Student?.ToViewModel();
 
             if (user.Teacher != null)
             {
                 result.Teacher = new TeacherViewModel()
                 {
-                    Id = user.Student.Id,
+                    Id = user.Teacher.Id,
                     UserId = user.Id,
-                    InstrumentsTaught = user.Student.Instruments?.Split(','),
+                    InstrumentsTaught = user.Teacher.InstrumentsTaught?.Split(','),
 
                 };
             }
@@ -59,19 +50,49 @@ namespace GMS2.Core.Helpers
             return result;
         }
 
-        public static TeacherViewModel ToViewModel(this Teacher teacher){
-           var model = new TeacherViewModel()
+        public static StudentViewModel ToViewModel(this Student student)
+        {
+            return new StudentViewModel()
+            {
+                Id = student.Id,
+                UserId = student.UserId,
+                Instruments = student.Instruments?.Split(','),
+            };
+        }
+
+
+        public static TeacherViewModel ToViewModel(this Teacher teacher)
+        {
+            var model = new TeacherViewModel()
             {
                 Id = teacher.Id,
                 UserId = teacher.UserId,
+                Name = $"{teacher.AppUser?.FirstName} {teacher.AppUser?.LastName}",
                 InstrumentsTaught = teacher.InstrumentsTaught?.Split(','),
+                Description = teacher.Description,
                 HourlyRate = 50
             };
 
-            if (teacher.AppUser != null){
+            if (teacher.AppUser != null)
+            {
                 model.Name = $"{teacher.AppUser.FirstName} {teacher.AppUser.LastName}";
-                
+
             }
+
+            return model;
+        }
+
+        public static LessonViewModel ToViewModel(this Lesson lesson)
+        {
+            var model = new LessonViewModel()
+            {
+                Teacher = lesson.Teacher?.ToViewModel(),
+                Student = lesson.Student?.ToViewModel(),
+                Id = lesson.Id,
+                Cost = lesson.Cost,
+                Date = lesson.DateTime.ToString("o"),
+                Duration = lesson.Duration
+            };
 
             return model;
         }

@@ -8,7 +8,7 @@ using GMS2.Core.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+using GMS2.Core.Helpers;
 
 namespace GMS2.Core.Controllers
 {
@@ -44,7 +44,7 @@ namespace GMS2.Core.Controllers
             //
             var lesson = new Lesson()
             {
-                StartDateTime = DateTime.Parse(model.Date),
+                DateTime = DateTime.Parse(model.Date),
                 Status = LessonStatus.Booked,
                 Cost = model.Cost,
                 LessonType = model.LessonType,
@@ -70,13 +70,14 @@ namespace GMS2.Core.Controllers
         /// <param name="id">id of the user</param>
         /// <returns>List of lessons</returns>
         [HttpGet("{id}")]
-        public IActionResult ReadLessons(Guid id)
+        public async Task<IActionResult> ReadLessons(Guid id)
         {
-            var lessons = _dataContext.Lessons.Where(l => l.StudentId == id);
+            var lessons = _dataContext.Lessons.Include(l => l.Student).ThenInclude(l => l.AppUser)
+                                            .Include(l => l.Teacher).ThenInclude(l => l.AppUser)
+                                            .Where(l => l.StudentId == id).Select(l =>  l.ToViewModel());
 
             return Json(lessons);
         }
-
 
         /// <summary>
         /// Get lessons of the user with given id
@@ -96,7 +97,7 @@ namespace GMS2.Core.Controllers
                 return NotFound();
 
             // Update values, all other properties are immutable after creation
-            lesson.StartDateTime = DateTime.Parse(model.Date);
+            lesson.DateTime = DateTime.Parse(model.Date);
             lesson.Cost = model.Cost;
             lesson.Status = model.Status;
 
@@ -121,11 +122,6 @@ namespace GMS2.Core.Controllers
 
             return new BadRequestObjectResult(null);
         }
-
-
-
-
-
 
     }
 }

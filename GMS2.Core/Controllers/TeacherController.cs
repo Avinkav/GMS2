@@ -92,16 +92,22 @@ namespace GMS2.Core.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPut("")]
-        public async Task<IActionResult> UpdateTeacher([FromBody] TeacherViewModel model)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateTeacher(Guid id, [FromBody] TeacherViewModel model)
         {
             if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (id != model.Id)
                 return BadRequest();
 
-            var teacher = await _dataContext.Teachers.FindAsync(model.Id);
+            var teacher = await _dataContext.Teachers.Where(t => t.Id == model.Id).SingleOrDefaultAsync();
 
-            if (!await TryUpdateModelAsync(teacher))
-                return new StatusCodeResult(500);
+            if (teacher ==  null)
+                return BadRequest("Teacher not found");
+
+            teacher.InstrumentsTaught = String.Join(",", model.InstrumentsTaught);
+            teacher.Description = model.Description;
 
             await _dataContext.SaveChangesAsync();
             return Ok();
@@ -127,7 +133,8 @@ namespace GMS2.Core.Controllers
             return new Teacher()
             {
                 UserId = model.UserId,
-                InstrumentsTaught = String.Join(",", model.InstrumentsTaught)
+                InstrumentsTaught = String.Join(",", model.InstrumentsTaught),
+                Description = model.Description
             };
         }
 
