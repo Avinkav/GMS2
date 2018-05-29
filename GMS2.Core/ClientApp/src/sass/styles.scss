@@ -115,10 +115,11 @@ body {
   -o-transition-duration: 0.5s;
 }
 
+.container-social{
+  align-items:center;
+}
 /* End of Footer */
-
 /* Links */
-
 .linklight {
   color: dimgray;
 }
@@ -267,4 +268,15 @@ body {
 .login-btn-google:hover,
 .login-btn-google:focus {
   background: #E74B37;
+}
+
+.darkfooter {
+  background: black;
+}
+
+.footericon{
+  width:30px;
+  height:30px;
+  padding:7.5px;
+  cursor:pointer;
 }
