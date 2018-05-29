@@ -65,17 +65,33 @@ namespace GMS2.Core.Controllers
         }
 
         /// <summary>
-        /// Get lessons of the user with given id
+        /// Get lessons of the student with given id
         /// 
         /// </summary>
         /// <param name="id">id of the user</param>
         /// <returns>List of lessons</returns>
-        [HttpGet("{id}")]
-        public async Task<IActionResult> ReadLessons(Guid id)
+        [HttpGet("student/{id}")]
+        public async Task<IActionResult> ReadStudentLessons(Guid id)
         {
             var lessons = _dataContext.Lessons.Include(l => l.Student).ThenInclude(l => l.AppUser)
                                             .Include(l => l.Teacher).ThenInclude(l => l.AppUser)
                                             .Where(l => l.StudentId == id).Select(l =>  l.ToViewModel());
+
+            return Json(lessons);
+        }
+
+                /// <summary>
+        /// Get lessons of the student with given id
+        /// 
+        /// </summary>
+        /// <param name="id">id of the user</param>
+        /// <returns>List of lessons</returns>
+        [HttpGet("teacher/{id}")]
+        public async Task<IActionResult> ReadTeacherLessons(Guid id)
+        {
+            var lessons = _dataContext.Lessons.Include(l => l.Student).ThenInclude(l => l.AppUser)
+                                            .Include(l => l.Teacher).ThenInclude(l => l.AppUser)
+                                            .Where(l => l.TeacherId == id).Select(l =>  l.ToViewModel());
 
             return Json(lessons);
         }

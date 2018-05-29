@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-lessons',
@@ -8,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class LessonsComponent implements OnInit {
 
   viewDate = new Date();
-  constructor() { }
+  readonly model;
+
+  constructor(private userService: UserService) {
+  this.model = this.userService.getCurrentLogin().student;
+  }
 
   ngOnInit() {
   }

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CalendarEvent } from 'calendar-utils';
 import { DataService } from '../../services/data.service';
+import { Teacher } from '../../models/teacher';
+import { Student, isStudent } from '../../models/student';
 
 @Component({
   selector: 'app-calendar',
@@ -13,19 +15,20 @@ export class CalendarComponent implements OnInit {
   viewDate = new Date();
   events: CalendarEvent[];
 
-  @Input() id: string;
+  @Input() model: Teacher | Student;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    if (!this.id)
+    if (!this.model)
       return;
-    this.dataService.getLessons(this.id).subscribe(
+    this.dataService.getLessons(this.model).subscribe(
       res => {
+        console.log(res);
         this.events = res.map(l => ({
             start: new Date(l.date),
             end: this.getEndDate(new Date(l.date), l.duration),
-            title: l.teacher.name
+            title: isStudent(this.model) ? l.teacher.name : l.student.name
           })
         );
       });

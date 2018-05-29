@@ -56,6 +56,7 @@ namespace GMS2.Core.Helpers
             {
                 Id = student.Id,
                 UserId = student.UserId,
+                Name = $"{student.AppUser?.FirstName} {student.AppUser?.LastName}",
                 Instruments = student.Instruments?.Split(','),
             };
         }

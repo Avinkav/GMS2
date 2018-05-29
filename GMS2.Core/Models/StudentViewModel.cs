@@ -15,5 +15,6 @@ namespace GMS2.Core.Models
         public string[] Instruments { get; set; }
 
         public List<Lesson> LessonsTaken { get; set; }
+        public string Name { get; set; }
     }
 }
