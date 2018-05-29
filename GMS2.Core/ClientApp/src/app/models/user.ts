@@ -1,5 +1,7 @@
-import { Teacher } from "./teacher";
-import { Student } from "./student";
+import { Teacher } from './teacher';
+import { Student } from './student';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 export class User {
     id: string;
@@ -20,4 +22,12 @@ export class User {
 }
 
 
-export const STATES = ['QLD', 'NSW', 'WA', 'NT', 'TAS'];
+export const STATES = ['Queensland (QLD)', 'New South Wales (NSW)', 'Western Australia (WA)', 'Northern Territory (NT)', 'Tasmania (TAS)'];
+
+
+export const stateSearch = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => STATES.filter(v => v.toLowerCase().includes(term.toLowerCase())))
+    )

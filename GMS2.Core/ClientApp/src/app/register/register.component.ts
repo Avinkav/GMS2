@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { fadeInAnimation } from '../../fadeInAnimation';
-import { User, STATES } from '../models/user';
+import { User, STATES, stateSearch } from '../models/user';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -12,10 +14,12 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  newUser: User = new User();
+  public newUser: User = new User();
   states = STATES;
+  stateSearch = stateSearch;
 
   constructor(private userService: UserService, private router: Router) { }
+
 
   onSubmit() {
     this.userService.register(this.newUser).subscribe(o => {
@@ -24,9 +28,7 @@ export class RegisterComponent implements OnInit {
       } else {
       // handle err
       }
-
-    })
-      ;
+    });
   }
   ngOnInit() {
   }

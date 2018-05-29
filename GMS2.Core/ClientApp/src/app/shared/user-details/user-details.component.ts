@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { STATES, User } from 'src/app/models/user';
+import { STATES, User, stateSearch } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { ProgressService } from 'src/app/services/progress.service';
 import { slideInAnimation } from '../../../slideInAnimation';
@@ -16,6 +16,7 @@ export class UserDetailsComponent implements OnInit {
   @Input() model: User;
   @Input() title: string;
   edit = false;
+  stateSearch = stateSearch;
 
   constructor(private userService: UserService, private progressService: ProgressService) { }
 
@@ -29,7 +30,7 @@ export class UserDetailsComponent implements OnInit {
     if (this.edit === true) {
       this.userService.update(this.model).subscribe(o => {
         if (o.status === 200) {
-          // saved succesfully
+          this.edit = false;
           return;
         } else {
           // handle err

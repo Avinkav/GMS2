@@ -60,10 +60,8 @@
         <span [hidden]="city.valid || city.pristine" class="text-danger">City is required</span>
       </div>
       <div class="col-sm-3">
-        <select class="form-group form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" required id="state" placeholder="State"
-          [(ngModel)]="model.state" #state="ngModel" name="state">
-          <option *ngFor="let s of states" [value]="s">{{s}}</option>
-        </select>
+          <input type="text" class="form-control" required id="state" placeholder="State" [disabled]="!edit" [class.form-control-plaintext]="!edit"
+           [(ngModel)]="model.state" #state="ngModel" name="state" [ngbTypeahead]="stateSearch" />
         <span [hidden]="state.valid || state.pristine" class="text-danger">State is required</span>
       </div>
       <div class="form-group col-sm-4">
