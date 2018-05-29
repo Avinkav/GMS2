@@ -6,7 +6,7 @@ export class Instrument {
     imageUrl: string;
 }
 
-export const borrowedInstruments: Instrument[] = [
+export const burrowedInstruments: Instrument[] = [
     {id: 1, name: 'Marshall Electric Guitar', hireCost: 10, isLate: true,
     imageUrl: 'assets/instruments/2000.jpg' },
     {id: 3, name: 'Stunning Violin', hireCost: 10, isLate: false,

@@ -7,7 +7,7 @@ import { User } from '../../models/user';
 import { Lesson } from '../../models/lesson';
 import { duration } from 'moment';
 import * as $ from 'jquery';
-import { jsonpCallbackContext } from '@angular/common/http';
+import { Instrument, burrowedInstruments } from '../../models/instrument';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -43,7 +43,7 @@ export class UserDashboardComponent implements OnInit {
   },
   ];
 
-
+  instrument: Instrument = burrowedInstruments[1];
   lessons: Lesson[];
   readonly model: User;
 
