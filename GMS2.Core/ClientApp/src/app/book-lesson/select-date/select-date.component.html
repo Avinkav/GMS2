@@ -15,11 +15,11 @@
   <button button class="btn btn-primary" mat-button (click)="clickNext()">Next</button> -->
 </div>
 <div [ngSwitch]="view">
-  <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="selectedDate" [events]="events" (dayClicked)="viewDate = $event.day.date; view='day'">
+  <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="selectedDate" [events]="events" (dayClicked)="selectedDate = $event.day.date; view='day'">
   </mwl-calendar-month-view>
   <div class="col-md-8 mx-auto day-view-wrapper" *ngSwitchCase="'day'">
     <mwl-calendar-day-view  [viewDate]="selectedDate" [events]="events" [dayStartHour]="9" [dayEndHour]="20" [hourSegmentHeight]="60"
-    (hourSegmentClicked)="viewDate = $event.date; selectDate.emit($event.date);">
+    (hourSegmentClicked)="hourClicked($event)">
     </mwl-calendar-day-view>
   </div>
 </div>

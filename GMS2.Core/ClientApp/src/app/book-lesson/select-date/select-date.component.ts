@@ -27,4 +27,8 @@ export class SelectDateComponent implements OnInit {
     this.selectDuration.emit(value);
   }
 
+  hourClicked($event) {
+    this.selectedDate = $event.date;
+    this.selectDate.emit($event.date);
+  }
 }

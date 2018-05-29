@@ -51,6 +51,7 @@ export class BookLessonComponent implements OnInit {
   }
 
   dateSelected(d) {
+    console.log(d);
     this.model.date = d;
     this.step2 = true;
     this.stepper.next();
@@ -61,6 +62,7 @@ export class BookLessonComponent implements OnInit {
   }
 
   confirmClick(e) {
+    console.log(this.model);
     this.dataService.newLesson(this.model).subscribe(
       res => { if (res.ok) {
         this.router.navigateByUrl('/user-portal/lessons');

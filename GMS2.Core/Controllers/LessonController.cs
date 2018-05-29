@@ -47,6 +47,7 @@ namespace GMS2.Core.Controllers
                 DateTime = DateTime.Parse(model.Date),
                 Status = LessonStatus.Booked,
                 Cost = model.Cost,
+                Duration = model.Duration,
                 LessonType = model.LessonType,
                 StudentId = model.Student.Id,
                 TeacherId = model.Teacher.Id

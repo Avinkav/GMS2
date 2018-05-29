@@ -60,7 +60,7 @@ export class UserDashboardComponent implements OnInit {
       this.events = this.lessons.map( l => {console.log(l); return ({
         start: new Date(l.date),
         end:  this.getEndDate(new Date(l.date), l.duration),
-        title: 'Class with ' + l.teacher.name
+        title: 'Class with ' + l.teacher.name + ' at ' + new Date(l.date).toString()
       });
     });
       }
