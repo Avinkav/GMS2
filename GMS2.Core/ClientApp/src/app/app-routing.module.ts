@@ -27,6 +27,7 @@ import { TeacherPortalComponent } from './teacher-portal/teacher-portal.componen
 import { TeacherDashboardComponent } from './teacher-portal/teacher-dashboard/teacher-dashboard.component';
 import { ClassesComponent } from './teacher-portal/classes/classes.component';
 import { IncomeComponent } from './teacher-portal/income/income.component';
+import { InstrumentsComponent } from './shared/instruments/instruments.component';
 
 
 const routes: Routes = [
@@ -49,6 +50,7 @@ const routes: Routes = [
     {path: 'lessons', component: LessonsComponent, data: { breadcrumb: 'Lessons' }},
     {path: 'billing', component: BillingComponent, data: { breadcrumb: 'Billing' }},
     {path: 'profile', component: ProfileComponent, data: { breadcrumb: 'Profile' }},
+    {path: 'instruments', component: InstrumentsComponent, data: { breadcrumb: 'Instruments' }}
   ] },
   { path: 'teacher-portal',  component: TeacherPortalComponent, children: [
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},

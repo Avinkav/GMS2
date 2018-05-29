@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MockdataService } from '../../services/mockdata.service';
+import { Instrument } from '../../models/instrument';
+
+
 
 @Component({
   selector: 'app-instruments',
@@ -7,9 +11,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InstrumentsComponent implements OnInit {
 
-  constructor() { }
+  burrowedInstruments: Instrument[];
+
+  instruments: Instrument[];
+
+
+  constructor(private dataService: MockdataService) { }
 
   ngOnInit() {
+    this.dataService.getInstruments().subscribe(value => this.instruments = value);
+    this.dataService.getBorrowedInstruments().subscribe(value => this.burrowedInstruments = value);
   }
 
 }
