@@ -22,7 +22,7 @@ export class User {
 }
 
 
-export const STATES = ['Queensland (QLD)', 'New South Wales (NSW)', 'Western Australia (WA)', 'Northern Territory (NT)', 'Tasmania (TAS)'];
+export const STATES = ['New South Wales (NSW)', 'Queensland (QLD)', 'South Australia (SA)', 'Tasmania (TAS)', 'Western Australia (WA)', 'Victoria (VIC)', 'Northern Territory (NT)', 'Australian Capital Territory (ACT)'];
 
 
 export const stateSearch = (text$: Observable<string>) =>
