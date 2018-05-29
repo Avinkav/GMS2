@@ -27,12 +27,28 @@
         <td>{{i.city}}</td>
         <td>
           <a routerLink="{{i.id}}">Details</a> |
+          <a href="#" (click)="open(contract)">Contract</a> |
           <a href="#" (click)="confirmDelete(deleteMessage, i)">Delete</a>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
+<ng-template #contract let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Generic Music School Lesson Contract</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>contract</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
+
 <ng-template #deleteMessage let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title">Confirm Delete</h4>
