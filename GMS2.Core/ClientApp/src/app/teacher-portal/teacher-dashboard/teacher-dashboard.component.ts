@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import 'fullcalendar';
+import { Teacher } from '../../models/teacher';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-teacher-dashboard',
@@ -17,17 +19,15 @@ export class TeacherDashboardComponent implements OnInit {
     { date: '19/06/2018', hours: 27, amount: 2136.9 },
   ]
 
-  constructor() { }
+  readonly model: Teacher;
+  constructor(private userService: UserService) {
+    let user = this.userService.getCurrentLogin();
+    if (user)
+      this.model = user.teacher;
+  }
 
   ngOnInit() {
-    $('#calendar').fullCalendar({
-      eventLimit: false,
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay'
-      },
-    });
+    
   }
 
 }

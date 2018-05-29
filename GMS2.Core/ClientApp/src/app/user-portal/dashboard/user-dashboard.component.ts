@@ -41,35 +41,20 @@ export class UserDashboardComponent implements OnInit {
   },
 ];
 
-  view = 'month';
-  viewDate = new Date();
-  events: CalendarEvent[];
+
   lessons: Lesson[];
-  readonly user: User;
+  readonly model: User;
 
   constructor(private dataService: DataService, private router: Router, private userService: UserService) {
-    this.user = this.userService.getCurrentLogin();
+    this.model = this.userService.getCurrentLogin();
 
-    if (!this.user) {
+    if (!this.model) {
       router.navigateByUrl('/login');
     }
    }
 
   ngOnInit() {
-    this.dataService.getLessons(this.user.student.id).subscribe(
-      res => {
-      this.lessons = res;
-      this.events = this.lessons.map( l => {console.log(l); return ({
-        start: new Date(l.date),
-        end:  this.getEndDate(new Date(l.date), l.duration),
-        title: 'Class with ' + l.teacher.name
-      });
-    });
-      }
-    );
   }
 
-   getEndDate(date: Date, dur: number) {
-    return new Date(date.getTime() + dur * 60000);
-   }
+
 }

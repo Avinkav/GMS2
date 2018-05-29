@@ -1,0 +1,14 @@
+@import '../../../sass/_variables';
+
+small {
+    margin: 5px 0px;
+    padding: 5px;
+    background-color: #1a237e; 
+    font-size: 11px;
+    line-height: 13px;
+    color: $tertiary;
+}
+
+.cal-month-view .cal-cell-top{
+    min-height: unset;
+}
