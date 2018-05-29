@@ -12,7 +12,7 @@ import { Instrument } from '../../models/instrument';
 export class InstrumentsComponent implements OnInit {
 
   burrowedInstruments: Instrument[];
-
+  searchString = '';
   instruments: Instrument[];
 
 

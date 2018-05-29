@@ -1,30 +1,42 @@
-<div>
-  <h3>Borrowed Instruments</h3>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" *ngFor="let instrument of burrowedInstruments">
-        <div class="instrument-card clickable-card card my-2 " >
-          <div class="content">
-            <div class="d-flex">{{instrument.name}}
+<div class="container-fluid pt-3">
+  <div class="row">
+    <h4 class="col">Borrowed Instruments</h4>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" *ngFor="let instrument of burrowedInstruments">
+      <div class="instrument-card clickable-card card my-2 ">
+        <div class="content">
+          <div class="d-flex">{{instrument.name}}
             <div class="flex-spacer"></div>
-              <span *ngIf="instrument.isLate" [class.warn]="instrument.isLate">OVERDUE</span>
-            </div>
-            <small *ngIf="instrument.isLate">Please return the instrument to block X</small>
+            <span *ngIf="instrument.isLate" [class.warn]="instrument.isLate">OVERDUE</span>
           </div>
-          <img src="{{instrument.imageUrl}}">
-
+          <small *ngIf="instrument.isLate">Please return the instrument to block X</small>
         </div>
+        <img src="{{instrument.imageUrl}}">
+
       </div>
     </div>
   </div>
-  <h3>Available Instruments</h3>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" *ngFor="let instrument of instruments">
-        <div class="instrument-card clickable-card card my-2">
-          <img src="{{instrument.imageUrl}}">
-          <div class="content">{{instrument.name}}
-          </div>
+  <div class="row my-3">
+    <h4 class="col">Borrow an instrument...</h4>
+  </div>
+  <div class="row">
+    <div class="col-12 ">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">
+            <mat-icon>search</mat-icon>
+          </span>
+        </div>
+        <input type="text" class="form-control" placeholder="Type to search..." [(ngModel)]="searchString" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" *ngFor="let instrument of instruments | filter:'name' : searchString">
+      <div class="instrument-card clickable-card card my-2">
+        <img src="{{instrument.imageUrl}}">
+        <div class="content">{{instrument.name}}
         </div>
       </div>
     </div>
