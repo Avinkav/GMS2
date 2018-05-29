@@ -10,11 +10,11 @@ import { duration } from 'moment';
 @Component({
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
-  styleUrls: ['./user-dashboard.component.css']
+  styleUrls: ['./user-dashboard.component.scss']
 })
 export class UserDashboardComponent implements OnInit {
 
-  viewDate = new Date();
+  
   bills = [{
     id: 1,
     date: '15-Apr-2018',
@@ -41,6 +41,8 @@ export class UserDashboardComponent implements OnInit {
   },
 ];
 
+  view = 'month';
+  viewDate = new Date();
   events: CalendarEvent[];
   lessons: Lesson[];
   readonly user: User;
@@ -60,7 +62,7 @@ export class UserDashboardComponent implements OnInit {
       this.events = this.lessons.map( l => {console.log(l); return ({
         start: new Date(l.date),
         end:  this.getEndDate(new Date(l.date), l.duration),
-        title: 'Class with ' + l.teacher.name + ' at ' + new Date(l.date).toString()
+        title: 'Class with ' + l.teacher.name
       });
     });
       }

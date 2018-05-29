@@ -3,11 +3,37 @@
     <div class="col-md-7">
       <div class="card p-3">
         <div class="row  text-center">
-          <div class="mx-auto col-md-4">
+            <div class="col-md-4 pl-0">
+                <div class="btn-group">
+                  <div
+                    class="btn btn-sm btn-outline-primary"
+                    mwlCalendarPreviousView
+                    [view]="view"
+                    [(viewDate)]="viewDate"
+                    (viewDateChange)="activeDayIsOpen = false">
+                    Previous
+                  </div>
+                  <div
+                    class="btn btn-sm  btn-outline-dark"
+                    mwlCalendarToday
+                    [(viewDate)]="viewDate">
+                    Today
+                  </div>
+                  <div
+                    class="btn btn-sm  btn-outline-primary"
+                    mwlCalendarNextView
+                    [view]="view"
+                    [(viewDate)]="viewDate"
+                    (viewDateChange)="activeDayIsOpen = false">
+                    Next
+                  </div>
+                </div>
+              </div>
+          <div class="col-md-4">
             <h3>{{ viewDate | calendarDate:('month' + 'ViewTitle'):'en' }}</h3>
           </div>
         </div>
-        <mwl-calendar-month-view [viewDate]="viewDate" [events]="events">
+        <mwl-calendar-month-view [viewDate]="viewDate" [events]="events" [cellTemplate]="customCellTemplate">
         </mwl-calendar-month-view>
       </div>
     </div>
@@ -52,3 +78,12 @@
     </div>
   </div>
 </div>
+
+
+<ng-template #customCellTemplate let-day="day" let-locale="locale">
+    <div class="cal-cell-top">
+      <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
+      <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+    </div>
+    <small *ngFor="let e of day.events">{{e.start | date:'shortTime'}}<br/>{{e.title}}</small>
+  </ng-template>
