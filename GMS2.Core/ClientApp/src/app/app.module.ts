@@ -43,6 +43,7 @@ import { SelectTeacherComponent } from './book-lesson/select-teacher/select-teac
 import { SelectDateComponent } from './book-lesson/select-date/select-date.component';
 import { SelectInstrumentComponent } from './book-lesson/select-instrument/select-instrument.component';
 import { ConfirmComponent } from './book-lesson/confirm/confirm.component';
+import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { ConfirmComponent } from './book-lesson/confirm/confirm.component';
     SelectDateComponent,
     SelectInstrumentComponent,
     ConfirmComponent,
+    BreadcrumbComponent,
   ],
   imports: [
     BrowserModule,

@@ -35,20 +35,20 @@ const routes: Routes = [
   { path: 'book-lesson',  component: BookLessonComponent },
   { path: 'contact-us',  component: ContactUsComponent },
   { path: 'register',  component: RegisterComponent },
-  { path: 'admin-portal',  component: AdminPortalComponent, children: [
+  { path: 'admin-portal',  component: AdminPortalComponent, data: { breadcrumb: 'Admin Portal' } , children: [
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-    {path: 'dashboard', component: DashboardComponent},
-    {path: 'users', component: UsersComponent},
-    {path: 'users/:id', component: ProfileComponent},
-    {path: 'finances', component: FinancesComponent},
-    {path: 'reports', component: ReportsComponent},
+    {path: 'dashboard', component: DashboardComponent, data: { breadcrumb: 'Dashboard' }},
+    {path: 'users', component: UsersComponent, data: { breadcrumb: 'Users' }},
+    {path: 'users/:id', component: ProfileComponent, data: { breadcrumb: 'User Details' }},
+    {path: 'finances', component: FinancesComponent, data: { breadcrumb: 'Finances' }},
+    {path: 'reports', component: ReportsComponent, data: { breadcrumb: 'Reports' }},
   ] },
-  { path: 'user-portal',  component: UserPortalComponent, children: [
+  { path: 'user-portal',  component: UserPortalComponent, data: { breadcrumb: 'User Portal' }, children: [
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-    {path: 'dashboard', component: UserDashboardComponent},
-    {path: 'lessons', component: LessonsComponent},
-    {path: 'billing', component: BillingComponent},
-    {path: 'profile', component: ProfileComponent},
+    {path: 'dashboard', component: UserDashboardComponent, data: { breadcrumb: 'Dashboard' }},
+    {path: 'lessons', component: LessonsComponent, data: { breadcrumb: 'Lessons' }},
+    {path: 'billing', component: BillingComponent, data: { breadcrumb: 'Billing' }},
+    {path: 'profile', component: ProfileComponent, data: { breadcrumb: 'Profile' }},
   ] },
   { path: 'teacher-portal',  component: TeacherPortalComponent, children: [
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
