@@ -36,13 +36,44 @@
 </div>
 <ng-template #contract let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title">Generic Music School Lesson Contract</h4>
+    <h4 class="modal-title contracttitle">Generic Music School Lesson Contract</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
-    <p>contract</p>
+  <div class="modal-body row contractbody">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <p>This is a contract between <b><em>StudentUser</em></b>;  hereafter referred to as "Student";</p>
+      <p>and <b><em>TeacherUser</em></b>;  hereafter referred to as "Teacher"</p>
+      <br />
+      <p>The Student and Teacher hereby agree to the following contract regarding music lessons:</p>
+      <ol class="clause">
+        <li>The Teacher will provide <b><em>daily/weekly/monthly</em></b> lessons to the Student.</li>
+        <li>The lessons will begin on <b><em>start date</em></b> and end on <b><em>end date</em></b>.</li>
+        <li>The Student will <b><em>provide/rent</em></b> his/her own <b><em>instrument type</em></b> for the purposes of the lessons.</li>
+        <li>The Student will be charged an amount of $<b><em>amount</em></b> per hour.</li>
+        <li>The Lessons will be <b><em>duration</em></b> hours long.</li>
+      </ol>
+      <br />
+      <p>By signing this contract, I agree to the terms and conditions listed.</p>
+    </div>
+    <br/>
+    <div class="col-1"></div>
+    <div class="col-1"></div>
+    <div class="col-5 signature">
+      <br/>
+      <p>____________________</p>
+      <p><b>Student's Signature</b></p>
+      <p><b>Date:</b> DD/MM/YYYY</p>
+    </div>
+    <div class="col-5 signature">
+      <br />
+      <p>____________________</p>
+      <p><b>Teacher's Signature</b></p>
+      <p><b>Date:</b> DD/MM/YYYY</p>
+    </div>
+    <div class="col-1"></div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>

@@ -16,11 +16,12 @@ export class UsersComponent implements OnInit {
   constructor(private userService: UserService, private modalService: NgbModal) { }
 
   open(contract) {
-    this.modalService.open(contract).result.then((result) => {
+    this.modalService.open(contract, { size: 'lg', centered: true }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+    return false;
   }
 
   private getDismissReason(reason: any): string {
