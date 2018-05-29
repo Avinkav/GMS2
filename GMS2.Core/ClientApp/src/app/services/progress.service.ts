@@ -8,16 +8,16 @@ export class ProgressService {
 
   public inProgress: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  start(): any {
+  public start() {
     this.inProgress.next(true);
   }
 
-  stop(): any {
+  public stop() {
     this.inProgress.next(false);
   }
   constructor() { }
 
-
+  // DEPRECATED: use start and stop
   public setProgress(value: boolean) {
     this.inProgress.next(value);
   }

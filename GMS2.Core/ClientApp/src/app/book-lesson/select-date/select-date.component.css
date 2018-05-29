@@ -6,3 +6,9 @@
     max-height: 60vh;
     overflow-y: auto;
 }
+
+.avatar-img{
+    float:left;
+    width: 128px;
+    height: 128px;
+}

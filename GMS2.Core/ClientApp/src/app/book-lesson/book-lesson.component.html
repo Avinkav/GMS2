@@ -7,7 +7,7 @@
       </mat-step>
       <mat-step [completed]="step2">
         <ng-template matStepLabel>Pick a date and time</ng-template>
-        <app-select-date [model]="model.teacher" (selectDate)="dateSelected($event)" (selectDuration)="model.duration = $event"></app-select-date>
+        <app-select-date [model]="model?.teacher" (selectDate)="dateSelected($event)" (selectDuration)="model.duration = $event"></app-select-date>
       </mat-step>
       <!-- <mat-step [completed]="step3">
         <ng-template matStepLabel>Hire an Instrument</ng-template>

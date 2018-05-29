@@ -14,7 +14,7 @@
         <!-- (click)="t.selected = !t.selected" -->
         <h5 class="mt-0">{{t.name}}</h5>
         <p>{{t.description}}</p>
-        <div class="inline-list" *ngIf="!t.selected">
+        <div class="inline-list">
           <span *ngFor="let i of t.instrumentsTaught">
             {{i}}
           </span>
