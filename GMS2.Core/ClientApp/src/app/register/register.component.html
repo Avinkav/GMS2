@@ -52,7 +52,7 @@
               <span [hidden]="state.valid || state.pristine" class="text-danger">State is required</span>
             </div>
             <div class="col-sm-4">
-              <input type="text" class="form-control" placeholder="Postcode*" id="postcode" required [(ngModel)]="newUser.postcode" name="postcode"
+              <input type="text" class="form-control" placeholder="Postcode*" id="postcode" required [(ngModel)]="newUser.postCode" name="postcode"
                 #postcode="ngModel" />
               <span [hidden]="postcode.valid || postcode.pristine" class="text-danger">Postcode is required</span>
             </div>

@@ -36,13 +36,13 @@
         </div>
         <div class="col-md-4">
           <div class="btn-group ml-auto">
-            <div class="btn btn-sm btn-outline-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="selectedDate" (viewDateChange)="activeDayIsOpen = false">
+            <div class="btn btn-sm btn-outline-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="selectedDate" >
               Previous
             </div>
-            <div class="btn btn-sm  btn-outline-dark" mwlCalendarToday [(viewDate)]="viewDate">
+            <div class="btn btn-sm  btn-outline-dark" mwlCalendarToday [(viewDate)]="selectedDate">
               Today
             </div>
-            <div class="btn btn-sm  btn-outline-primary" mwlCalendarNextView [view]="view" [(viewDate)]="selectedDate" (viewDateChange)="activeDayIsOpen = false">
+            <div class="btn btn-sm  btn-outline-primary" mwlCalendarNextView [view]="view" [(viewDate)]="selectedDate" >
               Next
             </div>
           </div>

@@ -171,7 +171,7 @@ export class UserService {
   handleError(err: HttpErrorResponse) {
     if (err.status === 401) {
       // redirect to login
-      return this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/login');
     }
     return throwError(err);
   }
