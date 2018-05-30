@@ -25,7 +25,7 @@ export class UserService {
   public userName: BehaviorSubject<string> = new BehaviorSubject(null);
   API_ROOT = PROD_API_ROOT;
 
-  constructor(private http: HttpClient, private cookieService: CookieService,
+  constructor(private http: HttpClient,
     private progressService: ProgressService, private router: Router) {
     if (isDevMode())
       this.API_ROOT = 'api/';
@@ -66,10 +66,11 @@ export class UserService {
   }
 
   public getCurrentLogin(): User {
-    if (localStorage.getItem('user')) {
-      return JSON.parse(localStorage.getItem('user'));
+    const user = localStorage.getItem('user');
+    if (user) {
+      return JSON.parse(user);
     }
-
+    // further handling to be added later
     return null;
   }
 

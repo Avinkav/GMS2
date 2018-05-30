@@ -14,7 +14,8 @@ getTestBed().initTestEnvironment(
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting()
 );
-// Then we find all the tests.
-const context = require.context('./', true, /\.spec\.ts$/);
+// Then we find all the tests with .run.spec.ts extention
+// which mark implemented tests
+const context = require.context('./', true, /\.run\.spec\.ts$/);
 // And load the modules.
 context.keys().map(context);

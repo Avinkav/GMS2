@@ -30,7 +30,7 @@ import { IncomeComponent } from './teacher-portal/income/income.component';
 import { InstrumentsComponent } from './shared/instruments/instruments.component';
 
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: 'index',  component: HomeComponent },
   { path: 'about',  component: AboutComponent },
   { path: 'book-lesson',  component: BookLessonComponent },
