@@ -88,7 +88,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 * **Avin Kavish** - *Most of the work* - [GitHub](https://github.com/AvinKav)
 * **Eric Tang** - *Some of the work* - [GitHub](https://github.com/ericsontang)
-* **Aaidil Abdullah** - *Bit of the work* - [GitHub](https://github.com/AvinKav)
+* **Aaidil Abdullah** - *Bit of the work* - [GitHub](https://github.com/aidil505)
 
 
 ## License
