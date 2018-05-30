@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   title = 'app';
   scrollTop = 0;
 
-  constructor(private userService: UserService) {}
+  constructor(public userService: UserService) {}
 
   ngOnInit()  {
 

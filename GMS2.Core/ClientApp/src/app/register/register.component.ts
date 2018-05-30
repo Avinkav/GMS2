@@ -5,6 +5,7 @@ import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { recaptchaKey } from 'src/environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,8 @@ export class RegisterComponent implements OnInit {
   public newUser: User = new User();
   states = STATES;
   stateSearch = stateSearch;
-
+  recaptchaKey = recaptchaKey;
+  
   constructor(private userService: UserService, private router: Router) { }
 
 

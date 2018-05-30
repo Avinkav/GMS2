@@ -81,7 +81,7 @@
           </p>
           <div class="form-row">
             <div class="col-sm my-2">
-              <div class="g-recaptcha" data-sitekey="6Le_PVkUAAAAADJVxDu7pFuKPJkCY1aF21uLAjJw"></div>
+              <div class="g-recaptcha" [attr.data-sitekey]="recaptchaKey"></div>
             </div>
             <div class="col-sm my-2">
               <button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid">Register</button>

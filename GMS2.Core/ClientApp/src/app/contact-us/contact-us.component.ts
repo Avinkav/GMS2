@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { slideInAnimation } from '../../slideInAnimation';
 import { fadeInAnimation } from '../../fadeInAnimation';
+import { recaptchaKey} from 'src/environments/environment';
 
 @Component({
   selector: 'app-contact-us',
@@ -10,6 +11,8 @@ import { fadeInAnimation } from '../../fadeInAnimation';
 })
 export class ContactUsComponent implements OnInit {
 
+  recaptchaKey = recaptchaKey;
+  
   constructor() { }
 
   ngOnInit() {

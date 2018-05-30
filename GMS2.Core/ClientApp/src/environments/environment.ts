@@ -6,6 +6,8 @@ export const environment = {
   production: false
 };
 
+export const recaptchaKey = '6Le_PVkUAAAAADJVxDu7pFuKPJkCY1aF21uLAjJw';
+
 /*
  * In development mode, to ignore zone related error stack frames such as
  * `zone.run`, `zoneDelegate.invokeTask` for easier debugging, you can

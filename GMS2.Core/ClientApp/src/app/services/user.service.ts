@@ -9,7 +9,7 @@ import { Student } from 'src/app/models/student';
 import { Teacher } from '../models/teacher';
 import { Router } from '@angular/router';
 
-export const PROD_API_ROOT = 'avin.app:5000/api/';
+export const PROD_API_ROOT = 'api/';
 
 @Injectable({
   providedIn: 'root'
@@ -88,7 +88,7 @@ export class UserService {
     );
   }
 
-  deleteUser(id: string) {
+  public deleteUser(id: string) {
     return this.http.delete(this.API_ROOT + 'user/' + id).pipe(
       tap(null, null, () => this.progressService.stop()),
       catchError((error) => {
