@@ -14,7 +14,8 @@ export class CalendarComponent implements OnInit {
   view = 'month';
   viewDate = new Date();
   events: CalendarEvent[];
-
+  activeDayIsOpen = false;
+  
   @Input() model: Teacher | Student;
 
   constructor(private dataService: DataService) { }

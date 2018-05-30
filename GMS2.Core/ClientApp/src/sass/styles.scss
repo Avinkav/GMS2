@@ -3,12 +3,7 @@
 @import "~angular-calendar/css/angular-calendar.css";
 @import 'variables';
 @import 'calendar';
-
-$theme-colors: (
-  "primary": $accent,
-  "danger": #ff4136
-);
-
+$theme-colors: ( "primary": $accent, "danger": #ff4136);
 @import '~bootstrap/scss/bootstrap';
 html,
 body {
@@ -24,15 +19,14 @@ body {
   min-height: 100%;
 }
 
-.form-control:focus{
+.form-control:focus {
   border-width: 1px;
   box-shadow: 0 0 0 2px rgba(164, 9, 48, 0.25);
 }
 
-
-.progress{
+.progress {
   position: fixed;
-  top:$navbar-height;
+  top: $navbar-height;
   left: 0;
   right: 0;
   z-index: 100000;
@@ -46,14 +40,14 @@ body {
 }
 
 .navbar.scrolled {
-  background-color:#202124;
+  background-color: #202124;
 }
 
-.mat-drawer{
+.mat-drawer {
   background-color: unset;
 }
 
-.breadcrumb{
+.breadcrumb {
   background-color: unset;
 }
 
@@ -61,16 +55,19 @@ body {
   font-family: 'Times New Roman', Times, serif;
 }
 
-.overflow-hidden{
+.overflow-hidden {
   overflow: hidden;
 }
 
 .section {
-  min-height: 100vh; /* calc(100vh - #{$navbar-height}) */;
+  min-height: 100vh;
+  /* calc(100vh - #{$navbar-height}) */
+  ;
   align-items: center;
 }
 
-.table th, .table td{
+.table th,
+.table td {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
@@ -95,17 +92,35 @@ body {
   right: 0;
 }
 
-.clickable-card{
+.card {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.clickable-card {
   @include mat-elevation-transition;
   &:hover {
     @include mat-elevation(6);
   }
-
   &:active {
     @include mat-elevation(8);
   }
 }
 
+.instrument-card img {
+  width: inherit;
+  /* margin-top: -100px; */
+}
+
+.instrument-card .content {
+  position: absolute;
+  bottom: 0px;
+  background: inherit;
+  padding: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  width: 100%;
+  font-size: 14px;
+}
 
 /* Footer */
 
@@ -131,11 +146,14 @@ body {
   -o-transition-duration: 0.5s;
 }
 
-.container-social{
-  align-items:center;
+.container-social {
+  align-items: center;
 }
+
 /* End of Footer */
+
 /* Links */
+
 .linklight {
   color: dimgray;
 }
@@ -290,9 +308,9 @@ body {
   background: black;
 }
 
-.footericon{
-  width:30px;
-  height:30px;
-  padding:7.5px;
-  cursor:pointer;
+.footericon {
+  width: 30px;
+  height: 30px;
+  padding: 7.5px;
+  cursor: pointer;
 }

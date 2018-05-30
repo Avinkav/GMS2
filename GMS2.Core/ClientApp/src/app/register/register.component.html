@@ -8,8 +8,8 @@
           <p class="lead">Let us know who you are</p>
           <div class="form-row">
             <div class="form-group col">
-              <input type="text" class="form-control" placeholder="First name*" id="firstName" required 
-                name="firstName" #firstName="ngModel" [(ngModel)]="newUser.firstName" />
+              <input type="text" class="form-control" placeholder="First name*" id="firstName" required name="firstName" #firstName="ngModel"
+                [(ngModel)]="newUser.firstName" />
               <span [hidden]="firstName.valid || firstName.pristine" class="text-danger">First name is required</span>
             </div>
             <div class="form-group col">
@@ -29,8 +29,8 @@
           <p class="lead mt-3">Contact details</p>
           <div class="form-row">
             <div class="form-group col-sm-4">
-              <input type="text" class="form-control" placeholder="Phone number*" id="phone" required [(ngModel)]="newUser.phoneNumber" name="phone"
-                #phone="ngModel" />
+              <input type="text" class="form-control" placeholder="Phone number*" id="phone" required [(ngModel)]="newUser.phoneNumber"
+                name="phone" #phone="ngModel" />
               <span [hidden]="phone.valid || phone.pristine" class="text-danger">Phone number is required</span>
             </div>
           </div>
@@ -46,17 +46,17 @@
               <span [hidden]="city.valid || city.pristine" class="text-danger">City is required</span>
             </div>
             <div class="col-sm-3">
-              <input type="text" class="form-control" required id="state" placeholder="State" [(ngModel)]="newUser.state" #state="ngModel" name="state"
-              [ngbTypeahead]="stateSearch" />
+              <input type="text" class="form-control" required id="state" placeholder="State" [(ngModel)]="newUser.state" #state="ngModel"
+                name="state" [ngbTypeahead]="stateSearch" />
 
               <span [hidden]="state.valid || state.pristine" class="text-danger">State is required</span>
             </div>
             <div class="col-sm-4">
               <input type="text" class="form-control" placeholder="Postcode*" id="postcode" required [(ngModel)]="newUser.postCode" name="postcode"
-                #postcode="ngModel"  />
+                #postcode="ngModel" />
               <span [hidden]="postcode.valid || postcode.pristine" class="text-danger">Postcode is required</span>
             </div>
-          </div>          
+          </div>
           <p class="lead mt-3">Fill in your credentials</p>
           <div class="row">
             <div class="form-group col-sm-6">
@@ -67,8 +67,8 @@
           </div>
           <div class="row">
             <div class="form-group col-sm-6">
-              <input type="password" class="form-control" placeholder="Password" id="password" required [(ngModel)]="newUser.password" name="password"
-                #password="ngModel" />
+              <input type="password" class="form-control" placeholder="Password" id="password" required [(ngModel)]="newUser.password"
+                name="password" #password="ngModel" />
               <span class="text-danger"></span>
             </div>
             <div class="form-group col-sm-6">
@@ -76,12 +76,19 @@
               <span class="text-danger"></span>
             </div>
           </div>
+          <div class="form-row">
+            <div class="col d-flex flex-column">
+              <div class="text-danger" *ngFor="let err of errors">
+                {{ err.description }}
+              </div>
+            </div>
+          </div>
           <p class="lead" id="terms"> By creating an account you agree to our
             <a href="#" class="linkdark">Terms & Privacy.</a>
           </p>
           <div class="form-row">
             <div class="col-sm my-2">
-              <div class="g-recaptcha" data-sitekey="6Le_PVkUAAAAADJVxDu7pFuKPJkCY1aF21uLAjJw"></div>
+              <div class="g-recaptcha" [attr.data-sitekey]="recaptchaKey"></div>
             </div>
             <div class="col-sm my-2">
               <button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid">Register</button>

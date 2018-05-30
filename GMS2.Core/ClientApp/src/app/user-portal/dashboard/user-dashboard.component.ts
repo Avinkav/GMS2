@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { Lesson } from '../../models/lesson';
 import { duration } from 'moment';
+import * as $ from 'jquery';
+import { Instrument, burrowedInstruments } from '../../models/instrument';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -14,7 +16,7 @@ import { duration } from 'moment';
 })
 export class UserDashboardComponent implements OnInit {
 
-  
+
   bills = [{
     id: 1,
     date: '15-Apr-2018',
@@ -39,9 +41,9 @@ export class UserDashboardComponent implements OnInit {
     amount: 322.00,
     description: 'You took banjo classes'
   },
-];
+  ];
 
-
+  instrument: Instrument = burrowedInstruments[1];
   lessons: Lesson[];
   readonly model: User;
 
@@ -51,10 +53,32 @@ export class UserDashboardComponent implements OnInit {
     if (!this.model) {
       router.navigateByUrl('/login');
     }
-   }
-
-  ngOnInit() {
   }
 
+  ngOnInit() {
+    // tslint:disable-next-line:quotemark
+    for (let j = 1; j <= 5; j++) {
+      $('.star-' + j).hover(
+        () => {
+          for (let i = 1; i <= j; i++) {
+            $('.star-' + i).addClass('star');
+          }
+        },
+        () => {
+          for (let i = 1; i <= j; i++) {
+            $('.star-' + i).removeClass('star');
+          }
+        });
+    }
 
+    for (let j = 1; j <= 5; j++) {
+      $('.star-' + j).click(
+        () => {
+          $(`[class^='star-']`).removeClass(['starred', 'star']);
+          for (let i = 1; i <= j; i++)
+            $('.star-' + i).addClass('starred');
+        }
+      );
+    }
+  }
 }

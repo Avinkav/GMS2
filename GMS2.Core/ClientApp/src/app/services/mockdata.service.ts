@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Instrument, instruments, borrowedInstruments } from '../models/instrument';
+import { Instrument, instruments, burrowedInstruments } from '../models/instrument';
 import { Observable, of } from 'rxjs';
 import { Teacher, teachers } from '../models/teacher';
 
@@ -12,7 +12,7 @@ export class MockdataService {
   constructor() { }
 
   getBorrowedInstruments(): Observable<Instrument[]> {
-    return of(borrowedInstruments);
+    return of(burrowedInstruments);
   }
 
   getInstruments(): Observable<Instrument[]> {

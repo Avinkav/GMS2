@@ -1,15 +1,14 @@
 <div class="container-fluid p-3">
   <div class="row">
     <div class="col-md-7">
-      <div class="card p-3">
+      <div class="card shadow-sm p-3">
         <app-calendar [model]="model.student"></app-calendar>
       </div>
     </div>
     <div class="col-md-5">
       <div>
-        <div class="card p-3">
-          <h4>
-            Past Lessons </h4>
+        <div class="card shadow-sm p-3">
+          <h4 class="mb-3"> Payments </h4>
           <table class="table table-striped">
             <thead>
               <tr>
@@ -32,15 +31,32 @@
       </div>
       <div class="py-3">
         <div class="row">
-            <div class="col-6">
-                <div class="card p-3">
-      
-                </div>
+          <div class="col-6">
+            <div class="card shadow-sm p-3 text-center">
+              How was your last class with Mrs. Smith?
+              <div class="my-3">
+                <mat-icon class="star-1">star</mat-icon>
+                <mat-icon class="star-2">star</mat-icon>
+                <mat-icon class="star-3">star</mat-icon>
+                <mat-icon class="star-4">star</mat-icon>
+                <mat-icon class="star-5">star</mat-icon>
               </div>
-              <div class="col-6">
-                <div class="card p-3">
+            </div>
+          </div>
+          <div class="col-6">
+            <a routerLink="/user-portal/instruments">
+              <div class="card instrument-card clickable-card">
+                <div class="content">
+                  <div class="d-flex">{{instrument.name}}
+                    <div class="flex-spacer"></div>
+                    <span *ngIf="instrument.isLate" [class.text-danger]="instrument.isLate">OVERDUE</span>
+                  </div>
+                  <small *ngIf="instrument.isLate">Please return the instrument to block X</small>
                 </div>
+                <img src="{{instrument.imageUrl}}">
               </div>
+            </a>
+          </div>
         </div>
       </div>
     </div>

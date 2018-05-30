@@ -8,12 +8,11 @@
         <div class="content">
           <div class="d-flex">{{instrument.name}}
             <div class="flex-spacer"></div>
-            <span *ngIf="instrument.isLate" [class.warn]="instrument.isLate">OVERDUE</span>
+            <span *ngIf="instrument.isLate" [class.text-danger]="instrument.isLate">OVERDUE</span>
           </div>
           <small *ngIf="instrument.isLate">Please return the instrument to block X</small>
         </div>
         <img src="{{instrument.imageUrl}}">
-
       </div>
     </div>
   </div>

@@ -8,7 +8,7 @@ import { ProgressService } from '../services/progress.service';
 })
 export class ProgressComponent implements OnInit {
 
-  constructor(private progressService: ProgressService) { }
+  constructor(public progressService: ProgressService) { }
 
   ngOnInit() {
   }

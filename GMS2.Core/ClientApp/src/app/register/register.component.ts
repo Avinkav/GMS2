@@ -5,6 +5,8 @@ import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { recaptchaKey } from 'src/environments/environment';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -17,19 +19,25 @@ export class RegisterComponent implements OnInit {
   public newUser: User = new User();
   states = STATES;
   stateSearch = stateSearch;
-
+  recaptchaKey = recaptchaKey;
+  errors: any[];
   constructor(private userService: UserService, private router: Router) { }
 
 
   onSubmit() {
     this.userService.register(this.newUser).subscribe(o => {
-      if (o.status === 200) {
-      this.router.navigateByUrl('/user-portal/profile');
+      if (o.ok) {
+        this.router.navigateByUrl('/user-portal/profile');
       } else {
-      // handle err
+        console.warn(o);
+        // handle err
       }
+    }, (err: HttpErrorResponse) => {
+      if (err.hasOwnProperty('error'))
+        this.errors = err.error;
     });
   }
+
   ngOnInit() {
   }
 
