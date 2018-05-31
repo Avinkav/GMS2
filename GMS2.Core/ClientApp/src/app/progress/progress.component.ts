@@ -8,9 +8,12 @@ import { ProgressService } from '../services/progress.service';
 })
 export class ProgressComponent implements OnInit {
 
-  constructor(public progressService: ProgressService) { }
+  constructor(private progressService: ProgressService) { }
+
+  progress;
 
   ngOnInit() {
+    this.progressService.inProgress.subscribe(next => this.progress = next);
   }
 
 }

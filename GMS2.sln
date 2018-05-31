@@ -10,7 +10,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS2.Core", "GMS2.Core\GMS2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Data", "GMS.Data\GMS.Data.csproj", "{70FB7A1A-9717-4338-8CB6-92B9CDDEFF4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMS2.UnitTests", "GMS2.UnitTessts\GMS2.UnitTests.csproj", "{973EAC46-EAE6-475E-A793-4517F4FA02CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMS2.UnitTests", "GMS2.UnitTests\GMS2.UnitTests.csproj", "{973EAC46-EAE6-475E-A793-4517F4FA02CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

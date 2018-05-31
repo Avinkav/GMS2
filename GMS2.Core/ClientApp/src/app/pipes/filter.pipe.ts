@@ -7,7 +7,7 @@ import { Pipe, PipeTransform, Injectable } from '@angular/core';
 // WARNING: filter pipe
 @Injectable()
 export class FilterPipe implements PipeTransform {
-  
+
   transform(items: any[], field: string, value: string): any {
     if (!items)
       return [];
@@ -38,7 +38,7 @@ export class FilterPipe implements PipeTransform {
   }
 
   includesIgnoreCase(val: string, include: string) {
-     return val.toLowerCase().includes(include.toLowerCase());
+    return val.toLowerCase().includes(include.toLowerCase());
   }
 
 }

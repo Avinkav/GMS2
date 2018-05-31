@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ProgressService {
 
-  public inProgress: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public inProgress: EventEmitter<boolean> = new EventEmitter();
 
   public start() {
     this.inProgress.next(true);
