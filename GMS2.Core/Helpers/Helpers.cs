@@ -12,9 +12,9 @@ namespace GMS2.Core.Helpers
 {
     public static class Helpers
     {
-        public static UserViewModel ToViewModel(this AppUser user, IList<string> roles = null)
+        public static UserDTO ToViewModel(this AppUser user, IList<string> roles = null)
         {
-            var result = new UserViewModel()
+            var result = new UserDTO()
             {
                 Id = user.Id,
                 UserName = user.UserName,
@@ -36,9 +36,9 @@ namespace GMS2.Core.Helpers
             return result;
         }
 
-        public static StudentViewModel ToViewModel(this Student student)
+        public static StudentDTO ToViewModel(this Student student)
         {
-            return new StudentViewModel()
+            return new StudentDTO()
             {
                 Id = student.Id,
                 UserId = student.UserId,
@@ -47,9 +47,9 @@ namespace GMS2.Core.Helpers
             };
         }
 
-        public static TeacherViewModel ToViewModel(this Teacher teacher)
+        public static TeacherDTO ToViewModel(this Teacher teacher)
         {
-            return new TeacherViewModel()
+            return new TeacherDTO()
             {
                 Id = teacher.Id,
                 UserId = teacher.UserId,

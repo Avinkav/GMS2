@@ -72,7 +72,7 @@
               <span class="text-danger"></span>
             </div>
             <div class="form-group col-sm-6">
-              <input type="password" class="form-control" placeholder="Confirm Password" id="cPassword" required/>
+              <input type="password" class="form-control" placeholder="Confirm Password" id="cPassword" (input)="cPasswordPristine=false" [ngModelOptions]="{standalone:true}"  [(ngModel)]="cPassword" required/>
               <span class="text-danger"></span>
             </div>
           </div>
@@ -80,6 +80,9 @@
             <div class="col d-flex flex-column">
               <div class="text-danger" *ngFor="let err of errors">
                 {{ err.description }}
+              </div>
+              <div class="text-danger" [hidden]="(cPassword === newUser.password) || cPasswordPristine">
+                Passwords do not match
               </div>
             </div>
           </div>
@@ -91,7 +94,7 @@
               <div class="g-recaptcha" [attr.data-sitekey]="recaptchaKey"></div>
             </div>
             <div class="col-sm my-2">
-              <button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid">Register</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!(registerForm.form.valid && cPassword == newUser.password)">Register</button>
             </div>
           </div>
           <!-- <h3>Social Profiles</h3>

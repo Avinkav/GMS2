@@ -42,7 +42,7 @@ namespace GMS2.Core.Controllers
         /// <param name="model"></param>
         /// <returns>Returns created availability with status OK</returns>
         [HttpPost("")]
-        public async Task<IActionResult> CreateAvailability([FromBody] AvailabilityViewModel model)
+        public async Task<IActionResult> CreateAvailability([FromBody] AvailabilityDTO model)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
@@ -82,7 +82,7 @@ namespace GMS2.Core.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAvailability(Guid id, [FromBody] AvailabilityViewModel model)
+        public async Task<IActionResult> UpdateAvailability(Guid id, [FromBody] AvailabilityDTO model)
         {
             if (!ModelState.IsValid)
                 return BadRequest();

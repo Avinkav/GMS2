@@ -55,7 +55,7 @@ namespace GMS2.Core.Controllers
 
         // Found in AccountController TODO: Code or remove?
         [HttpPost("")]
-        public IActionResult CreateUser([FromBody] UserViewModel model)
+        public IActionResult CreateUser([FromBody] UserDTO model)
         {
             return BadRequest();
             throw new NotImplementedException();
@@ -81,7 +81,7 @@ namespace GMS2.Core.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UserViewModel model)
+        public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UserDTO model)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
@@ -158,7 +158,7 @@ namespace GMS2.Core.Controllers
 
 
         //
-        public void UpdateModel(AppUser user, UserViewModel model)
+        public void UpdateModel(AppUser user, UserDTO model)
         {
             user.UserName = model.UserName;
             user.NormalizedUserName = model.UserName.ToUpperInvariant();

@@ -21,6 +21,9 @@ export class RegisterComponent implements OnInit {
   stateSearch = stateSearch;
   recaptchaKey = recaptchaKey;
   errors: any[];
+  cPassword = '';
+  cPasswordPristine = true;
+
   constructor(private userService: UserService, private router: Router) { }
 
 

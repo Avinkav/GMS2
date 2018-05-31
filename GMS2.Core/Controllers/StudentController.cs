@@ -68,7 +68,7 @@ namespace GMS2.Core.Controllers
 
 
         [HttpPost("")]
-        public async Task<IActionResult> CreateStudent([FromBody] StudentViewModel model)
+        public async Task<IActionResult> CreateStudent([FromBody] StudentDTO model)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
@@ -116,7 +116,7 @@ namespace GMS2.Core.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateStudent(Guid id, [FromBody] StudentViewModel model)
+        public async Task<IActionResult> UpdateStudent(Guid id, [FromBody] StudentDTO model)
         {
             if (!ModelState.IsValid || id != model.Id)
                 return BadRequest();

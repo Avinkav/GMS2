@@ -56,7 +56,7 @@ namespace GMS2.Core.Controllers
         /// <param name="returnUrl">Page to redirect to after user logs in</param>
         /// <returns></returns>
         [HttpPost("register")]
-        public async Task<object> Register([FromBody] RegisterViewModel model)
+        public async Task<object> Register([FromBody] RegisterDTO model)
         {
             if (!ModelState.IsValid) return new BadRequestObjectResult(ModelState);
 
@@ -103,7 +103,7 @@ namespace GMS2.Core.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<object> Login([FromBody] LoginViewModel model)
+        public async Task<object> Login([FromBody] LoginDTO model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -142,7 +142,7 @@ namespace GMS2.Core.Controllers
 
         [HttpPut("details")]
         [Authorize]
-        public async Task<object> Details([FromBody] UserViewModel model)
+        public async Task<object> Details([FromBody] UserDTO model)
         {
             if (model == null)
                 return NotFound();
@@ -168,7 +168,7 @@ namespace GMS2.Core.Controllers
         }
 
         // Update user object using values from the viewmodel
-        public void UpdateValues(AppUser user, UserViewModel model)
+        public void UpdateValues(AppUser user, UserDTO model)
         {
             user.UserName = model.UserName;
             user.NormalizedUserName = model.Email.ToUpperInvariant();

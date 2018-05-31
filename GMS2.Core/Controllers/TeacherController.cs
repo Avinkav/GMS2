@@ -45,7 +45,7 @@ namespace GMS2.Core.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost("")]
-        public async Task<IActionResult> CreateTeacher([FromBody] TeacherViewModel model)
+        public async Task<IActionResult> CreateTeacher([FromBody] TeacherDTO model)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
@@ -94,7 +94,7 @@ namespace GMS2.Core.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTeacher(Guid id, [FromBody] TeacherViewModel model)
+        public async Task<IActionResult> UpdateTeacher(Guid id, [FromBody] TeacherDTO model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

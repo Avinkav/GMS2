@@ -67,6 +67,7 @@ export class DataService {
       // redirect to login
       this.router.navigateByUrl('/login');
     }
+    this.progressService.stop();
     return throwError(err);
   }
 

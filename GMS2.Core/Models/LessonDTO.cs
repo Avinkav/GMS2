@@ -13,8 +13,8 @@ namespace GMS2.Core.Models
         public int Cost { get; set; }
         //public Guid InstrumentId { get;  set; }
         public string LessonType { get;  set; }
-        public TeacherViewModel Teacher { get;  set; }
-        public StudentViewModel Student { get;  set; }
+        public TeacherDTO Teacher { get;  set; }
+        public StudentDTO Student { get;  set; }
         public LessonStatus Status { get; internal set; }
     }
 }

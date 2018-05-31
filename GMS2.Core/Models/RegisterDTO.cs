@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GMS.ASPNet.Core.Models
 {
-    public class RegisterViewModel
+    public class RegisterDTO
     {
         public string FirstName { get; set; }
 

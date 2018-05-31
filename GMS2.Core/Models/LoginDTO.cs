@@ -2,7 +2,7 @@
 
 namespace GMS2.Core.Models
 {
-    public class LoginViewModel
+    public class LoginDTO
     {
         [Required]
         public string Email { get; set; }

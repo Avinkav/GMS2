@@ -2,7 +2,7 @@
 
 namespace GMS2.Core.Controllers
 {
-    public class AvailabilityViewModel
+    public class AvailabilityDTO
     {
         public Guid UserId { get; set; }
 

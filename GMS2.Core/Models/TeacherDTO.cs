@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GMS2.Core.Models
 {
-    public class TeacherViewModel
+    public class TeacherDTO
     {
         public Guid Id { get; set; }
 

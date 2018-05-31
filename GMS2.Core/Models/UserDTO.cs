@@ -10,9 +10,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GMS2.Core.Models
 {
-    public class UserViewModel
+    public class UserDTO
     {
-        public UserViewModel()
+        public UserDTO()
         {
         }
 
@@ -38,9 +38,9 @@ namespace GMS2.Core.Models
 
         public string dob { get; set; }
 
-        public StudentViewModel Student {get;set;}
+        public StudentDTO Student {get;set;}
 
-        public TeacherViewModel Teacher {get;set;}
+        public TeacherDTO Teacher {get;set;}
 
         public IList<string> Roles {get; set;}
 
