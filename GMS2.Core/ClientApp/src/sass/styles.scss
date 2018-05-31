@@ -23,6 +23,9 @@ p {
   font-size: 14px;
 }
 
+router-outlet{
+  display: none;
+}
 .form-control:focus {
   border-width: 1px;
   box-shadow: 0 0 0 2px rgba(164, 9, 48, 0.25);
