@@ -18,7 +18,7 @@ IDE of your choice. we use VS Code
 
 ### Development Build
 
-Complete the following steps to build the app
+Complete the following steps to build the app. As of 31/05, Angular and .Net core development servers need to be started independantly of eachother. This is to optimize build times when restarting after code changes.
 
 In the root folder run
 
@@ -26,11 +26,12 @@ In the root folder run
 dotnet restore
 ```
 
-Change directory to GMS2.Core/ClientApp and restore dependencies for the angular project
+Change directory to GMS2.Core/ClientApp and restore dependencies for the angular project and run it
 
 ```
 cd GMS2.Core/ClientApp
 npm install
+ng serve
 ```
 
 Change directory back up to GMS2.Core and run
