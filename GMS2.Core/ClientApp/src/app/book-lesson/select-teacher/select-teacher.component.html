@@ -1,25 +1,29 @@
-<div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon1">
-        <mat-icon>search</mat-icon>
-      </span>
+
+  <div class="p-3">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">
+          <mat-icon>search</mat-icon>
+        </span>
+      </div>
+      <input type="text" class="form-control" placeholder="Type to search..." [(ngModel)]="searchString" />
     </div>
-    <input type="text" class="form-control" placeholder="Type to search..." [(ngModel)]="searchString" />
   </div>
-<ng-container *ngFor="let t of model  | filter : 'name,instrumentsTaught' : searchString;">
-  <div (click)="clickTeacher(t)" class="media p-3">
-    <img class="align-self-start mr-3 avatar-img" src="assets/avatar.png" alt="Generic placeholder image">
-    <div class="media-body">
-      <div>
-        <!-- (click)="t.selected = !t.selected" -->
-        <h5 class="mt-0">{{t.name}}</h5>
-        <p>{{t.description}}</p>
-        <div class="inline-list">
-          <span *ngFor="let i of t.instrumentsTaught">
-            {{i}}
-          </span>
+  <ng-container *ngFor="let t of model  | filter : 'name,instrumentsTaught' : searchString;">
+    <div (click)="clickTeacher(t)" class="media p-3">
+      <img class="align-self-start mr-3 avatar-img" src="assets/avatar.png" alt="Generic placeholder image">
+      <div class="media-body">
+        <div>
+          <!-- (click)="t.selected = !t.selected" -->
+          <h5 class="mt-0">{{t.name}}</h5>
+          <p>{{t.description}}</p>
+          <div class="inline-list">
+            <span *ngFor="let i of t.instrumentsTaught">
+              {{i}}
+            </span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</ng-container>
+  </ng-container>
+

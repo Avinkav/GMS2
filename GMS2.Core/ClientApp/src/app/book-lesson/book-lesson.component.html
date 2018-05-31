@@ -1,22 +1,24 @@
 <div class="container-fluid py-2 py-lg-5">
   <div class="container">
-    <mat-horizontal-stepper #stepper>
-      <mat-step [completed]="step1">
-        <ng-template matStepLabel>Select a Teacher</ng-template>
-        <app-select-teacher [model]="teachers" (selectTeacher)="teacherSelected($event)"></app-select-teacher>
-      </mat-step>
-      <mat-step [completed]="step2">
-        <ng-template matStepLabel>Pick a date and time</ng-template>
-        <app-select-date [model]="model?.teacher" (selectDate)="dateSelected($event)" (selectDuration)="model.duration = $event"></app-select-date>
-      </mat-step>
-      <!-- <mat-step [completed]="step3">
-        <ng-template matStepLabel>Hire an Instrument</ng-template>
-        <app-select-instrument></app-select-instrument>
-      </mat-step> -->
-      <mat-step [completed]="step4">
-        <ng-template matStepLabel>Confirm Booking</ng-template>
-        <app-confirm [model]="model" (cancel)="cancelClick($event)" (confirm)="confirmClick($event)"></app-confirm>
-      </mat-step>
-    </mat-horizontal-stepper>
+    <div class="card p-3">
+      <mat-horizontal-stepper #stepper>
+        <mat-step [completed]="step1">
+          <ng-template matStepLabel>Select a Teacher</ng-template>
+          <app-select-teacher [model]="teachers" (selectTeacher)="teacherSelected($event)"></app-select-teacher>
+        </mat-step>
+        <mat-step [completed]="step2">
+          <ng-template matStepLabel>Pick a date and time</ng-template>
+          <app-select-date [model]="model?.teacher" (selectDate)="dateSelected($event)" (selectDuration)="model.duration = $event"></app-select-date>
+        </mat-step>
+        <!-- <mat-step [completed]="step3">
+          <ng-template matStepLabel>Hire an Instrument</ng-template>
+          <app-select-instrument></app-select-instrument>
+        </mat-step> -->
+        <mat-step [completed]="step4">
+          <ng-template matStepLabel>Confirm Booking</ng-template>
+          <app-confirm [model]="model" (cancel)="cancelClick($event)" (confirm)="confirmClick($event)"></app-confirm>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
   </div>
 </div>

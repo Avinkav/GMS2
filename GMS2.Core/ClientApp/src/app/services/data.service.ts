@@ -27,8 +27,13 @@ export class DataService {
     );
   }
 
-  public update(teacher: Teacher) {
-    return this.http.put(this.API_ROOT + 'teacher/' + teacher.id, teacher, { observe: 'response' }).pipe(
+  public update(model: Teacher | Student) {
+    let path = this.API_ROOT;
+    if (isStudent(model))
+      path += 'student/';
+    else
+      path += 'teacher/';
+    return this.http.put(path + model.id, model, { observe: 'response' }).pipe(
       catchError(err => this.handleError(err))
     );
   }

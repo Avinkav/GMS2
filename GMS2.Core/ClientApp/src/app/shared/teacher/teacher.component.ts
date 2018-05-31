@@ -22,28 +22,24 @@ export class TeacherComponent implements OnInit {
 
   }
 
-  removeItem(i: string) {
-    this.model.instrumentsTaught.splice(this.model.instrumentsTaught.indexOf(i), 1);
+  removeItem(value: string) {
+    this.model.instrumentsTaught.splice(this.model.instrumentsTaught.indexOf(value), 1);
+    this.dataService.update(this.model).subscribe(
+      res => { },
+      err => {
+        this.model.instrumentsTaught.push(value);
+        console.error(err);
+      });
   }
 
-  getIndex(index) {
-    return index;
-  }
-
-  addItem(box: any) {
-    console.log(this.model.instrumentsTaught);
+  addItem(value: string) {
     if (!this.model.instrumentsTaught)
       this.model.instrumentsTaught = [];
-    console.log(this.model.instrumentsTaught);
-    this.model.instrumentsTaught.push(box.value);
-    this.dataService.update(this.model).subscribe(res => {
-      // if (res.ok)
 
-    },
-    err => {
+    this.model.instrumentsTaught.push(value);
 
-  });
-    box.value = '';
+    this.dataService.update(this.model).subscribe(res => { }, err => { });
+    value = '';
   }
 
   togglePermission() {
@@ -55,7 +51,7 @@ export class TeacherComponent implements OnInit {
             this.permission = false;
 
         },
-        err => console.log(err)
+        err => console.error(err)
       );
       return;
     }
@@ -66,11 +62,13 @@ export class TeacherComponent implements OnInit {
           this.userService.getTeacher(this.userId).subscribe(obj => this.model = obj);
         }
       },
-      err => console.log(err)
+      err => console.error(err)
     );
   }
 
-
+  getIndex(index) {
+    return index;
+  }
 }
 
 

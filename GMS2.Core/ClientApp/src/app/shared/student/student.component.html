@@ -15,7 +15,7 @@
       <label  class="mb-3">Learning Instruments</label>
       <ul class="list-group list-group-flush mb-3">
         <li class="list-group-item d-flex justify-content-between align-items-center overflow-hidden" *ngFor="let i of model?.instruments">{{i}}
-          <button type="button" class="close" aria-label="Close">
+          <button type="button" class="close" aria-label="Close" (click)="removeItem(i)">
             <span aria-hidden="true">&times;</span>
           </button>
         </li>
@@ -24,7 +24,7 @@
   </div>
   <div class="form-row">
     <div class="form-group col">
-      <input #box class="form-control form-control-sm" type="text" placeholder="Add instrument..." (keyup.enter)="addItem(box)">
+      <input #box class="form-control form-control-sm" type="text" placeholder="Add instrument..." (keyup.enter)="addItem(box.value)" [(ngModel)]="value">
     </div>
   </div>
 </div>

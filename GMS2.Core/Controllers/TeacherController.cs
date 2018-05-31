@@ -34,8 +34,8 @@ namespace GMS2.Core.Controllers
         [HttpGet("list/{count?}")]
         public IActionResult ListTeachers(int count = 10)
         {
-            var teachers =_dataContext.Teachers.Include(t => t.AppUser).Take(10).Select(t => t.ToViewModel());
-            
+            var teachers = _dataContext.Teachers.Include(t => t.AppUser).OrderBy(t => t.Id).Take(count).Select(t => t.ToViewModel());
+
             return Json(teachers);
         }
 
@@ -50,21 +50,22 @@ namespace GMS2.Core.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var teacher = MapTeacher(model);
-            var user = await _userManager.FindByIdAsync(model.UserId.ToString());
+            var teacher = new Teacher()
+            {
+                UserId = model.UserId,
+                InstrumentsTaught = (model.InstrumentsTaught == null) ? null : String.Join(",", model.InstrumentsTaught),
+                Description = model.Description
+            };
+
             _dataContext.Teachers.Add(teacher);
 
             try
             {
                 await _dataContext.SaveChangesAsync();
-                await _userManager.AddToRoleAsync(user, "Teacher");
             }
             catch (Exception e)
             {
-                return new JsonResult(e)
-                {
-                    StatusCode = 500
-                };
+                return StatusCode(500, e);
             }
 
             return Ok();
@@ -75,10 +76,10 @@ namespace GMS2.Core.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> ReadTeacher(string userId)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> ReadTeacher(Guid id)
         {
-            var teacher = await _dataContext.Teachers.Where(t => t.UserId.ToString() == userId).FirstOrDefaultAsync();
+            var teacher = await _dataContext.Teachers.FindAsync(id);
 
             if (teacher == null)
                 return NoContent();
@@ -101,10 +102,10 @@ namespace GMS2.Core.Controllers
             if (id != model.Id)
                 return BadRequest();
 
-            var teacher = await _dataContext.Teachers.Where(t => t.Id == model.Id).SingleOrDefaultAsync();
+            var teacher = await _dataContext.Teachers.FindAsync(id);
 
-            if (teacher ==  null)
-                return BadRequest("Teacher not found");
+            if (teacher == null)
+                return NoContent();
 
             teacher.InstrumentsTaught = String.Join(",", model.InstrumentsTaught);
             teacher.Description = model.Description;
@@ -127,18 +128,5 @@ namespace GMS2.Core.Controllers
 
             return Ok();
         }
-
-        private Teacher MapTeacher(TeacherViewModel model)
-        {
-            return new Teacher()
-            {
-                UserId = model.UserId,
-                InstrumentsTaught = String.Join(",", model.InstrumentsTaught),
-                Description = model.Description
-            };
-        }
-
-        
-
     }
 }

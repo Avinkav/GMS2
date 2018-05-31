@@ -1,14 +1,18 @@
-.cal-hour-segment{
-    cursor: pointer;
+.cal-hour-segment {
+  cursor: pointer;
 }
 
-.day-view-wrapper{
-    max-height: 60vh;
-    overflow-y: auto;
+.day-view-wrapper {
+  max-height: 60vh;
+  overflow-y: auto;
 }
 
-.avatar-img{
-    float:left;
-    width: 128px;
-    height: 128px;
+.avatar-img {
+  float: left;
+  width: 128px;
+  height: 128px;
+}
+
+.cal-month-view .cal-header .cal-cell{
+  font-weight: 400;
 }

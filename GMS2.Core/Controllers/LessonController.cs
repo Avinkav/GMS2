@@ -41,10 +41,13 @@ namespace GMS2.Core.Controllers
 
             // Validation to make sure teacher is avaialbable
 
-            //
+            DateTime date;
+            if (!DateTime.TryParse(model.Date, out date))
+                return BadRequest("Invalid Date");
+
             var lesson = new Lesson()
             {
-                DateTime = DateTime.Parse(model.Date),
+                DateTime = date,
                 Status = LessonStatus.Booked,
                 Cost = model.Cost,
                 Duration = model.Duration,
@@ -55,9 +58,12 @@ namespace GMS2.Core.Controllers
 
             _dataContext.Lessons.Add(lesson);
 
-            try{
+            try
+            {
                 await _dataContext.SaveChangesAsync();
-            }catch(Exception e){
+            }
+            catch (Exception e)
+            {
                 return new BadRequestObjectResult(e);
             }
 
@@ -68,30 +74,30 @@ namespace GMS2.Core.Controllers
         /// Get lessons of the student with given id
         /// 
         /// </summary>
-        /// <param name="id">id of the user</param>
+        /// <param name="id">id of the student</param>
         /// <returns>List of lessons</returns>
         [HttpGet("student/{id}")]
         public async Task<IActionResult> ReadStudentLessons(Guid id)
         {
             var lessons = _dataContext.Lessons.Include(l => l.Student).ThenInclude(l => l.AppUser)
                                             .Include(l => l.Teacher).ThenInclude(l => l.AppUser)
-                                            .Where(l => l.StudentId == id).Select(l =>  l.ToViewModel());
+                                            .Where(l => l.StudentId == id).Select(l => l.ToViewModel());
 
             return Json(lessons);
         }
 
-                /// <summary>
-        /// Get lessons of the student with given id
+        /// <summary>
+        /// Get lessons of the teacher with given id
         /// 
         /// </summary>
-        /// <param name="id">id of the user</param>
+        /// <param name="id">id of the teacher</param>
         /// <returns>List of lessons</returns>
         [HttpGet("teacher/{id}")]
         public async Task<IActionResult> ReadTeacherLessons(Guid id)
         {
             var lessons = _dataContext.Lessons.Include(l => l.Student).ThenInclude(l => l.AppUser)
                                             .Include(l => l.Teacher).ThenInclude(l => l.AppUser)
-                                            .Where(l => l.TeacherId == id).Select(l =>  l.ToViewModel());
+                                            .Where(l => l.TeacherId == id).Select(l => l.ToViewModel());
 
             return Json(lessons);
         }
@@ -113,8 +119,12 @@ namespace GMS2.Core.Controllers
             if (lesson == null)
                 return NotFound();
 
+            DateTime date;
+            if (!DateTime.TryParse(model.Date, out date))
+                return BadRequest("Invalid Date");
+
             // Update values, all other properties are immutable after creation
-            lesson.DateTime = DateTime.Parse(model.Date);
+            lesson.DateTime = date;
             lesson.Cost = model.Cost;
             lesson.Status = model.Status;
 
@@ -135,9 +145,12 @@ namespace GMS2.Core.Controllers
             var lesson = await _dataContext.Lessons.FindAsync(id);
 
             if (lesson == null)
-                return NotFound();
+                return NoContent();
 
-            return new BadRequestObjectResult(null);
+            _dataContext.Lessons.Remove(lesson);
+            await _dataContext.SaveChangesAsync();
+
+            return Ok();
         }
 
     }

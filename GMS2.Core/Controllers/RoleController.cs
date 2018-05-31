@@ -24,7 +24,8 @@ namespace GMS2.Core.Controllers
         private readonly DataContext _dataContext;
 
 
-        public RoleController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, DataContext context, RoleManager<IdentityRole<Guid>> roleManager)
+        public RoleController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, 
+        DataContext context, RoleManager<IdentityRole<Guid>> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -45,8 +46,10 @@ namespace GMS2.Core.Controllers
             if (!await _roleManager.RoleExistsAsync(role))
                 return BadRequest();
 
-            var user = await _dataContext.Users.Include(u => u.Teacher)
-                                                .Include(u => u.Student).Where(u => u.Id.ToString() == id).FirstOrDefaultAsync();
+            var user = await _dataContext.Users.Where(u => u.Id.ToString() == id)
+                                                .Include(u => u.Teacher)
+                                                .Include(u => u.Student)
+                                                .SingleOrDefaultAsync();
 
             if (user == null)
                 return BadRequest();
@@ -54,16 +57,18 @@ namespace GMS2.Core.Controllers
             await _userManager.AddToRoleAsync(user, role);
 
             // if user does not have a student account, create one
-            if (role.ToUpperInvariant() == "STUDENT" && user.Student == null) {
+            if (role.ToUpperInvariant() == "STUDENT" && user.Student == null)
+            {
                 user.Student = new Student();
                 await _dataContext.SaveChangesAsync();
-                return Ok();
+                return Ok(user.Student);
             }
             // if user does not have a teacher account, create one
-            if (role.ToUpperInvariant() == "TEACHER" && user.Teacher == null) {
+            if (role.ToUpperInvariant() == "TEACHER" && user.Teacher == null)
+            {
                 user.Teacher = new Teacher();
                 await _dataContext.SaveChangesAsync();
-                return Ok();
+                return Ok(user.Teacher);
             }
 
             return Ok();

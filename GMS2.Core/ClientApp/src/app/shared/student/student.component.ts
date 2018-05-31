@@ -3,6 +3,7 @@ import { Student } from '../../models/student';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { UserService } from '../../services/user.service';
 import { shrinkInOut } from '../../animations/shrinkInOut';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-student',
@@ -15,30 +16,39 @@ export class StudentComponent implements OnInit {
   @Input() model: Student;
   @Input() permission;
   @Input() userId;
+  value = '';
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private dataService: DataService) { }
 
   ngOnInit() {
 
   }
 
-  removeItem(i: string) {
-    this.model.instruments.splice(this.model.instruments.indexOf(i), 1);
+  removeItem(value: string) {
+    this.model.instruments.splice(this.model.instruments.indexOf(value), 1);
+    this.dataService.update(this.model).subscribe(
+      res => { },
+      err => {
+        console.error(err);
+        this.model.instruments.push(value);
+      });
   }
 
-  addItem(box: any) {
-    this.model.instruments.push(box.value);
-    box.value = '';
+  addItem(value: string) {
+    if (!this.model.instruments)
+      this.model.instruments = [];
+      
+    this.model.instruments.push(value);
+    this.dataService.update(this.model).subscribe(res => { }, err => { });
+    this.value = '';
   }
 
   togglePermission() {
     if (this.permission) {
-      // revoke
       this.userService.revokePermission(this.userId, 'Student').subscribe(
         res => {
-          if (res.ok) {
+          if (res.ok)
             this.permission = false;
-          }
         },
         err => console.log(err)
       );

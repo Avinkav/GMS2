@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using GMS.Data;
 using GMS.Data.Models;
+using GMS2.Core.Helpers;
 using GMS2.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -32,19 +33,15 @@ namespace GMS2.Core.Controllers
             else if (count < 0)
                 BadRequest("Cannot select a negative number of elements you monkey");
 
-            var students = await _dataContext.Students.Take(count).ToListAsync();
+            var students = await _dataContext.Students.OrderBy(s => s.Id).Take(count).ToListAsync();
 
             if (students?.Any() == false)
                 return NoContent();
 
             // Send headers describing the sequence of selected records
-            Request.HttpContext.Response.Headers.Add("From", "0");
-            Request.HttpContext.Response.Headers.Add("To", $"{count}");
             Request.HttpContext.Response.Headers.Add("Count", $"{count}");
 
-            return new JsonResult(students) {
-                StatusCode = (int) HttpStatusCode.OK
-            };
+            return Json(students.Select(s => s.ToViewModel()));
         }
 
         [HttpGet("list/{from}/{to}")]
@@ -54,20 +51,19 @@ namespace GMS2.Core.Controllers
             if (from < 1 || to <= from)
                 return BadRequest("are u sirius m8?");
 
-            var students = await _dataContext.Students.Skip(from).Take(to - from).ToListAsync();
+            var students = await _dataContext.Students.OrderBy(s => s.Id).Skip(from).Take(to - from).ToListAsync();
 
             if (students?.Any() == false)
                 return NoContent();
 
             // Send headers describing the sequence of selected records
-            Request.HttpContext.Response.Headers.Add("From", $"{from}");
-            Request.HttpContext.Response.Headers.Add("To", $"{to}");
-            Request.HttpContext.Response.Headers.Add("Count", $"{to - from}");
+            var headers = Request.HttpContext.Response.Headers;
+            headers.Add("From", $"{from}");
+            headers.Add("To", $"{to}");
+            headers.Add("Count", $"{to - from}");
 
-            return new JsonResult(students)
-            {
-                StatusCode = (int)HttpStatusCode.OK
-            };
+            var models = students.Select(s => s.ToViewModel());
+            return Json(models);
         }
 
 
@@ -77,58 +73,69 @@ namespace GMS2.Core.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            if (model.Instruments == null)
-                model.Instruments = new string[] { };
-
             var student = new Student()
             {
                 UserId = model.UserId,
-                Instruments = string.Join(",", model.Instruments )
+                Instruments = (model.Instruments == null) ? null : string.Join(",", model.Instruments)
             };
 
             _dataContext.Students.Add(student);
 
-            try{
-             await _dataContext.SaveChangesAsync();
-            } catch (DbUpdateException ex){
-                return BadRequest("Request failed, make sure the UserId is valid and a student doesn't already exist");
-            } catch (Exception e){
-                Request.HttpContext.Response.StatusCode = 500;
-                return Json(e);
+            try
+            {
+                await _dataContext.SaveChangesAsync();
             }
-            
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = "Database failed to update, make sure the User Id is valid and a student doesn't already exist",
+                    exception = ex
+                });
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e);
+            }
+
             return Ok();
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> ReadStudent(Guid id)
         {
-            var student = await _dataContext.Students.Include(s => s.LessonsTaken).FirstOrDefaultAsync(s => s.UserId == id);
+            var student = await _dataContext.Students.Where(s => s.Id == id)
+                                                        .Include(s => s.LessonsTaken)
+                                                        .SingleOrDefaultAsync();
             if (student == null)
                 return NoContent();
 
-            var model = new StudentViewModel()
-            {
-                Id = student.Id,
-                UserId = student.UserId,
-                Instruments = student.Instruments.Split(','),
-                
-            };
+            var model = student.ToViewModel();
+
             return Json(model);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateStudent(Guid id, [FromBody] StudentViewModel model)
         {
-            if (!ModelState.IsValid || id != model.Id  )
+            if (!ModelState.IsValid || id != model.Id)
                 return BadRequest();
 
-            var student = await _dataContext.Students.FirstAsync(s => s.UserId == id);
+            var student = await _dataContext.Students.FindAsync(id);
+
+            if (student == null)
+                return BadRequest();
 
             student.Instruments = String.Join(',', model.Instruments);
-
-            _dataContext.Students.Update(student);
-            await _dataContext.SaveChangesAsync();
+            try
+            {
+                _dataContext.Students.Update(student);
+                await _dataContext.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e);
+            }
             return Ok();
         }
 
@@ -140,14 +147,17 @@ namespace GMS2.Core.Controllers
             if (student == null)
                 return BadRequest();
 
-            _dataContext.Students.Remove(student);
-            await _dataContext.SaveChangesAsync();
+            try
+            {
+                _dataContext.Students.Remove(student);
+                await _dataContext.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e);
+            }
 
             return Ok();
         }
-
-
-
-
     }
 }

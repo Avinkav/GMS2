@@ -76,7 +76,6 @@ namespace GMS2.Core.Controllers
                 Student = new Student()
             };
 
-
             var result = await _userManager.CreateAsync(user, model.Password);
             
             if (!result.Succeeded) 
@@ -99,24 +98,28 @@ namespace GMS2.Core.Controllers
             // Sign new user in if registration was succesful
             await _signInManager.SignInAsync(user, isPersistent: false);
 
-            return new OkObjectResult(user);
+            return new OkObjectResult(user.ToViewModel());
 
         }
 
         [HttpPost("login")]
         public async Task<object> Login([FromBody] LoginViewModel model)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
 
             if (result.Succeeded)
             {
-                var appUser = await _userManager.Users.Include(u => u.Student)
+                var user = await _userManager.Users.Include(u => u.Student)
                                                         .Include(u => u.Teacher)
                                                         .Where(r => r.NormalizedEmail == model.Email.ToUpperInvariant()).SingleOrDefaultAsync();
-                return Ok(appUser.MaptoViewModel());
+                return Ok(user.ToViewModel());
             }
 
-            return new BadRequestObjectResult("Login failed");
+            return BadRequest(result);
         }
 
         [HttpGet("logout")]
@@ -132,8 +135,8 @@ namespace GMS2.Core.Controllers
         public async Task<object> Details(string id = null)
         {
             var user = await _userManager.GetUserAsync(User);
-
-            return Json(user.MaptoViewModel());
+            var vm = user.ToViewModel();
+            return Json(vm);
         }
 
 
@@ -141,11 +144,11 @@ namespace GMS2.Core.Controllers
         [Authorize]
         public async Task<object> Details([FromBody] UserViewModel model)
         {
-
-            if (model == null) NotFound();
-
             if (model == null)
                 return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest();
 
             var user = await _userManager.GetUserAsync(User);
 
@@ -155,9 +158,6 @@ namespace GMS2.Core.Controllers
             if (user.Id != model.Id)
                 return Unauthorized();
 
-            if (!ModelState.IsValid)
-                return new BadRequestObjectResult(model);
-
             // Perform database update
             UpdateValues(user, model);
             await _userManager.UpdateAsync(user);
@@ -165,6 +165,22 @@ namespace GMS2.Core.Controllers
             await _userManager.UpdateNormalizedUserNameAsync(user);
 
             return Ok();
+        }
+
+        // Update user object using values from the viewmodel
+        public void UpdateValues(AppUser user, UserViewModel model)
+        {
+            user.UserName = model.UserName;
+            user.NormalizedUserName = model.Email.ToUpperInvariant();
+            user.NormalizedEmail = model.Email.ToUpperInvariant();
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.Dob = DateTime.Parse(model.dob);
+            user.Email = model.Email;
+            user.AddressLine1 = model.AddressLine1;
+            user.City = model.City;
+            user.PostCode = model.PostCode;
+            user.PhoneNumber = model.PhoneNumber;
         }
 
         private async Task<object> GenerateJwtToken(string email, AppUser user)
@@ -190,28 +206,5 @@ namespace GMS2.Core.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-
-        // Update user object using values from the viewmodel
-        public void UpdateValues(AppUser user, UserViewModel model)
-        {
-            user.UserName = model.UserName;
-            user.NormalizedUserName = model.Email.ToUpperInvariant();
-            user.NormalizedEmail = model.Email.ToUpperInvariant();
-            user.FirstName = model.FirstName;
-            user.LastName = model.LastName;
-            user.Dob = DateTime.Parse(model.dob);
-            user.Email = model.Email;
-            user.AddressLine1 = model.AddressLine1;
-            user.City = model.City;
-            user.PostCode = model.PostCode;
-            user.PhoneNumber = model.PhoneNumber;
-        }
-
-        // Helper method to read a full user
-        // private async Task<AppUser> GetFullUser(string id)
-        // {
-        //     var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.Id == new Guid(id));
-        //     return user;
-        // }
     }
 }

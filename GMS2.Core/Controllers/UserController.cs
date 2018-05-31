@@ -35,7 +35,8 @@ namespace GMS2.Core.Controllers
         /// <param name="context">Entity Framework inherited GMS.Data.DataContext instance</param>
         /// <param name="roleManager">ASP Net Identity RoleManager instance</param>
         /// <param name="logger">Framework provided logger for logging</param>
-        public UserController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, DataContext context, RoleManager<IdentityRole<Guid>> roleManager)
+        public UserController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
+                                 DataContext context, RoleManager<IdentityRole<Guid>> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -46,12 +47,8 @@ namespace GMS2.Core.Controllers
         [HttpGet("list")]
         public async Task<IActionResult> ListUser()
         {
-            var userVms = new List<UserViewModel>();
-
-            foreach (var user in _dataContext.Users)
-            {           
-                userVms.Add(user.MaptoViewModel());
-            }
+            var userVms = (await _dataContext.Users.ToListAsync())
+                                    .Select(user => user.ToViewModel());
 
             return Json(userVms);
         }
@@ -60,7 +57,7 @@ namespace GMS2.Core.Controllers
         [HttpPost("")]
         public IActionResult CreateUser([FromBody] UserViewModel model)
         {
-
+            return BadRequest();
             throw new NotImplementedException();
         }
 
@@ -71,14 +68,14 @@ namespace GMS2.Core.Controllers
             if (id == null)
                 return BadRequest();
 
-            var user = await _dataContext.Users
+            var user = await _dataContext.Users.Where(u => u.Id == new Guid(id))
                                          .Include(u => u.Teacher)
                                          .Include(u => u.Student)
-                                         .FirstAsync(u => u.Id == new Guid(id));
+                                         .SingleOrDefaultAsync();
 
             var roles = await _userManager.GetRolesAsync(user);
 
-            var vm = user.MaptoViewModel(roles);
+            var vm = user.ToViewModel(roles);
 
             return Json(vm);
         }
@@ -94,7 +91,7 @@ namespace GMS2.Core.Controllers
             if (user == null)
                 return NotFound();
 
-            UpdateValues(user, model);
+            UpdateModel(user, model);
             await _userManager.UpdateAsync(user);
 
             return Ok();
@@ -161,7 +158,7 @@ namespace GMS2.Core.Controllers
 
 
         //
-        public void UpdateValues(AppUser user, UserViewModel model)
+        public void UpdateModel(AppUser user, UserViewModel model)
         {
             user.UserName = model.UserName;
             user.NormalizedUserName = model.UserName.ToUpperInvariant();
