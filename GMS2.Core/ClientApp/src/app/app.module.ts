@@ -46,6 +46,8 @@ import { ConfirmComponent } from './book-lesson/confirm/confirm.component';
 import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 import { CalendarComponent } from './shared/calendar/calendar.component';
 import { InstrumentsComponent } from './shared/instruments/instruments.component';
+import { FooterComponent } from './footer/footer.component';
+import { PortalComponent } from './shared/portal/portal.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +85,8 @@ import { InstrumentsComponent } from './shared/instruments/instruments.component
     BreadcrumbComponent,
     CalendarComponent,
     InstrumentsComponent,
+    FooterComponent,
+    PortalComponent,
   ],
   imports: [
     BrowserModule,

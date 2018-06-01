@@ -9,22 +9,11 @@ import { UserService } from './services/user.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'app';
-  scrollTop = 0;
+
 
   constructor(public userService: UserService) {}
 
   ngOnInit()  {
-
-    $(document).scroll(() => {
-      const st = $(document).scrollTop();
-      if (st > this.scrollTop) {
-        $('.navbar').slideUp('fast', 'swing');
-      } else {
-        $('.navbar').slideDown('fast', 'swing');
-      }
-      this.scrollTop  = st;
-    });
   }
 
   logout() {

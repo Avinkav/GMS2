@@ -61,14 +61,14 @@ namespace GMS2.Core.Controllers
             {
                 user.Student = new Student();
                 await _dataContext.SaveChangesAsync();
-                return Ok(user.Student);
+                return Ok(user.Student.ToViewModel());
             }
             // if user does not have a teacher account, create one
             if (role.ToUpperInvariant() == "TEACHER" && user.Teacher == null)
             {
                 user.Teacher = new Teacher();
                 await _dataContext.SaveChangesAsync();
-                return Ok(user.Teacher);
+                return Ok(user.Teacher.ToViewModel());
             }
 
             return Ok();

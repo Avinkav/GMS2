@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-teacher-portal',
-  templateUrl: './teacher-portal.component.html',
-  styleUrls: ['./teacher-portal.component.css']
+  template: `<app-portal [navItems]="navItems"></app-portal>`,
+  styles: [``]
 })
 export class TeacherPortalComponent implements OnInit {
 

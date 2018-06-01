@@ -1,11 +1,14 @@
-<mat-sidenav-container class="portal-container">
-    <mat-sidenav mode="side" opened>
-        <mat-nav-list>
-            <a mat-list-item [routerLink]="i.link" routerLinkActive="active" *ngFor="let i of navItems"> {{i.anchor}} </a>
-         </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <app-breadcrumb></app-breadcrumb>
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+<div class="container-fluid portal-container">
+  <div class="sidebar">
+    <div class="list-group list-group-flush">
+      <a class="list-group-item list-group-item-action" 
+                routerLinkActive="active" 
+                *ngFor="let i of navItems" 
+                [routerLink]="i.link"> {{i.anchor}}</a>
+    </div>
+  </div>
+  <main>
+    <app-breadcrumb></app-breadcrumb>
+    <router-outlet></router-outlet>
+  </main>
+</div>

@@ -1,30 +1,36 @@
-<div class="d-flex align-items-center">
-  <h4 class="">Teacher</h4>
-  <div class="flex-spacer"></div>
-  <div class="btn-group" role="group">
-    <button id="toggle" type="button" class="btn btn-sm px-3" [class.btn-primary]="!permission" [class.btn-warning]="permission"
-      (click)="togglePermission()">
-      <span *ngIf="permission">Revoke</span>
-      <span *ngIf="!permission">Grant</span>
-    </button>
-  </div>
-</div>
-<div class="content mt-4" [@shrinkInOut] *ngIf="permission && model">
-  <div class="form-row">
-    <div class="form-group col">
-      <label  class="mb-3">Teaching Instruments</label>
-      <ul class="list-group list-group-flush mb-3">
-        <li class="list-group-item d-flex justify-content-between align-items-center overflow-hidden" *ngFor="let i of model.instrumentsTaught">{{i}}
-          <button type="button" class="close" aria-label="Close" (click)=removeItem(i)>
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </li>
-      </ul>
+<div class="card">
+  <div class="card-header">
+    <div class="d-flex align-items-center">
+      <h4 class="">Teacher</h4> 
+      <div class="flex-spacer"></div>
+      <div class="btn-group" role="group">
+        <button id="toggle" type="button" class="btn btn-sm px-3" [class.btn-primary]="!permission" [class.btn-warning]="permission"
+          (click)="togglePermission()">
+          <span *ngIf="permission">Revoke</span>
+          <span *ngIf="!permission">Grant</span>
+        </button>
+      </div>
     </div>
   </div>
-  <div class="form-row">
-    <div class="form-group col">
-      <input #box class="form-control form-control-sm" type="text" placeholder="Add instrument..." (keyup.enter)="addItem(box.value)">
+  <div class="card-body" *ngIf="permission && model">
+    <div class="content" >
+      <div class="form-row">
+        <div class="form-group col">
+          <label class="mb-3">Teaching Instruments</label>
+          <ul class="list-group list-group-flush mb-3">
+            <li class="list-group-item d-flex justify-content-between align-items-center overflow-hidden" *ngFor="let i of model.instrumentsTaught">{{i}}
+              <button type="button" class="close" aria-label="Close" (click)=removeItem(i)>
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col">
+          <input #box class="form-control form-control-sm" type="text" placeholder="Add instrument..." (keyup.enter)="addItem(box.value)">
+        </div>
+      </div>
     </div>
   </div>
 </div>

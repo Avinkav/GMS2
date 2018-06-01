@@ -14,7 +14,7 @@ export class User {
     state: string;
     postCode: number;
     phoneNumber: string;
-    dob: string;
+    dob: Date;
     password: string;
     teacher: Teacher;
     student: Student;
@@ -22,12 +22,13 @@ export class User {
 }
 
 
-export const STATES = ['New South Wales (NSW)', 'Queensland (QLD)', 'South Australia (SA)', 'Tasmania (TAS)', 'Western Australia (WA)', 'Victoria (VIC)', 'Northern Territory (NT)', 'Australian Capital Territory (ACT)'];
+export const STATES = ['New South Wales (NSW)', 'Queensland (QLD)', 'South Australia (SA)', 'Tasmania (TAS)',
+    'Western Australia (WA)', 'Victoria (VIC)', 'Northern Territory (NT)', 'Australian Capital Territory (ACT)'];
 
 
 export const stateSearch = (text$: Observable<string>) =>
     text$.pipe(
-      debounceTime(200),
-      distinctUntilChanged(),
-      map(term => STATES.filter(v => v.toLowerCase().includes(term.toLowerCase())))
+        debounceTime(200),
+        distinctUntilChanged(),
+        map(term => STATES.filter(v => v.toLowerCase().includes(term.toLowerCase())))
     )

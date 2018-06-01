@@ -27,6 +27,14 @@ router-outlet{
   display: none;
 }
 
+// .form-control:disabled{
+//   background-color: unset;
+// }
+
+.animation-wrapper{
+  overflow: hidden;
+}
+
 .alert{
   overflow: hidden;
 }
@@ -43,11 +51,33 @@ router-outlet{
   z-index: 100000;
 }
 
+.sidebar{
+  position: fixed;
+  top: $navbar-height;
+  left: 0;
+  width: $sidebar-width;
+  height: 100%;
+  border-right: 1px solid #dadada;
+}
+
+.sidebar list-group{
+  
+}
+
+.portal-container{
+  background: white;
+  min-height: calc(100vh - #{$navbar-height});
+}
+
+main{
+  margin-left: $sidebar-width;
+}
+
 .navbar {
   height: $navbar-height;
   background-color: black;
   transition: background-color 200ms linear;
-  @include mat-elevation(4);
+  @include mat-elevation(2);
 }
 
 .navbar.scrolled {
@@ -95,13 +125,6 @@ router-outlet{
   background-color: white;
 }
 
-.portal-container {
-  position: absolute !important;
-  top: $navbar-height;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
 
 .clickable-card {
   @include mat-elevation-transition;

@@ -1,19 +1,17 @@
-<div class="container-fluid">
+<div class="container mx-auto">
   <div class="row my-3">
-    <div class="col-lg-6">
-      <div class=" p-3 shadow-sm bg-white card overflow-hidden">
-        <app-user-details [title]="title" [model]="user"></app-user-details>
-      </div>
+    <div class="col-12">
+      <app-user-details [title]="title" [model]="user"></app-user-details>
     </div>
-    <div class="col-lg-3" *ngIf="admin || user?.student">
-      <div class="p-3 shadow-sm bg-white card overflow-hidden">
-        <app-student [permission]="user?.roles?.includes('Student')" [userId]="user?.id" [model]="user?.student"></app-student>
-      </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-12" *ngIf="admin || user?.student">
+      <app-student [permission]="user?.roles?.includes('Student')" [userId]="user?.id" [model]="user?.student"></app-student>
     </div>
-    <div class="col-lg-3 " *ngIf="admin || user?.teacher">
-      <div class="shadow-sm bg-white p-3 card overflow-hidden">
-        <app-teacher [permission]="user?.roles?.includes('Teacher')" [userId]="user?.id" [model]="user?.teacher"></app-teacher>
-      </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-12 " *ngIf="admin || user?.teacher">
+      <app-teacher [permission]="user?.roles?.includes('Teacher')" [userId]="user?.id" [model]="user?.teacher"></app-teacher>
     </div>
   </div>
 </div>
