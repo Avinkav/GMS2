@@ -1,0 +1,9 @@
+@import '../../../sass/variables';
+
+a {
+    color: #666;
+}
+
+a:hover {
+    color: $accent;
+}

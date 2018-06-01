@@ -26,6 +26,17 @@ namespace GMS2.Core.Controllers
             _dataContext = dataContext;
         }
 
+        [HttpGet("list")]
+        public async Task<IActionResult> ListLessons(){
+            var lessons = await _dataContext.Lessons.Include(l => l.Student).ThenInclude(s => s.AppUser)
+                                                    .Include(l => l.Teacher).ThenInclude(t => t.AppUser)
+                                                    .OrderBy(l => l.DateTime)
+                                                    .Take(10)
+                                                    .ToListAsync();
+
+            return Json(lessons.Select(l => l.ToViewModel()));
+        }
+
 
         /// <summary>
         /// Creates a new booking for a teacher based on data recieved in viewmodel

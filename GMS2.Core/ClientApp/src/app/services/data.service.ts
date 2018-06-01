@@ -46,6 +46,13 @@ export class DataService {
     );
   }
 
+  getAllLessons() {
+    return this.http.get<Lesson[]>(this.API_ROOT + 'lesson/list').pipe(
+      tap(null, null, () => this.progressService.stop()),
+      catchError(err => this.handleError(err))
+    );
+  }
+
   public getLessons(model: Teacher | Student) {
     let requestUrl = '';
     if (isStudent(model))

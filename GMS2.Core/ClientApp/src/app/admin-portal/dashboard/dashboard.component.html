@@ -1,13 +1,12 @@
 <div class="container-fluid py-3">
   <div class="row">
     <div class="col-md-8">
-      <div class="col p-3 shadow-sm bg-white">
-        <div id="calendar">
-        </div>
+      <div class="col p-3 shadow-sm card bg-white">
+        <app-calendar [admin]="true"  ></app-calendar>
       </div>
     </div>
     <div class="row col-md-4 d-flex flex-column">
-      <div class="col p-3 shadow-sm bg-white">
+      <div class="col p-3 card shadow-sm bg-white">
         <div class="d-flex align-baseline">
           <h4> Financial Summary</h4>
           <div class="flex-spacer"></div>
@@ -31,7 +30,7 @@
         </table>
 
       </div>
-      <div class="col p-3 shadow-sm bg-white my-2">
+      <div class="col p-3 card shadow-sm bg-white my-2">
         <h4> Notifications</h4>
       </div>
     </div>

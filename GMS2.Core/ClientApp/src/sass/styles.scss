@@ -27,10 +27,6 @@ router-outlet{
   display: none;
 }
 
-// .form-control:disabled{
-//   background-color: unset;
-// }
-
 .animation-wrapper{
   overflow: hidden;
 }
@@ -38,9 +34,14 @@ router-outlet{
 .alert{
   overflow: hidden;
 }
+
 .form-control:focus {
   border-width: 1px;
   box-shadow: 0 0 0 2px rgba(164, 9, 48, 0.25);
+}
+
+.form-control:disabled{
+  background-color: #f8f8f8;
 }
 
 .progress {
@@ -58,14 +59,12 @@ router-outlet{
   width: $sidebar-width;
   height: 100%;
   border-right: 1px solid #dadada;
+  background: white;
 }
 
-.sidebar list-group{
-  
-}
 
 .portal-container{
-  background: white;
+  background: rgb(245, 245, 245);
   min-height: calc(100vh - #{$navbar-height});
 }
 
