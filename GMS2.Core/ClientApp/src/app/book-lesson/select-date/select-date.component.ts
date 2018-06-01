@@ -3,10 +3,12 @@ import { CalendarEvent } from 'angular-calendar';
 import { Teacher } from '../../models/teacher';
 import { subDays, compareAsc } from 'date-fns';
 import { shrinkInOut } from '../../animations/shrinkInOut';
+import * as $ from 'jquery';
+
 @Component({
   selector: 'app-select-date',
   templateUrl: './select-date.component.html',
-  styleUrls: ['./select-date.component.css'],
+  styleUrls: ['./select-date.component.scss'],
   animations: [shrinkInOut]
 })
 export class SelectDateComponent implements OnInit {
@@ -31,6 +33,7 @@ export class SelectDateComponent implements OnInit {
       this.error = 'Pick a date in the future';
       return;
     }
+
     this.error = '';
     this.selectedDate = date;
     this.view = 'day';

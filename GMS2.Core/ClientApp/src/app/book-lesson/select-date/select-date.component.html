@@ -10,10 +10,10 @@
         <div class="media-body">
           <div>
             <img class="align-self-start mr-3 avatar-img" src="assets/avatar.png" alt="Generic placeholder image">
-            <h5 class="mt-0">{{model.name}}</h5>
-            <p>{{model.description}}</p>
+            <h5 class="mt-0">{{model?.name}}</h5>
+            <p>{{model?.description}}</p>
             <ul class="unstyled-list">
-              <li *ngFor="let i of model.instrumentsTaught">
+              <li *ngFor="let i of model?.instrumentsTaught">
                 {{i}}
               </li>
             </ul>
