@@ -2,37 +2,45 @@ var jsonfile = require('jsonfile');
 var request = require('request');
 
 
-var userList;
 
-var defaultRequest = request.defaults({baseUrl: 'http://localhost:5000' })
+var defaultRequest = request.defaults({
+    baseUrl: 'http://localhost:5000'
+})
+
+var file = 'test-data/mock-users-2.json';
+var userList = jsonfile.readFileSync(file);
 
 //User Registration test
-var file = 'test-data/mock-users-2.json';
-jsonfile.readFile(file, function (err, obj) {
-    this.userList = obj;
-})
+// userList.forEach(element => {
+//     defaultRequest.post('/api/account/register', {
+//         json: true,
+//         body: element
+//     }, function (error, response, body) {
+//         console.log('error:', error);
+//         console.log('statusCode:', response && response.statusCode);
+//         console.log('body:', body);
+//     });
+// });
 
+let count = 0;
+let err = 0;
+// User Login & Logout test
 userList.forEach(element => {
-    defaultRequest.post('/api/account/register', {
+    defaultRequest.post('/api/account/login', {
         json: true,
-        body: element
+        body: {
+            email: element.Email,
+            password: element.Password
+        }
     }, function (error, response, body) {
+        if ( response.statusCode >= 200 && response.statusCode <= 299)
+            count++;
+        else
+            err++
         console.log('error:', error);
-        console.log('statusCode:', response && response.statusCode); 
-        console.log('body:', body); 
+        console.log('statusCode:', response && response.statusCode);
+        console.log('succceded: ', count)
+        console.log('failed: ', err)
+        //console.log('body:', body);
     });
 });
-
-// User Login & Logout test
-
-userList.forEach(element => {
-        defaultRequest.post('/api/account/register', {
-            json: true,
-            body: {email: element['email'], password: element['password']}
-        }, function (error, response, body) {
-            console.log('error:', error);
-            console.log('statusCode:', response && response.statusCode); 
-            console.log('body:', body); 
-        });
-    });
-})

@@ -48,6 +48,8 @@ import { CalendarComponent } from './shared/calendar/calendar.component';
 import { InstrumentsComponent } from './shared/instruments/instruments.component';
 import { FooterComponent } from './footer/footer.component';
 import { PortalComponent } from './shared/portal/portal.component';
+import { NgProgressModule } from '@ngx-progressbar/core';
+import { NgProgressHttpModule } from '@ngx-progressbar/http';
 
 @NgModule({
   declarations: [
@@ -103,7 +105,9 @@ import { PortalComponent } from './shared/portal/portal.component';
     MatButtonModule,
     HttpClientModule,
     NgbModule.forRoot(),
-    CalendarModule.forRoot()
+    CalendarModule.forRoot(),
+    NgProgressModule.forRoot(),
+    NgProgressHttpModule
   ],
   providers: [ CookieService ],
   bootstrap: [AppComponent]

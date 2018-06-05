@@ -3,7 +3,7 @@ import { slideInAnimation } from '../../slideInAnimation';
 import { fadeInAnimation } from '../../fadeInAnimation';
 import { bgImageAnimation } from '../../bgImgAnimation';
 import { Observable, interval } from 'rxjs';
-
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-home',

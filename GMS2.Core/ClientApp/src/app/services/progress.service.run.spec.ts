@@ -1,5 +1,4 @@
 import { TestBed, inject } from '@angular/core/testing';
-
 import { ProgressService } from './progress.service';
 
 describe('ProgressService', () => {

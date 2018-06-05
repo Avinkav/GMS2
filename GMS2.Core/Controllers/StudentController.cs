@@ -89,7 +89,8 @@ namespace GMS2.Core.Controllers
             {
                 return StatusCode(500, new
                 {
-                    message = "Database failed to update, make sure the User Id is valid and a student doesn't already exist",
+                    message = "Database failed to update, make sure the User Id is valid and " +
+                                " a student doesn't already exist",
                     exception = ex
                 });
             }
