@@ -8,11 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class UserPortalComponent implements OnInit {
 
   navItems = [
-    { anchor: 'Dashboard', link: 'dashboard'},
-    { anchor: 'Lessons', link: 'lessons'},
-    { anchor: 'Instruments', link: 'instruments'},
-    { anchor: 'Billing', link: 'billing'},
-    { anchor: 'Profile', link: 'profile'}
+    { anchor: 'Dashboard', link: 'dashboard', icon: 'dashboard' },
+    { anchor: 'Lessons', link: 'lessons', icon: 'assignment'},
+    { anchor: 'Instruments', link: 'instruments', icon: 'queue_music'},
+    { anchor: 'Billing', link: 'billing', icon: 'monetization_on'},
+    { anchor: 'Profile', link: 'profile', icon: 'profile'}
 ];
 
   constructor() { }

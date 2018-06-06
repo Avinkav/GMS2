@@ -28,43 +28,49 @@ import { TeacherDashboardComponent } from './teacher-portal/teacher-dashboard/te
 import { ClassesComponent } from './teacher-portal/classes/classes.component';
 import { IncomeComponent } from './teacher-portal/income/income.component';
 import { InstrumentsComponent } from './shared/instruments/instruments.component';
-import { AuthGuardService  as AuthGuard } from './services/auth-guard.service';
+import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 export const routes: Routes = [
-  { path: 'index',  component: HomeComponent },
-  { path: 'about',  component: AboutComponent },
-  { path: 'book-lesson',  component: BookLessonComponent, canActivate: [AuthGuard] },
-  { path: 'contact-us',  component: ContactUsComponent },
-  { path: 'register',  component: RegisterComponent },
-  { path: 'admin-portal',  component: AdminPortalComponent, data: { breadcrumb: 'Admin Portal' }, canActivate: [AuthGuard] , children: [
-    {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-    {path: 'dashboard', component: DashboardComponent, data: { breadcrumb: 'Dashboard' }},
-    {path: 'users', component: UsersComponent, data: { breadcrumb: 'Users' }},
-    {path: 'users/:id', component: ProfileComponent, data: { breadcrumb: 'User Details' }},
-    {path: 'finances', component: FinancesComponent, data: { breadcrumb: 'Finances' }},
-    {path: 'reports', component: ReportsComponent, data: { breadcrumb: 'Reports' }},
-  ] },
-  { path: 'user-portal',  component: UserPortalComponent, data: { breadcrumb: 'User Portal' }, canActivate: [AuthGuard], children: [
-    {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-    {path: 'dashboard', component: UserDashboardComponent, data: { breadcrumb: 'Dashboard' }},
-    {path: 'lessons', component: LessonsComponent, data: { breadcrumb: 'Lessons' }},
-    {path: 'billing', component: BillingComponent, data: { breadcrumb: 'Billing' }},
-    {path: 'profile', component: ProfileComponent, data: { breadcrumb: 'Profile' }},
-    {path: 'instruments', component: InstrumentsComponent, data: { breadcrumb: 'Instruments' }}
-  ] },
-  { path: 'teacher-portal',  component: TeacherPortalComponent, canActivate: [AuthGuard], children: [
-    {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-    {path: 'dashboard', component: TeacherDashboardComponent},
-    {path: 'classes', component: ClassesComponent},
-    {path: 'income', component: IncomeComponent},
-  ] },
-  { path: 'login',  component: LoginComponent },
-  {  path: '',  redirectTo: '/index',  pathMatch: 'full'}
+  { path: 'index', component: HomeComponent },
+  { path: 'book-lesson', component: BookLessonComponent, canActivate: [AuthGuard] },
+  { path: 'register', component: RegisterComponent },
+  {
+    path: 'admin-portal', component: AdminPortalComponent, data: { breadcrumb: 'Admin Portal' }, canActivate: [AuthGuard], children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: DashboardComponent, data: { breadcrumb: 'Dashboard' } },
+      { path: 'users', component: UsersComponent, data: { breadcrumb: 'Users' } },
+      { path: 'users/:id', component: ProfileComponent, data: { breadcrumb: 'User Details' } },
+      { path: 'finances', component: FinancesComponent, data: { breadcrumb: 'Finances' } },
+      { path: 'reports', component: ReportsComponent, data: { breadcrumb: 'Reports' } },
+    ]
+  },
+  {
+    path: 'user-portal', component: UserPortalComponent, data: { breadcrumb: 'User Portal' }, canActivate: [AuthGuard], children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: UserDashboardComponent, data: { breadcrumb: 'Dashboard' } },
+      { path: 'lessons', component: LessonsComponent, data: { breadcrumb: 'Lessons' } },
+      { path: 'billing', component: BillingComponent, data: { breadcrumb: 'Billing' } },
+      { path: 'profile', component: ProfileComponent, data: { breadcrumb: 'Profile' } },
+      { path: 'instruments', component: InstrumentsComponent, data: { breadcrumb: 'Instruments' } }
+    ]
+  },
+  {
+    path: 'teacher-portal', component: TeacherPortalComponent, canActivate: [AuthGuard], children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: TeacherDashboardComponent },
+      { path: 'classes', component: ClassesComponent },
+      { path: 'income', component: IncomeComponent },
+    ]
+  },
+  { path: 'login', component: LoginComponent },
+  { path: '', component: HomeComponent, pathMatch: 'full' }
+  { path: '**', component: NotFoundComponent, pathMatch: 'full' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

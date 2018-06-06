@@ -1,10 +1,10 @@
 <div class="container-fluid portal-container">
     <div class="sidebar">
       <div class="nav flex-column">
-        <a class="nav-link" 
+        <a class="nav-link d-flex align-items-center py-3" 
                   routerLinkActive="active" 
                   *ngFor="let i of navItems" 
-                  [routerLink]="i.link"> {{i.anchor}}</a>
+                  [routerLink]="i.link"><mat-icon>{{ i.icon }}</mat-icon> <div class="ml-4">{{ i.anchor }}</div></a>
       </div>
     </div>
     <main>

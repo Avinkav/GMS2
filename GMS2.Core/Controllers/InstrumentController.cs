@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GMS2.Core.Controllers
 {
+    [Authorize]
     [Route("api/instruments")]
     public class InstrumentController : Controller
     {

@@ -51,6 +51,7 @@ import { PortalComponent } from './shared/portal/portal.component';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { AuthInterceptor } from './services/auth-interceptor';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { AuthInterceptor } from './services/auth-interceptor';
     InstrumentsComponent,
     FooterComponent,
     PortalComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

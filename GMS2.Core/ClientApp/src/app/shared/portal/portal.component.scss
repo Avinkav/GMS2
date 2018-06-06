@@ -1,9 +1,9 @@
 @import '../../../sass/variables';
 
 a {
-    color: #666;
+    color: rgba(0,0,0,0.6);
 }
 
-a:hover {
+a:hover, a.active {
     color: $accent;
 }

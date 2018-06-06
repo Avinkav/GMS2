@@ -18,7 +18,7 @@ namespace GMS2.Core.Controllers
     /// AccountController handles all actions performed on users exluding session management such as login, logout
     /// All GMS related actions such as assigning student/teacher/admin priviledges are handled here
     /// </summary>
-    [Authorize]
+    [Authorize(Roles = "Administrator, Super Administrator")]
     [Route("api/user")]
     public class UserController : Controller
     {

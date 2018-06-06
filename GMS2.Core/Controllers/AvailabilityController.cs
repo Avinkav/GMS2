@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using GMS.Data;
 using GMS.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace GMS2.Core.Controllers
 {
+    [Authorize]
     [Route("api/availability")]
     public class AvailabilityController : Controller
     {
@@ -93,7 +95,7 @@ namespace GMS2.Core.Controllers
             await TryUpdateModelAsync(availability);
 
             await _dataContext.SaveChangesAsync();
-                
+
             return Ok();
         }
 

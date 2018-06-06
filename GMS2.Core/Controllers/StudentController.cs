@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 namespace GMS2.Core.Controllers
 {
     [Route("api/student")]
-    [Authorize]
+    [Authorize(Roles = "Student, Administrator, Super Administrator")]
     public class StudentController : Controller
     {
 

@@ -9,9 +9,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GMS2.Core.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GMS2.Core.Controllers
 {
+    [Authorize(Roles = "Teacher, Administrator, Super Administrator")]
     [Route("api/teacher")]
     public class TeacherController : Controller
     {

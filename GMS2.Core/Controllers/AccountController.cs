@@ -20,6 +20,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace GMS2.Core.Controllers
 {
+    [Authorize]
     [Route("api/account")]
     public class AccountController : Controller
     {
@@ -55,6 +56,7 @@ namespace GMS2.Core.Controllers
         /// <param name="model">View model containin the new registrants datra</param>
         /// <param name="returnUrl">Page to redirect to after user logs in</param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<object> Register([FromBody] RegisterDTO model)
         {
@@ -77,13 +79,13 @@ namespace GMS2.Core.Controllers
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
-            
-            if (!result.Succeeded) 
+
+            if (!result.Succeeded)
                 return new BadRequestObjectResult(result.Errors);
 
             result = await _userManager.AddToRoleAsync(user, "Student");
 
-            if (!result.Succeeded) 
+            if (!result.Succeeded)
                 return new BadRequestObjectResult(result.Errors);
 
             try
@@ -98,27 +100,29 @@ namespace GMS2.Core.Controllers
             // Sign new user in if registration was succesful
             await _signInManager.SignInAsync(user, isPersistent: false);
 
-            return new OkObjectResult(user.ToViewModel());
+            var roles = await _userManager.GetRolesAsync(user);
+
+            return new OkObjectResult(user.ToViewModel(roles));
 
         }
-
+        
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<object> Login([FromBody] LoginDTO model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
 
             if (result.Succeeded)
             {
                 var user = await _userManager.Users.Include(u => u.Student)
-                                                        .Include(u => u.Teacher)
-                                                        .Where(r => r.NormalizedEmail == model.Email.ToUpperInvariant()).SingleOrDefaultAsync();
-                return Ok(user.ToViewModel());
+                                                    .Include(u => u.Teacher)
+                                                    .Where(r => r.NormalizedEmail == model.Email.ToUpperInvariant()).SingleOrDefaultAsync();
+                var roles = await _userManager.GetRolesAsync(user);
+                return Ok(user.ToViewModel(roles));
             }
-
             return BadRequest(result);
         }
 
@@ -131,8 +135,7 @@ namespace GMS2.Core.Controllers
         }
 
         [HttpGet("details")]
-        [Authorize]
-        public async Task<object> Details(string id = null)
+        public async Task<IActionResult> Details(string id = null)
         {
             var user = await _userManager.GetUserAsync(User);
             var vm = user.ToViewModel();
@@ -141,8 +144,7 @@ namespace GMS2.Core.Controllers
 
 
         [HttpPut("details")]
-        [Authorize]
-        public async Task<object> Details([FromBody] UserDTO model)
+        public async Task<IActionResult> Details([FromBody] UserDTO model)
         {
             if (model == null)
                 return NotFound();

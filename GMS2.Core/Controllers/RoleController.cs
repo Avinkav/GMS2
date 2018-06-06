@@ -14,7 +14,7 @@ using GMS2.Core.Helpers;
 namespace GMS2.Core.Controllers
 {
 
-    [Authorize]
+    [Authorize(Roles = "Administrator, Super Administrator")]
     [Route("api/role")]
     public class RoleController : Controller
     {
@@ -24,7 +24,7 @@ namespace GMS2.Core.Controllers
         private readonly DataContext _dataContext;
 
 
-        public RoleController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, 
+        public RoleController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
         DataContext context, RoleManager<IdentityRole<Guid>> roleManager)
         {
             _userManager = userManager;
@@ -70,8 +70,8 @@ namespace GMS2.Core.Controllers
                 await _dataContext.SaveChangesAsync();
                 return Ok(user.Teacher.ToViewModel());
             }
-
-            return Ok();
+            var roles = _userManager.GetRolesAsync(user);
+            return Ok(roles);
         }
 
         [HttpGet("{id}/revoke/{role}")]
@@ -86,8 +86,8 @@ namespace GMS2.Core.Controllers
                 return BadRequest();
 
             await _userManager.RemoveFromRoleAsync(user, role);
-
-            return Ok();
+            var roles = _userManager.GetRolesAsync(user);
+            return Ok(roles);
         }
     }
 }
