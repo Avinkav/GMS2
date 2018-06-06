@@ -14,6 +14,15 @@
       </div>
     </div>
     <div class="card-body">
+      <div class="form-row mb-3">
+        <div class="col">
+          <div class="profile-pic-wrapper" (mouseover)="hideUpload = false" (mouseleave)="hideUpload = true">
+            <mat-icon [hidden]="hideUpload" (click)="uploadPic.click()">file_upload</mat-icon>
+            <img class="profile-pic" [src]="avatarPath">
+          </div>
+          <input #uploadPic hidden type="file" (change)="onFileChanged($event)">
+        </div>
+      </div>
       <div class="form-row">
         <div class="form-group col">
           <input type="text" class="form-control" [class.form-control-plaintext]="!edit" [disabled]="!edit" placeholder="First name*"

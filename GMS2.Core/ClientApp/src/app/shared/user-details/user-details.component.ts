@@ -3,6 +3,8 @@ import { STATES, User, stateSearch } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { ProgressService } from 'src/app/services/progress.service';
 import { slideInAnimation } from '../../../slideInAnimation';
+import { filter } from 'rxjs/operators';
+import { HttpResponse } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-user-details',
@@ -17,13 +19,12 @@ export class UserDetailsComponent implements OnInit {
   @Input() title: string;
   edit = false;
   stateSearch = stateSearch;
+  avatarPath = 'assets/portrait1.jpg';
+  hideUpload = true;
 
   constructor(private userService: UserService, private progressService: ProgressService) { }
 
   ngOnInit() {
-    // this.userService.getDetails().subscribe(o => {
-    //   this.user = o;
-    // });
   }
 
   onSubmit() {
@@ -38,6 +39,14 @@ export class UserDetailsComponent implements OnInit {
         }
       });
     }
-      this.edit = true;
+    this.edit = true;
+  }
+
+  onFileChanged(event) {
+    const file = event.target.files[0];
+    this.userService.uploadPic(file).subscribe((res: any) => {
+      if (res.ok)
+        this.avatarPath = res.body.avatarPath; // handle event here
+    });
   }
 }

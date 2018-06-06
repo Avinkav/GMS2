@@ -67,6 +67,15 @@ export class UserService {
     return null;
   }
 
+  public uploadPic(file: File) {
+    const uploadData = new FormData();
+    uploadData.append('userId', this.getCurrentLogin().id);
+    uploadData.append('profilePic', file, file.name);
+    return this.http.post(this.API_ROOT + 'account/profile-pic', uploadData, {
+      observe: 'response'
+    });
+  }
+
   public logout() {
     return this.http.get(this.API_ROOT + 'account/logout').pipe(
       tap(res => {
@@ -77,11 +86,11 @@ export class UserService {
   }
 
   public deleteUser(id: string) {
-    return this.http.delete(this.API_ROOT + 'user/' + id)
+    return this.http.delete(this.API_ROOT + 'user/' + id);
   }
 
   public getDetails() {
-    return this.http.get<User>(this.API_ROOT + 'account/details')
+    return this.http.get<User>(this.API_ROOT + 'account/details');
   }
 
   public update(user: User) {

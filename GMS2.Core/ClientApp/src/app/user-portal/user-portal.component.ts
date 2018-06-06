@@ -12,7 +12,7 @@ export class UserPortalComponent implements OnInit {
     { anchor: 'Lessons', link: 'lessons', icon: 'assignment'},
     { anchor: 'Instruments', link: 'instruments', icon: 'queue_music'},
     { anchor: 'Billing', link: 'billing', icon: 'monetization_on'},
-    { anchor: 'Profile', link: 'profile', icon: 'profile'}
+    { anchor: 'Profile', link: 'profile', icon: 'person'}
 ];
 
   constructor() { }

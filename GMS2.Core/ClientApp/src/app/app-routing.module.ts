@@ -65,7 +65,7 @@ export const routes: Routes = [
     ]
   },
   { path: 'login', component: LoginComponent },
-  { path: '', component: HomeComponent, pathMatch: 'full' }
+  { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: '**', component: NotFoundComponent, pathMatch: 'full' }
 ];
 

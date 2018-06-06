@@ -5,3 +5,19 @@
 #cancelButton{
     z-index: 9;
 }
+
+.profile-pic-wrapper{
+    position: relative;
+    max-width: 250px;
+}
+
+.profile-pic-wrapper .mat-icon{
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    cursor: pointer;
+}
+
+.profile-pic{
+    width: 100%;
+}

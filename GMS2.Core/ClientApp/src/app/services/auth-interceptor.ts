@@ -16,7 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 if (err.status === 401) {
                     // redirect to login
                     console.log('auth interceptor redirecting');
-                    this.router.navigate(['/login'], {queryParams: {returnUrl: 'test'}});
+                    this.router.navigate(['/login'], {queryParams: {returnUrl: this.router.url}});
                     return throwError(err);
                 }
                 console.log(err);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -11,6 +12,7 @@ using GMS.Data.Models;
 using GMS2.Core.Helpers;
 using GMS2.Core.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -105,7 +107,7 @@ namespace GMS2.Core.Controllers
             return new OkObjectResult(user.ToViewModel(roles));
 
         }
-        
+
         [AllowAnonymous]
         [HttpPost("login")]
         public async Task<object> Login([FromBody] LoginDTO model)
@@ -167,6 +169,18 @@ namespace GMS2.Core.Controllers
             await _userManager.UpdateNormalizedUserNameAsync(user);
 
             return Ok();
+        }
+
+        [HttpPost("profile-pic")]
+        public async Task<IActionResult> UploadProfilePic(Guid userId, IFormFile profilePic, [FromServices] IHostingEnvironment hostingEnv)
+        {
+            var filePath = $"wwwroot/avatar/{userId}.jpg";
+
+            using (var stream = new FileStream( filePath, FileMode.Create))
+            {
+                await profilePic.CopyToAsync(stream);
+            }
+            return Ok(new { avatarPath = $"avatar/{userId}.jpg"});
         }
 
         // Update user object using values from the viewmodel

@@ -1,9 +1,29 @@
 @import '../../../sass/variables';
-
 a {
-    color: rgba(0,0,0,0.6);
+  color: rgba(0, 0, 0, 0.7);
 }
 
-a:hover, a.active {
-    color: $accent;
+a:hover,
+a.active {
+  color: $accent;
 }
+
+.sidebar {
+  position: fixed;
+  top: $navbar-height;
+  left: 0;
+  width: $sidebar-width;
+  height: 100%;
+   // border-right: 1px solid #dadada;
+  // background: white;
+}
+
+.portal-container {
+  background: rgb(245, 245, 245);
+  min-height: calc(100vh - #{$navbar-height});
+}
+
+
+main{
+    margin-left: $sidebar-width;
+  }
