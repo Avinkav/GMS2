@@ -50,9 +50,9 @@ export class UserDashboardComponent implements OnInit {
   constructor(private dataService: DataService, private router: Router, private userService: UserService) {
     this.model = this.userService.getCurrentLogin();
 
-    if (!this.model) {
-      router.navigateByUrl('/login');
-    }
+    // if (!this.model) {
+    //   router.navigateByUrl('/login');
+    // }
   }
 
   ngOnInit() {

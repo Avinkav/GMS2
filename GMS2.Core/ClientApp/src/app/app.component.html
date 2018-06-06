@@ -19,7 +19,7 @@
       </ul>
       <ul class="navbar-nav" *ngIf="userService.userName.value">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/user-portal">Hello {{userService.userName.value}}, User Portal</a>
+          <a class="nav-link" routerLink="/user-portal">Hello {{userService.getCurrentLogin()?.firstName}}, User Portal</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" routerLink="/teacher-portal">Teacher Portal</a>
@@ -43,7 +43,7 @@
     </div>
   </div>
 </nav>
-<ng-progress></ng-progress>
+<ng-progress spinner="false" meteor="true" color="#a40930"></ng-progress>
 <div class="body-content container-fluid p-0">
   <router-outlet></router-outlet>
 </div>

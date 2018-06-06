@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { fadeInAnimation } from '../../fadeInAnimation';
 import { UserService } from '../services/user.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ProgressService } from '../services/progress.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -12,21 +13,21 @@ import { ProgressService } from '../services/progress.service';
   animations: [fadeInAnimation]
 })
 export class LoginComponent implements OnInit {
-  
+
   error = '';
   login = { email: '', password: '', rememberMe: true };
-
-  constructor(private userService: UserService, private router: Router,
-    private cookieService: CookieService,
-    private progressService: ProgressService) { }
+  returnUrl;
+  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.pipe(filter(params => params.returnUrl)).subscribe(params => this.returnUrl = params.returnUrl);
   }
 
   onSubmit() {
     this.userService.login(this.login).subscribe(res => {
       if (res.ok) {
-        this.router.navigateByUrl('/user-portal/dashboard');
+        console.log(this.returnUrl);
+        this.router.navigateByUrl(this.returnUrl);
         return;
       }
     },

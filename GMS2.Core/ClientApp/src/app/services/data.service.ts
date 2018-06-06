@@ -21,10 +21,7 @@ export class DataService {
   }
 
   public getTeachers() {
-    this.progressService.start();
-    return this.http.get<Teacher[]>(this.API_ROOT + 'teacher/list/10').pipe(
-      tap(null, null, () => this.progressService.stop()),
-    );
+    return this.http.get<Teacher[]>(this.API_ROOT + 'teacher/list/10');
   }
 
   public update(model: Teacher | Student) {
@@ -33,24 +30,16 @@ export class DataService {
       path += 'student/';
     else
       path += 'teacher/';
-    return this.http.put(path + model.id, model, { observe: 'response' }).pipe(
-      catchError(err => this.handleError(err))
-    );
+    return this.http.put(path + model.id, model, { observe: 'response' });
   }
 
   public newLesson(model: Lesson) {
-    this.progressService.start();
-    return this.http.post(this.API_ROOT + 'lesson', model, { observe: 'response' }).pipe(
-      tap(null, null, () => this.progressService.stop()),
-      catchError(err => this.handleError(err))
-    );
+
+    return this.http.post(this.API_ROOT + 'lesson', model, { observe: 'response' });
   }
 
   getAllLessons() {
-    return this.http.get<Lesson[]>(this.API_ROOT + 'lesson/list').pipe(
-      tap(null, null, () => this.progressService.stop()),
-      catchError(err => this.handleError(err))
-    );
+    return this.http.get<Lesson[]>(this.API_ROOT + 'lesson/list');
   }
 
   public getLessons(model: Teacher | Student) {
@@ -60,21 +49,10 @@ export class DataService {
     else
       requestUrl = this.API_ROOT + 'lesson/teacher/' + model.id;
 
-    console.log(requestUrl);
-    this.progressService.start();
-    return this.http.get<Lesson[]>(requestUrl).pipe(
-      tap(null, null, () => this.progressService.stop()),
-      catchError(err => this.handleError(err))
-    );
+    return this.http.get<Lesson[]>(requestUrl);
   }
 
   handleError(err: HttpErrorResponse) {
-    this.progressService.stop();
-    if (err.status === 401) {
-      // redirect to login
-      this.router.navigateByUrl('/login');
-    }
-    this.progressService.stop();
     return throwError(err);
   }
 

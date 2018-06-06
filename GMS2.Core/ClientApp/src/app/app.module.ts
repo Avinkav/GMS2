@@ -25,7 +25,7 @@ import { BookLessonComponent } from './book-lesson/book-lesson.component';
 import { ChartModule } from 'angular2-chartjs';
 import { FormsModule } from '@angular/forms';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { FilterPipe } from './pipes/filter.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -50,6 +50,7 @@ import { FooterComponent } from './footer/footer.component';
 import { PortalComponent } from './shared/portal/portal.component';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
+import { AuthInterceptor } from './services/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,11 @@ import { NgProgressHttpModule } from '@ngx-progressbar/http';
     NgProgressModule.forRoot(),
     NgProgressHttpModule
   ],
-  providers: [ CookieService ],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

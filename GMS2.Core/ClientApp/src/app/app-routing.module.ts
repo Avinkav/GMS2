@@ -28,15 +28,16 @@ import { TeacherDashboardComponent } from './teacher-portal/teacher-dashboard/te
 import { ClassesComponent } from './teacher-portal/classes/classes.component';
 import { IncomeComponent } from './teacher-portal/income/income.component';
 import { InstrumentsComponent } from './shared/instruments/instruments.component';
+import { AuthGuardService  as AuthGuard } from './services/auth-guard.service';
 
 
 export const routes: Routes = [
   { path: 'index',  component: HomeComponent },
   { path: 'about',  component: AboutComponent },
-  { path: 'book-lesson',  component: BookLessonComponent },
+  { path: 'book-lesson',  component: BookLessonComponent, canActivate: [AuthGuard] },
   { path: 'contact-us',  component: ContactUsComponent },
   { path: 'register',  component: RegisterComponent },
-  { path: 'admin-portal',  component: AdminPortalComponent, data: { breadcrumb: 'Admin Portal' } , children: [
+  { path: 'admin-portal',  component: AdminPortalComponent, data: { breadcrumb: 'Admin Portal' }, canActivate: [AuthGuard] , children: [
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     {path: 'dashboard', component: DashboardComponent, data: { breadcrumb: 'Dashboard' }},
     {path: 'users', component: UsersComponent, data: { breadcrumb: 'Users' }},
@@ -44,7 +45,7 @@ export const routes: Routes = [
     {path: 'finances', component: FinancesComponent, data: { breadcrumb: 'Finances' }},
     {path: 'reports', component: ReportsComponent, data: { breadcrumb: 'Reports' }},
   ] },
-  { path: 'user-portal',  component: UserPortalComponent, data: { breadcrumb: 'User Portal' }, children: [
+  { path: 'user-portal',  component: UserPortalComponent, data: { breadcrumb: 'User Portal' }, canActivate: [AuthGuard], children: [
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     {path: 'dashboard', component: UserDashboardComponent, data: { breadcrumb: 'Dashboard' }},
     {path: 'lessons', component: LessonsComponent, data: { breadcrumb: 'Lessons' }},
@@ -52,7 +53,7 @@ export const routes: Routes = [
     {path: 'profile', component: ProfileComponent, data: { breadcrumb: 'Profile' }},
     {path: 'instruments', component: InstrumentsComponent, data: { breadcrumb: 'Instruments' }}
   ] },
-  { path: 'teacher-portal',  component: TeacherPortalComponent, children: [
+  { path: 'teacher-portal',  component: TeacherPortalComponent, canActivate: [AuthGuard], children: [
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     {path: 'dashboard', component: TeacherDashboardComponent},
     {path: 'classes', component: ClassesComponent},

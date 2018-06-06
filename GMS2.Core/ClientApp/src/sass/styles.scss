@@ -83,6 +83,10 @@ main{
   background-color: #202124;
 }
 
+.ng-progress-bar{
+  top:$navbar-height !important;
+}
+
 .mat-drawer {
   background-color: unset;
 }
