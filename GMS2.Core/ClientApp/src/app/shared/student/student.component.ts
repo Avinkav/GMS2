@@ -14,6 +14,7 @@ import { DataService } from '../../services/data.service';
 export class StudentComponent implements OnInit {
 
   @Input() model: Student;
+  @Input() admin = false;
   @Input() permission;
   @Input() userId;
   value = '';
@@ -37,9 +38,9 @@ export class StudentComponent implements OnInit {
   addItem(value: string) {
     if (!this.model.instruments)
       this.model.instruments = [];
-      
+
     this.model.instruments.push(value);
-    this.dataService.update(this.model).subscribe(res => { }, err => { });
+    this.dataService.update(this.model).subscribe(res => { console.log(res); }, err => { console.log(err); });
     this.value = '';
   }
 

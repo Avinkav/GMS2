@@ -13,9 +13,11 @@
 
 .profile-pic-wrapper .mat-icon{
     position: absolute;
-    top: 4px;
     right: 4px;
+    bottom: 4px;
     cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 2px;
 }
 
 .profile-pic{

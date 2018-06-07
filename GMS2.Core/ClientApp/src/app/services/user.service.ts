@@ -25,8 +25,7 @@ export class UserService {
   public userName: BehaviorSubject<string> = new BehaviorSubject(null);
   API_ROOT = PROD_API_ROOT;
 
-  constructor(private http: HttpClient,
-    private progressService: ProgressService, private router: Router) {
+  constructor(private http: HttpClient, private router: Router) {
     if (isDevMode())
       this.API_ROOT = 'api/';
     const user = this.getCurrentLogin();
@@ -36,33 +35,29 @@ export class UserService {
   }
 
   public register(user: User) {
-    return this.http.post(this.API_ROOT + 'account/register', user, { headers: this.headers, observe: 'response' }).pipe(
+    return this.http.post<User>(this.API_ROOT + 'account/register', user).pipe(
       tap(res => {
-        if (res.ok) {
-          localStorage.setItem('user', JSON.stringify(res.body));
-          this.userName.next(this.getCurrentLogin().firstName);
-        }
+        if (res)
+          this.setCurrentLogin(res);
       }),
       catchError(err => this.handleError(err))
     );
   }
 
   public login(login: any) {
-    return this.http.post<User>(this.API_ROOT + 'account/login', login, { headers: this.headers, observe: 'response' }).pipe(
+    return this.http.post<User>(this.API_ROOT + 'account/login', login).pipe(
       tap(res => {
-        if (res.ok) {
-          localStorage.setItem('user', JSON.stringify(res.body));
-          this.userName.next(res.body.firstName);
-        }
+        if (res)
+          this.setCurrentLogin(res);
       })
     );
   }
 
   public getCurrentLogin(): User {
     const user = localStorage.getItem('user');
-    if (user) {
+    if (user)
       return JSON.parse(user);
-    }
+
     // further handling to be added later
     return null;
   }
@@ -85,12 +80,16 @@ export class UserService {
     );
   }
 
-  public deleteUser(id: string) {
-    return this.http.delete(this.API_ROOT + 'user/' + id);
+  public deleteUser(user: User) {
+    return this.http.delete(this.API_ROOT + 'user/' + user.id);
   }
 
   public getDetails() {
-    return this.http.get<User>(this.API_ROOT + 'account/details');
+    return this.http.get<User>(this.API_ROOT + 'account/details').pipe(
+      tap(res => {
+        if (res)
+          this.setCurrentLogin(res);
+      }));
   }
 
   public update(user: User) {
@@ -117,21 +116,23 @@ export class UserService {
   }
 
   public getPermissions(id: string) {
-
     return this.http.get(this.API_ROOT + 'role/' + id, { headers: this.headers, responseType: 'json', observe: 'response' });
   }
 
   public getStudent(id: string) {
-
-    return this.http.get<Student>(this.API_ROOT + 'student/' + id, { headers: this.headers, responseType: 'json' });
+    return this.http.get<Student>(this.API_ROOT + 'student/' + id);
   }
 
   public getTeacher(id: string) {
-
-    return this.http.get<Teacher>(this.API_ROOT + 'teacher/' + id, { headers: this.headers, responseType: 'json' });
+    return this.http.get<Teacher>(this.API_ROOT + 'teacher/' + id);
   }
 
-  handleError(err: HttpErrorResponse) {
+  private setCurrentLogin(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
+    this.userName.next(user.firstName);
+  }
+
+  private handleError(err: HttpErrorResponse) {
     return throwError(err);
   }
 

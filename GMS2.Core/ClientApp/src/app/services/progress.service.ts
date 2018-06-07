@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+// DEPRECATED : Migrating to ng-progress
 export class ProgressService {
 
   public inProgress: EventEmitter<boolean> = new EventEmitter();

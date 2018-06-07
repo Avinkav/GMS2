@@ -121,7 +121,8 @@ namespace GMS2.Core.Controllers
             {
                 var user = await _userManager.Users.Include(u => u.Student)
                                                     .Include(u => u.Teacher)
-                                                    .Where(r => r.NormalizedEmail == model.Email.ToUpperInvariant()).SingleOrDefaultAsync();
+                                                    .Where(r => r.NormalizedEmail == model.Email.ToUpperInvariant())
+                                                    .SingleOrDefaultAsync();
                 var roles = await _userManager.GetRolesAsync(user);
                 return Ok(user.ToViewModel(roles));
             }
@@ -139,8 +140,14 @@ namespace GMS2.Core.Controllers
         [HttpGet("details")]
         public async Task<IActionResult> Details(string id = null)
         {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = user.ToViewModel();
+            var userId = new Guid(_userManager.GetUserId(User));
+
+            var user = await _userManager.Users.Include(u => u.Student)
+                                                .Include(u => u.Teacher)
+                                                .Where(u => u.Id == userId)
+                                                .SingleOrDefaultAsync();
+            var roles = await _userManager.GetRolesAsync(user);
+            var vm = user.ToViewModel(roles);
             return Json(vm);
         }
 
@@ -176,11 +183,11 @@ namespace GMS2.Core.Controllers
         {
             var filePath = $"wwwroot/avatar/{userId}.jpg";
 
-            using (var stream = new FileStream( filePath, FileMode.Create))
+            using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await profilePic.CopyToAsync(stream);
             }
-            return Ok(new { avatarPath = $"avatar/{userId}.jpg"});
+            return Ok(new { avatarPath = $"avatar/{userId}.jpg" });
         }
 
         // Update user object using values from the viewmodel

@@ -28,13 +28,8 @@ export class RegisterComponent implements OnInit {
 
 
   onSubmit() {
-    this.userService.register(this.newUser).subscribe(o => {
-      if (o.ok) {
+    this.userService.register(this.newUser).subscribe(user => {
         this.router.navigateByUrl('/user-portal/profile');
-      } else {
-        console.warn(o);
-        // handle err
-      }
     }, (err: HttpErrorResponse) => {
       if (err.hasOwnProperty('error'))
         this.errors = err.error;

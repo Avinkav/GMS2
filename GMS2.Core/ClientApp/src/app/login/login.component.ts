@@ -25,11 +25,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.userService.login(this.login).subscribe(res => {
-      if (res.ok) {
-        console.log(this.returnUrl);
         this.router.navigateByUrl(this.returnUrl);
-        return;
-      }
     },
     err => this.error = 'Incorrect username and/or password'
   );

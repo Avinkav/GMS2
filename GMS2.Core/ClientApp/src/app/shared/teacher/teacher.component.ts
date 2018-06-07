@@ -3,23 +3,38 @@ import { Teacher } from '../../models/teacher';
 import { UserService } from 'src/app/services/user.service';
 import { shrinkInOut } from '../../animations/shrinkInOut';
 import { DataService } from '../../services/data.service';
+import { spin1 } from '../../animations/spin';
+import { tick } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-teacher',
   templateUrl: './teacher.component.html',
   styleUrls: ['./teacher.component.css'],
-  animations: [shrinkInOut]
+  animations: [shrinkInOut, spin1]
 })
 export class TeacherComponent implements OnInit {
 
   @Input() model: Teacher;
+  @Input() admin = false;
   @Input() permission;
   @Input() userId;
+
+  descDisabled = true;
 
   constructor(private userService: UserService, private dataService: DataService) { }
 
   ngOnInit() {
 
+  }
+
+  toggle(input: any) {
+    console.log(input);
+    if (this.descDisabled) {
+      this.descDisabled = false;
+      input.focus();
+    } else {
+      this.descDisabled = true;
+    }
   }
 
   removeItem(value: string) {

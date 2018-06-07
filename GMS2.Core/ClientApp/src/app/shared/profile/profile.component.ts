@@ -13,14 +13,14 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./profile.component.css'],
   animations: [slideInAnimation]
 })
-export class ProfileComponent implements OnInit, AfterViewInit {
+export class ProfileComponent implements OnInit {
 
   user: User = new User();
   @Input() userId;
   studentId: string = null;
   teacherId: string = null;
 
-  title = '';
+  title = 'Profile';
   admin = false;
 
   constructor(private userService: UserService, private route: ActivatedRoute) { }
@@ -31,23 +31,24 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   getUser() {
     this.userId = this.route.snapshot.paramMap.get('id');
-    // if a userId hasn't been passed, treat request as personal profile
-    if (!this.userId) {
-      this.userService.getDetails().subscribe(data => {
-        this.user = data;
-        this.title = 'Profile';
-      });
-    } else {
-      this.userService.getUser(this.userId).subscribe( data => {
-        console.log(data);
+    if (this.userId) {
+      this.userService.getUser(this.userId).subscribe(data => {
         this.user = data;
         this.title = 'User details';
         this.admin = true;
       });
+      return;
     }
+    // if a userId hasn't been passed, get current login
+    const user = this.userService.getCurrentLogin();
+    if (user) {
+      this.user = user;
+    }
+    // Refresh with data from server
+    this.userService.getDetails().subscribe(data => {
+      console.log(data);
+      this.user = data;
+      this.title = 'Profile';
+    });
   }
-
-  ngAfterViewInit() {
-  }
-
 }

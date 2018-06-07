@@ -44,7 +44,7 @@ export class UsersComponent implements OnInit {
   confirmDelete(content, user) {
     this.modalService.open(content).result.then(result => {
       if (result === 'confirm') {
-        this.userService.deleteUser(user.id).subscribe(
+        this.userService.deleteUser(user).subscribe(
           res => { this.users.splice(this.users.indexOf(user), 1); },
           err => alert('failed'));
       }

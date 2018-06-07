@@ -29,10 +29,6 @@ namespace GMS2.Core.Controllers
 
         }
 
-        /// <summary>
-        /// Returns a list of teachers
-        /// </summary>
-        /// <returns></returns>
         [HttpGet("list/{count?}")]
         public IActionResult ListTeachers(int count = 10)
         {
@@ -41,11 +37,6 @@ namespace GMS2.Core.Controllers
             return Json(teachers);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
         [HttpPost("")]
         public async Task<IActionResult> CreateTeacher([FromBody] TeacherDTO model)
         {
@@ -73,15 +64,12 @@ namespace GMS2.Core.Controllers
             return Ok();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> ReadTeacher(Guid id)
         {
-            var teacher = await _dataContext.Teachers.FindAsync(id);
+            var teacher = await _dataContext.Teachers.Where(t => t.Id == id)
+                                                     .Include(t => t.LessonsTaught)
+                                                     .SingleOrDefaultAsync();
 
             if (teacher == null)
                 return NoContent();
@@ -89,12 +77,19 @@ namespace GMS2.Core.Controllers
             return Json(teacher.ToViewModel());
         }
 
+        [HttpGet("by-user-id/{id}")]
+        public async Task<IActionResult> ReadTeacherByUserId(Guid id)
+        {
+            var teacher = await _dataContext.Teachers.Where(t => t.UserId == id)
+                                                     .Include(t => t.LessonsTaught)
+                                                     .SingleOrDefaultAsync();
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+            if (teacher == null)
+                return NoContent();
+
+            return Json(teacher.ToViewModel());
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateTeacher(Guid id, [FromBody] TeacherDTO model)
         {
@@ -116,11 +111,6 @@ namespace GMS2.Core.Controllers
             return Ok();
         }
 
-        /// <summary>
-        /// Delete a teacher
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpDelete("")]
         public async Task<IActionResult> DeleteTeacher(string id)
         {

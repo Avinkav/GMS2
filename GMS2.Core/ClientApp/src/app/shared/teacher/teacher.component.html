@@ -1,9 +1,9 @@
 <div class="card">
   <div class="card-header">
     <div class="d-flex align-items-center">
-      <h4 class="">Teacher</h4> 
+      <h5 class="">Teacher</h5>
       <div class="flex-spacer"></div>
-      <div class="btn-group" role="group">
+      <div class="btn-group" role="group" *ngIf="admin">
         <button id="toggle" type="button" class="btn btn-sm px-3" [class.btn-primary]="!permission" [class.btn-warning]="permission"
           (click)="togglePermission()">
           <span *ngIf="permission">Revoke</span>
@@ -13,12 +13,23 @@
     </div>
   </div>
   <div class="card-body" *ngIf="permission && model">
-    <div class="content" >
+    <div class="content">
+      <div class="form-row">
+        <label class="d-flex w-100 align-items-center px-3">
+          <div class="mr-4">Description</div>
+          <div class="flex-spacer"></div>
+          <mat-icon [@spin1]="descDisabled" (click)="toggle(desc)">
+            <ng-container *ngIf="descDisabled">edit</ng-container>
+            <ng-container *ngIf="!descDisabled">save</ng-container>
+          </mat-icon>
+        </label>
+        <textarea #desc class="form-control" rows="6" [class.form-control-plaintext]="descDisabled" [disabled]="descDisabled" [(ngModel)]="model.description"></textarea>
+      </div>
       <div class="form-row">
         <div class="form-group col">
           <label class="mb-3">Teaching Instruments</label>
           <ul class="list-group list-group-flush mb-3">
-            <li class="list-group-item d-flex justify-content-between align-items-center overflow-hidden" *ngFor="let i of model.instrumentsTaught">{{i}}
+            <li class="list-group-item d-flex justify-content-between align-items-center overflow-hidden" *ngFor="let i of model?.instrumentsTaught">{{i}}
               <button type="button" class="close" aria-label="Close" (click)=removeItem(i)>
                 <span aria-hidden="true">&times;</span>
               </button>

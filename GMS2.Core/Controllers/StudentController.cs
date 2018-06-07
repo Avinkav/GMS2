@@ -106,8 +106,22 @@ namespace GMS2.Core.Controllers
         public async Task<IActionResult> ReadStudent(Guid id)
         {
             var student = await _dataContext.Students.Where(s => s.Id == id)
-                                                        .Include(s => s.LessonsTaken)
-                                                        .SingleOrDefaultAsync();
+                                                     .Include(s => s.LessonsTaken)
+                                                     .SingleOrDefaultAsync();
+            if (student == null)
+                return NoContent();
+
+            var model = student.ToViewModel();
+
+            return Json(model);
+        }
+
+        [HttpGet("by-user-id/{id}")]
+        public async Task<IActionResult> ReadStudentByUserId(Guid id)
+        {
+            var student = await _dataContext.Students.Where(s => s.UserId == id)
+                                                     .Include(s => s.LessonsTaken)
+                                                     .SingleOrDefaultAsync();
             if (student == null)
                 return NoContent();
 

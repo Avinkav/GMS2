@@ -1,9 +1,9 @@
 <div class="bg-white card ">
   <div class="card-header">
     <div class="d-flex align-items-center">
-      <h4 class="">Student</h4>
+      <h5 class="">Student</h5>
       <div class="flex-spacer"></div>
-      <div class="btn-group" role="group">
+      <div class="btn-group" role="group" *ngIf="admin">
         <button id="toggle" type="button" class="btn btn-sm px-3" [class.btn-primary]="!permission" [class.btn-warning]="permission"
           (click)="togglePermission()">
           <span *ngIf="permission">Revoke</span>
