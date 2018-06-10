@@ -4,6 +4,7 @@ import { fadeInAnimation } from '../../fadeInAnimation';
 import { bgImageAnimation } from '../../bgImgAnimation';
 import { Observable, interval } from 'rxjs';
 import * as $ from 'jquery';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   counter = 0;
   currentBackground = this.images[0];
 
-  constructor() { }
+  constructor(public userService: UserService) { }
 
   ngOnInit() {
     this.changeWallpaper();
@@ -48,6 +49,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.counter = (this.counter < this.images.length - 1) ? this.counter + 1 : 0;
       this.images[this.counter].show = true;
     });
+  }
+
+  logout() {
+    this.userService.logout().subscribe();
   }
 
   ngOnDestroy(): void {

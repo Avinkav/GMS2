@@ -5,7 +5,7 @@ import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-breadcrumb',
   templateUrl: './breadcrumb.component.html',
-  styleUrls: ['./breadcrumb.component.css']
+  styleUrls: ['./breadcrumb.component.scss']
 })
 export class BreadcrumbComponent implements OnInit {
 
@@ -24,8 +24,8 @@ export class BreadcrumbComponent implements OnInit {
 
   getBreadcrumbs(route: ActivatedRoute, url = '', crumbs: Breadcrumb[] = []) {
     route.children.forEach(child => {
-      if (child.snapshot.hasOwnProperty('data') && !child.snapshot.data.hasOwnProperty('breadcrumb'))
-          return this.getBreadcrumbs(child, url, crumbs);
+      if (!child.data)
+        return this.getBreadcrumbs(child, url, crumbs);
 
       url += '/' + child.snapshot.url.map(u => u.path).join('/');
       crumbs.push(

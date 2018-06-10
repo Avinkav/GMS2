@@ -8,22 +8,18 @@ a.active {
   color: $accent;
 }
 
-.sidebar {
-  position: fixed;
-  top: $navbar-height;
-  left: 0;
-  width: $sidebar-width;
-  height: 100%;
-   // border-right: 1px solid #dadada;
-  // background: white;
-}
-
 .portal-container {
+  margin-top: $portal-header-height;
   background: rgb(245, 245, 245);
   min-height: calc(100vh - #{$navbar-height});
 }
 
+main {
+  
+}
 
-main{
-    margin-left: $sidebar-width;
-  }
+.input-group .mat-icon {
+  height: unset;
+  width: unset;
+  font-size: 24px;
+}

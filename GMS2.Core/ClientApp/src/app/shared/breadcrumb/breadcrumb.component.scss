@@ -1,0 +1,23 @@
+@import '../../../sass/variables';
+
+ol {
+  margin-bottom: 0;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+a {
+  text-decoration: unset;
+  border-radius: 10px;
+  color: $dark-primary-font-color;
+  padding:  0.5rem 1rem;
+}
+
+li:first-child a{
+  padding-left: 0;
+}
+
+a:hover,
+a.active {
+  color: $accent;
+}

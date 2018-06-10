@@ -105,7 +105,6 @@ namespace GMS2.Core.Controllers
             var roles = await _userManager.GetRolesAsync(user);
 
             return new OkObjectResult(user.ToViewModel(roles));
-
         }
 
         [AllowAnonymous]

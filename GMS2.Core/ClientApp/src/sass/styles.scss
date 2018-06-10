@@ -3,7 +3,10 @@
 @import "~angular-calendar/css/angular-calendar.css";
 @import 'variables';
 @import 'calendar';
+
 $theme-colors: ( "primary": $accent, "danger": #ff4136);
+$breadcrumb-divider: quote(">");
+
 @import '~bootstrap/scss/bootstrap';
 html,
 body {
@@ -15,7 +18,6 @@ body {
   background-color: black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin-top: $navbar-height;
   min-height: 100%;
 }
 
@@ -23,23 +25,33 @@ p {
   font-size: 14px;
 }
 
-router-outlet{
+router-outlet {
   display: none;
 }
 
-label .mat-icon{
+label .mat-icon {
   font-size: 18px;
   width: 18px;
   height: 18px;
   cursor: pointer;
-  color: rgba(0,0,0,0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 
-.animation-wrapper{
+.section-left {
+  max-width: $sidebar-width;
+  height: 100%;
+}
+
+.section-main{
+  flex-grow: 1;
+  max-width: calc(100% - #{$sidebar-width});
+}
+
+.animation-wrapper {
   overflow: hidden;
 }
 
-.alert{
+.alert {
   overflow: hidden;
 }
 
@@ -49,7 +61,12 @@ label .mat-icon{
   background-color: #f8f8f8;
 }
 
-.form-control:disabled, .form-control:read-only{
+.form-control:disabled,
+.form-control:read-only {
+  background-color: unset;
+}
+
+.input-group-text {
   background-color: unset;
 }
 
@@ -72,8 +89,8 @@ label .mat-icon{
   background-color: #202124;
 }
 
-.ng-progress-bar{
-  top:$navbar-height !important;
+.ng-progress-bar {
+  top: $navbar-height !important;
 }
 
 .mat-drawer {
@@ -98,9 +115,21 @@ label .mat-icon{
   align-items: center;
 }
 
-.list-group-flush .list-group-item{
+.list-group-flush .list-group-item {
+  border-top: 0;
+  margin: 1px;
+}
+
+.tab-content .card{
   border-top:0;
-  margin: 1px; 
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.table-borderless th,
+.table-borderless td {
+  font-weight: 300;
+  font-size: 0.95rem;
 }
 
 .table th,
@@ -121,11 +150,10 @@ label .mat-icon{
   background-color: white;
 }
 
-.card-header{
+.card-header {
   padding-top: 0.6rem;
-  padding-bottom: 0.2rem;  
+  padding-bottom: 0.2rem;
 }
-
 
 .clickable-card {
   @include mat-elevation-transition;

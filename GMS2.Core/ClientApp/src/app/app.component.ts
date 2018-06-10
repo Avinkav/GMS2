@@ -11,12 +11,10 @@ import { UserService } from './services/user.service';
 export class AppComponent implements OnInit {
 
 
-  constructor(public userService: UserService) {}
+  constructor() {}
 
   ngOnInit()  {
   }
 
-  logout() {
-    this.userService.logout().subscribe();
-  }
+
 }

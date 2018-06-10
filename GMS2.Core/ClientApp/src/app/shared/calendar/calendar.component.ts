@@ -19,6 +19,8 @@ export class CalendarComponent implements OnInit {
   @Input() view = 'month';
   @Input() model: Teacher | Student;
   @Input() admin = false;
+  @Input() navbar = true;
+  @Input() viewbar = ['month', 'week', 'day', 'list'];
 
   constructor(private dataService: DataService) { }
 

@@ -1,0 +1,46 @@
+@import '~@angular/material/theming';
+@import '../../../sass/variables';
+
+$search-bar-fore:rgba(245,245,245, 0.85);
+
+.portal-header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgb(15, 15, 15); /* #212121; */
+    min-height: $portal-header-height ;
+    @include mat-elevation(2);
+    justify-content: flex-start;
+    z-index: 10;
+    display: unset;
+}
+
+.search-bar{
+    border-bottom: 1px solid $search-bar-fore;
+    min-width: 190px;
+    flex-basis: 30%;
+
+}
+
+.search-bar svg{
+    fill: $search-bar-fore;
+}
+
+.mat-icon{
+    color: $search-bar-fore;
+}
+
+.search-bar .input-group-text{
+    padding-left: 0;
+}
+
+.search-bar input{
+    flex-grow: 1;
+    color: $search-bar-fore;
+    background-color: unset;
+    border: 0;
+}
+
+.input-group-text{
+    border:0;
+}

@@ -37,9 +37,13 @@ body .fc {
 
 
 .cal-month-view .cal-header{
-  font-weight: unset;
+  font-weight: 300;
 }
 
 .cal-header b{
   font-weight: normal;
+}
+
+.cal-month-view .cal-cell-top{
+  min-height: unset;
 }

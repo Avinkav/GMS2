@@ -52,6 +52,9 @@ import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { AuthInterceptor } from './services/auth-interceptor';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { HomeServicesComponent } from './home/home-services/home-services.component';
+import { PaymentTableComponent } from './shared/payment-table/payment-table.component';
+import { PortalHeaderComponent } from './shared/portal-header/portal-header.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +95,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     FooterComponent,
     PortalComponent,
     NotFoundComponent,
+    HomeServicesComponent,
+    PaymentTableComponent,
+    PortalHeaderComponent,
   ],
   imports: [
     BrowserModule,

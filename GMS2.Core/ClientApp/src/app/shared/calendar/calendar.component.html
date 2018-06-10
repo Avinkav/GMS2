@@ -1,25 +1,25 @@
 <div class="row">
-  <div class="col-md-4 ">
+  <div class="col-md-4">
     <div class="btn-group">
-      <div class="btn btn-sm btn-outline-primary" (click)="view = 'month'" [class.active]="view === 'month'">
+      <div class="btn btn-sm btn-outline-primary" (click)="view = 'month'" [class.active]="view === 'month'" *ngIf="viewbar.includes('month')">
         Month
       </div>
-      <div class="btn btn-sm btn-outline-primary" (click)="view = 'week'" [class.active]="view === 'week'">
+      <div class="btn btn-sm btn-outline-primary" (click)="view = 'week'" [class.active]="view === 'week'" *ngIf="viewbar.includes('week')">
         Week
       </div>
-      <div class="btn btn-sm btn-outline-primary" (click)="view = 'day'" [class.active]="view === 'day'">
+      <div class="btn btn-sm btn-outline-primary" (click)="view = 'day'" [class.active]="view === 'day'" *ngIf="viewbar.includes('day')">
         Day
       </div>
-      <div class="btn btn-sm btn-outline-primary" (click)="view = 'list'" [class.active]="view === 'list'">
+      <div class="btn btn-sm btn-outline-primary" (click)="view = 'list'" [class.active]="view === 'list'" *ngIf="viewbar.includes('list')">
         List
       </div>
     </div>
   </div>
   <div class="col-md-4  text-center">
-    <h3>{{ viewDate | calendarDate:('month' + 'ViewTitle'):'en' }}</h3>
+    <h4>{{ viewDate | calendarDate:('month' + 'ViewTitle'):'en' }}</h4>
   </div>
   <div class="col-md-4 d-flex flex-row-reverse align-items-start">
-    <div class="btn-group">
+    <div class="btn-group" *ngIf="navbar">
       <div class="btn btn-sm btn-outline-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false">
         Previous
       </div>
